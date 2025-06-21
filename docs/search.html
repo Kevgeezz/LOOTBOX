@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h2>Search Results</h2>
+    <div id="results"></div>
+
+    <script>
+      // Get query string
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get("q")?.toLowerCase() || "";
+
+      // Simulated data - in real case, load from JSON or API
+      const allProducts = [
+        { name: "PLAYSTATION 5 (DIGITAL)", link: "Single Products/Play.html" },
+        { name: "JBL XTREME", link: "Single Products/JBL Xtreme.html" },
+        { name: "APPLE MONITOR", link: "Single Products/Mac.html" },
+        { name: "COTTON T-SHIRT", link: "clothes/clothes.html" },
+        { name: "EARPHONES", link: "shop/shop.html" },
+        { name: "VEST", link: "clothes/clothes.html" },
+      ];
+
+      const resultsContainer = document.getElementById("results");
+      const matches = allProducts.filter((p) =>
+        p.name.toLowerCase().includes(query)
+      );
+
+      if (matches.length > 0) {
+        matches.forEach((p) => {
+          const item = document.createElement("p");
+          item.innerHTML = `<a href="${p.link}">${p.name}</a>`;
+          resultsContainer.appendChild(item);
+        });
+      } else {
+        resultsContainer.innerText = "No products found.";
+      }
+    </script>
+  </body>
+</html>
