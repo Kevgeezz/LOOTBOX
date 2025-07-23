@@ -35,6 +35,29 @@
       rel="stylesheet"
     />
 
+
+      <!-- Google Fonts ================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+          <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet">
+
+
+      <!--  Google Fonts (Mine) -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+ <!--  Font Awesome -->
+ <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+ <script src="https://kit.fontawesome.com/a8b3cd8f70.js" crossorigin="anonymous"></script>
+
     <!--Link Swiper's CSS ================================================== -->
     <link
       rel="stylesheet"
@@ -42,19 +65,9 @@
     />
 
 
-
-     <!-- Style Sheet ================================================== -->
-  
-    <!--  Google Fonts (Mine) -->
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap"
-      rel="stylesheet"
-    />
-
     <style>
 
-/* From Uiverse.io by aaronross1 */ 
+ 
 .delete-button {
   width: 40px;
   height: 40px;
@@ -391,8 +404,12 @@
         position: fixed;
         left: 0;
         top: 0;
-        background: #fff;
+        background:#e9e5ff;
         border-right: 1px solid #e5e7eb;
+        box-shadow: 0px 0px 20px rgb(188 188 188);
+        padding: 1rem;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
       }
 
       .main-content {
@@ -464,7 +481,51 @@
         .main-content {
           margin-left: 0;
         }
+
       }
+
+        .money {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: green;
+        }
+
+
+        h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--black-color);
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.product-item {
+  transition: transform 0.2s;
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 8px;
+   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+    
+.sidebar-link {
+ 
+  color: black;
+  
+}
+
+.sidebar-link:hover {
+  background: rgba(173, 58, 58, 0.1);
+}
+
     </style>
   </head>
   <body>
@@ -484,7 +545,7 @@
           <p class="text-muted small mb-2">DASHBOARD</p>
           <a
             href="../Vendor/Vdashboard.html"
-            class="nav-link d-flex align-items-center"
+            class="nav-link d-flex align-items-center sidebar-link"
           >
             <i class="bi bi-shop me-2"></i>
             Overview
@@ -495,14 +556,14 @@
           <p class="text-muted small mb-2">CATALOG</p>
           <a
             href="../Vendor/Vproduct.html"
-            class="nav-link active d-flex align-items-center"
+            class="nav-link active d-flex align-items-center sidebar-link"
           >
             <i class="bi bi-box me-2"></i>
             Products
           </a>
           <a
             href="../Vendor/Vorders.html"
-            class="nav-link d-flex align-items-center"
+            class="nav-link d-flex align-items-center sidebar-link"
           >
             <i class="bi bi-cart me-2"></i>
             Orders
@@ -511,11 +572,11 @@
 
         <div class="mb-4">
           <p class="text-muted small mb-2">ACCOUNT</p>
-          <a href="/vendor/profile" class="nav-link d-flex align-items-center">
+          <a href="/vendor/profile" class="nav-link d-flex align-items-center sidebar-link">
             <i class="bi bi-person me-2"></i>
             Profile
           </a>
-          <a href="/vendor/settings" class="nav-link d-flex align-items-center">
+          <a href="/vendor/settings" class="nav-link d-flex align-items-center sidebar-link">
             <i class="bi bi-gear me-2"></i>
             Settings
           </a>
@@ -526,7 +587,7 @@
         <a
           href="#"
           onclick="logout()"
-          class="nav-link text-danger d-flex align-items-center"
+          class="nav-link text-danger d-flex align-items-center sidebar-link"
         >
           <i class="bi bi-box-arrow-right me-2"></i>
           Logout
@@ -943,17 +1004,17 @@ function showToast(message, type = "success") {
         products.forEach((p, i) => {
           grid.innerHTML += `
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card product-card">
+            <div class="card product-card product-item">
               <div class="img-container">
-                <img src="${p.image}" alt="${p.name}">
+                <img src="${p.image}" alt="${p.name}" class="product-imageimg-fluid">
                 <span class="badge bg-${
                   p.status === "Active" ? "success" : "danger"
                 } status-badge">${p.status}</span>
               </div>
               <div class="card-body">
-                <h6 class="card-title mb-1">${p.name}</h6>
+                <h5 class="card-title mb-1">${p.name}</h5>
                 <div class="d-flex justify-content-between align-items-center mt-1">
-                  <span class="fw-bold">GH&#8373; ${p.price}</span>
+                  <span class="fw-bold money">GH&#8373;${p.price}</span>
                   <small class="text-muted">${p.stock} in stock</small>
                 </div>
               </div>
@@ -977,8 +1038,10 @@ function showToast(message, type = "success") {
               </div>
             </div>
           </div>`;
+
         });
       }
+             
 
       /*async function saveProduct(product, id = null) {
         try {

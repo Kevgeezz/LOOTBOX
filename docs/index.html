@@ -12,6 +12,7 @@
     <meta name="author" content="LootBox">
     <meta name="keywords" content="LootBox">
     <meta name="description" content="LootBox (Final Year Project)">
+    
 
     <!--Bootstrap ================================================== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -45,6 +46,14 @@
  <!-- Flaticon-->
 
  <link rel="stylesheet" type="text/css" href="/website/css/uicons-solid-rounded.css">
+ <link rel="stylesheet" type="text/css" href="/website/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" type="text/css" href="/website/css/uicons-regular-straight.css">
+    <link rel="stylesheet" type="text/css" href="/website/css/uicons-line.css">
+
+    
+
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
  
 </head>
 
@@ -54,7 +63,32 @@
       </script>-->
       
     <!-- svg icon -->
+    
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol
+        xmlns="http://www.w3.org/2000/svg"
+        id="alt-arrow-right-outline"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057"
+          clip-rule="evenodd"
+        />
+      </symbol>
+      <symbol
+        xmlns="http://www.w3.org/2000/svg"
+        id="alt-arrow-left-outline"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M15.488 4.43a.75.75 0 0 1 .081 1.058L9.988 12l5.581 6.512a.75.75 0 1 1-1.138.976l-6-7a.75.75 0 0 1 0-.976l6-7a.75.75 0 0 1 1.057-.081"
+          clip-rule="evenodd"
+        />
+      </symbol>
         <symbol id="arrow-left" viewBox="0 0 256 256">
             <path fill="currentColor"
                 d="M220 128a4 4 0 0 1-4 4H49.66l65.17 65.17a4 4 0 0 1-5.66 5.66l-72-72a4 4 0 0 1 0-5.66l72-72a4 4 0 0 1 5.66 5.66L49.66 124H216a4 4 0 0 1 4 4" />
@@ -107,20 +141,6 @@
       <img src="https://cdn-icons-png.flaticon.com/128/2763/2763138.png" class="search-popup-close imgclose position-absolute top-0 end-0 m-3" aria-label="Close">
         <div class="search-popup-container">
 
-  <!--<form role="search" class="form-group" id="searchForm">
-  <div class="input-group">
-    <input type="search" id="searchInput" class="form-control border-0 border-bottom" 
-           placeholder="Type and press enter" name="q" />
-    <button type="submit" class="search-submit border-0 bg-white">
-      <svg class="search" width="24" height="24">
-        <use xlink:href="#search"></use>
-      </svg>
-    </button>
-    <button id="voiceSearchBtn" type="button" class="btn border-0 bg-white">
-      <i class="fas fa-microphone"></i><img src="images/mic.png" alt="Voice Search Icon">
-    </button>
-  </div>
-</form>-->
 
 <!-- Updated Search Form -->
 <form role="search" class="form-group" id="searchForm">
@@ -175,42 +195,6 @@
 <!-- Image search results will be shown here -->
 <p id="imageSearchStatus" class="text-muted mt-2">Waiting for image...</p>
 <div id="imageResults" class="row mt-3"></div>
-
-
-
-
-            <!--<form role="search" class="form-group" action="search.html" method="GET">
-  <input type="search" id="search-form" class="form-control border-0 border-bottom"
-         placeholder="Type and press enter" name="q" />
-  <button type="submit" class="search-submit border-0 position-absolute bg-white"
-          style="top: 15px; right: 15px;">
-    <svg class="search" width="24" height="24">
-      <use xlink:href="#search"></use>
-    </svg>
-  </button>
-</form>-->
-
-
-            <!--<form role="search" class="form-group" onsubmit="return false;">
-  <input type="search" id="search-form" class="form-control border-0 border-bottom"
-         placeholder="Type and press enter" name="s" onkeyup="searchProducts()" />
-  <button type="submit" class="search-submit border-0 position-absolute bg-white"
-          style="top: 15px;right: 15px;">
-    <svg class="search" width="24" height="24">
-      <use xlink:href="#search"></use>
-    </svg>
-  </button>
-   </form>-->
-
-
-            <!--<form role="search" method="get" class="form-group" action="">
-                <input type="search" id="search-form" class="form-control border-0 border-bottom"
-                    placeholder="Type and press enter" value="" name="s" />
-                <button type="submit" class="search-submit border-0 position-absolute bg-white"
-                    style="top: 15px;right: 15px;"><svg class="search" width="24" height="24">
-                        <use xlink:href="#search"></use>
-                    </svg></button>
-            </form>-->
 
             <h5 class="cat-list-title">Browse Categories</h5>
 
@@ -274,7 +258,7 @@
     </div>
 
     <!-- header section start  -->
-    <header id="header" class="site-header py-3 px-3 px-lg-5 position-absolute top-0 start-0 w-100 z-1">
+    <header id="header" class="site-header py-3 px-3 px-lg-5 position-absolute top-0 start-0 w-100 z-1" data-aos="fade-down">
         <div class="container-fluid">
             <div class="row">
                 <nav class="navbar navbar-expand-lg position-relative>">
@@ -477,13 +461,13 @@
         </div>
     </header>
 
-    <main id="billboard">
+  <main id="billboard" class="page-load" data-aos="fade-left">
         <div class="position-relative"
             style="background: url('images/header-img.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
             <div class="container">
                 <div class="offset-2 position-absolute top-50 start-0 translate-middle-y">
-                    <p class="fs-2 text-white">up to <span class="money">GH&#8373;100</span> off</p>
-                    <h2 class="display-1 text-white fw-medium  mt-3">On all apple <br> Products</h2>
+                    <p class="fs-2 text-white" data-aos="fade-right">up to <span class="money" >GH&#8373;100</span> off</p>
+                    <h2 class="display-1 text-white fw-medium  mt-3" data-aos="fade-left" >On all apple <br > Products</h2>
                     <a href="Shop/Shop.html" class="btn btn-outline-light mt-3">SHOP COLLECTION</a>
                 </div>
             </div>
@@ -491,31 +475,30 @@
     </main>
 
 
-
-    
-    <section id="collection">
+<section id="collection">
         <div class="container-fluid">
             <div class="row mt-4">
-                <div class="col-lg-6 ps-lg-0">
+                <div class="col-lg-6 ps-lg-0" data-aos="fade-right">
                     <div class="position-relative img-fluid"
                         style=" background: url(images/JBLBanner.png);background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;" >
+                        
                         <div class="text position-absolute text-center m-auto w-100 top-50 bg-white bg-opacity-10 py-5">
-                            <h3 class="display-4 fw-medium text-white mb-3">Deal Of the day</h3>
-                            <p class="fs-3 text-white">Up to 5% off on JBL Xtreme</p>
+                            <h3 class="display-4 fw-medium text-white mb-3" data-aos="fade-right">Deal Of the day</h3>
+                            <p class="fs-3 text-white" data-aos="fade-left">Up to 5% off on JBL Xtreme</p>
                             <div>
-                                <a href="./Single Products/JBL Xtreme.html" class="btn btn-light mt-3">SHOP Now </a>
+                                <a href="./Single Products/JBL Xtreme.html" class="btn btn-light mt-3" data-aos="fade-right">SHOP Now </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 pe-lg-0">
+                <div class="col-lg-6 pe-lg-0" data-aos="fade-left">
                     <div class="position-relative img-fluid"
                         style="background: url(images/groupBanner.png);background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
                         <div class="text position-absolute text-center m-auto w-100 top-50 bg-white bg-opacity-10 py-5">
-                            <h3 class="display-4 fw-medium text-white mb-3">The Best Selling</h3>
-                            <p class="fs-3 text-white">Starting price from GH&#8373;80</p>
+                            <h3 class="display-4 fw-medium text-white mb-3" data-aos="fade-left">The Best Selling</h3>
+                            <p class="fs-3 text-white" data-aos="fade-right">Starting price from GH&#8373;80</p>
                             <div>
-                                <a href="Clothes/Clothes.html" class="btn btn-light mt-3">SHOP COLLECTION </a>
+                                <a href="Clothes/Clothes.html" class="btn btn-light mt-3" data-aos="fade-left" >SHOP COLLECTION </a>
                             </div>
                         </div>
                     </div>
@@ -523,15 +506,18 @@
             </div>
         </div>
     </section>
+    
+    
+
     <!-- New Arrivals Section -->
     <section id="new-arrivals" class="newAv1 position-relative">
         <div class="container-fluid">
             <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
-                <h3 class="display-5 fw-medium ">NEW ARRIVAL ITEMS</h3>
-                <div><a href="./Shop/Shop.html" class="btn btn-dark">SHOP ALL</a></div>
+                <h3 class="display-5 fw-medium " data-aos="fade-right">NEW ARRIVAL ITEMS</h3>
+                <div><a href="./Shop/Shop.html" class="btn btn-dark" data-aos="fade-left">SHOP ALL</a></div>
             </div>
 
-            <div class="newswiper swiper mySwiper">
+            <div class="newswiper swiper mySwiper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-easing="ease-in-out" >
                 <div class="swiper-wrapper">
 
                     <!--Playstation-->
@@ -543,7 +529,7 @@
                             <img src="images/ps55.png" alt="new1" class="product-image img-fluid">
                             <div class="cart-concern">
                                 <div class="cart-button d-flex justify-content-between align-items-center px-4">
-                                    <a href="Single Products/Play.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('PS5')">PURCHASE
+                                    <a href="Single Products/Play.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('PLAYSTATION 5 (DIGITAL)')">PURCHASE
                                          <svg class="arrow" width="20" height="20">
                                             <use xlink:href="#arrow-right"></use>
                                         </svg>
@@ -711,6 +697,51 @@
                             </div>
                         </div>
                     </div>
+
+
+<!--NEXUS-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                            <img src="images/item6.jpg" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Mac.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('Nexus')">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="Nexus Buds Pro"
+                                       data-price="700.00"
+                                       data-image="images/item6.jpg"
+                                       onclick="trackProduct('Nexus')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="../Single Product/Sp.html" class="item-name">Nexus Buds Pro</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;700</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     <div class="swiper-slide">
                         <div class="product-item position-relative">
                             <img src="images/item5.jpg" alt="new1" class="img-fluid">
@@ -769,12 +800,13 @@
                     </div>
                 </div>
 
-                <div class="swiper-button-next arrival-next"></div>
+                <div class="swiper-button-next arrival-next "></div>
                  <div class="swiper-button-prev arrival-prev"></div>
                 <div class="swiper-pagination new-arrival-pagination position-relative d-block mt-4"></div>
             </div>
         </div>
     </section>
+    
   
 
 
@@ -782,12 +814,12 @@
     <section id="rec" class=" rec position-relative">
         <div class="container-fluid">
             <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
-                <h2 class="display-6 fw-medium ">Recommended for you</h2>
+                <h2 class="display-6 fw-medium " data-aos="fade-right">Recommended for you</h2>
             </div>
     
   <!--<h4 class="mb-3">Recommended for You</h4>-->
   
-<div class="swiper recommended-swiper">
+<div class="swiper recommended-swiper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-easing="ease-in-out" >
   <div class="swiper-wrapper" id="recommended-products">
     <!-- Slides will be injected here -->
   </div>
@@ -808,7 +840,7 @@
 
             <div class="banner-blocks">
             
-              <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('Clothes/images/Black Woman.png') no-repeat; background-size: cover;">
+              <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('Clothes/images/Black Woman.png') no-repeat; background-size: cover;" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" data-aos-easing="ease-in-out" >
                 <div class="banner-content p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Items on SALE</h3>
@@ -820,7 +852,7 @@
                 </div>
               </div>
               
-              <div class="banner-ad bg-success-subtle block-2" style="background:url('Clothes/images/banner-ad-2.jpg') no-repeat;background-size: cover">
+              <div class="banner-ad bg-success-subtle block-2" style="background:url('Clothes/images/banner-ad-2.jpg') no-repeat;background-size: cover" data-aos="fade-down" data-aos-duration="400" data-aos-delay="800" data-aos-easing="ease-in-out" >
                 <div class="banner-content align-items-center p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Combo offers</h3>
@@ -832,7 +864,7 @@
                 </div>
               </div>
 
-              <div class="banner-ad bg-danger block-3" style="background:url('Clothes/images/banner-ad-3.jpg') no-repeat;background-size: cover">
+              <div class="banner-ad bg-danger block-3" style="background:url('Clothes/images/banner-ad-3.jpg') no-repeat;background-size: cover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="800" data-aos-easing="ease-in-out" >
                 <div class="banner-content align-items-center p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Discount Coupons</h3>
@@ -852,7 +884,8 @@
       </div>
     </section>
 
-    <section id="new-arrivals" class="newAv2 position-relative">
+    <section id="new-arrivals" class="newAv2 position-relative" data-aos="fade-up"
+        data-aos-duration="1000" >
         <div class="container-fluid">
             <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
                 <h3 class="display-5 fw-medium ">NEW ARRIVAL ITEMS</h3>
@@ -863,7 +896,7 @@
                 <div class="swiper-wrapper">
 
                     <!--Playstation-->
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" data-aos="fade-left" >
                         <div class="Av product-item position-relative">
                             <img src="images/ps55.png" alt="new1" class="AvI product-image img-fluid">
                             <div class="cart-concern">
@@ -1045,7 +1078,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mt-2">
-                                <h5><a href="single-product.html" class="item-name">Product five</a></h5>
+                                <h5><a href="single-product.html" class="item-name">Apple Mouse</a></h5>
                                 <h5 class="money fw-bold ">GH&#8373;22.00</h5>
                             </div>
                         </div>
@@ -1073,7 +1106,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mt-2">
-                                <h5><a href="single-product.html" class="item-name">Product six</a></h5>
+                                <h5><a href="single-product.html" class="item-name">Apple Series 5</a></h5>
                                 <h5 class="money fw-bold ">GH&#8373;22.00</h5>
                             </div>
                         </div>
@@ -1083,6 +1116,73 @@
             </div>
         </div>
     </section>
+
+
+ <!-- ===== Limited-time offer – Bootstrap version ===== -->
+<section id="limited-offer" class="py-5 text-white" style="
+     background: url('Bimages/banner-image-bg-1.jpg') center / cover no-repeat;
+">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Image column (optional separate PNG if you prefer) -->
+      <div class="col-12 col-md-6 text-center mb-4 mb-md-0">
+        <img src="Bimages/banner-image3.png"
+             class="img-fluid" alt="Limited time offer">
+      </div>
+
+      <!-- Content column -->
+      <div class="col-12 col-md-5 offset-md-1 text-center text-md-start">
+
+        <h2 class=" clocktxt display-5 fw-bold mb-4">
+          30% Discount on Books. Hurry Up !!!
+        </h2>
+
+        <!-- Countdown clock -->
+        <div id="countdown-clock" class="d-flex justify-content-center
+                    justify-content-md-start gap-3 mb-4 flex-wrap">
+
+          <!-- days -->
+          <div class="time px-2">
+            <span class="count-value days"></span>
+            <small class="d-block">Days</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- hours -->
+          <div class="time px-2">
+            <span class="count-value hours"></span>
+            <small class="d-block">Hrs</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- minutes -->
+          <div class="time px-2">
+            <span class="count-value minutes"></span>
+            <small class="d-block">Min</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- seconds -->
+          <div class="time px-2">
+            <span class="count-value seconds"></span>
+            <small class="d-block">Sec</small>
+          </div>
+        </div>
+
+        <a href="books/index.html"
+           class="btn btn-dark px-4 py-2 fw-semibold">
+           Shop Collection
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
     <!-----------------------------------Customer's Reviews---------------------------->
     <section id="review" >
@@ -1119,6 +1219,19 @@
         </div>
     </section>
 
+
+<section class="mt-5">
+  <div class="container-fluid">
+    <h2 class="display-6 fw-medium">Vendor Added Products</h2>
+    <div class="swiper vendor-swiper">
+      <div class="swiper-wrapper" id="productList"></div>
+      <div class="swiper-button-next vendor-next"></div>
+      <div class="swiper-button-prev vendor-prev"></div>
+      <div class="swiper-pagination vendor-pagination position-relative d-block mt-4"></div>
+    </div>
+  </div>
+</section>
+
     <section id="video-modish" class="padding-medium">
         <div class="imageblock position-relative">
             <img class="img-fluid" src="images/video.jpg" alt="img">
@@ -1132,20 +1245,6 @@
             </a>
         </div>
     </section>
-
- 
-
-<section class="mt-5">
-  <div class="container-fluid">
-    <h2 class="display-6 fw-medium">Vendor Added Products</h2>
-    <div class="swiper vendor-swiper">
-      <div class="swiper-wrapper" id="productList"></div>
-      <div class="swiper-button-next vendor-next"></div>
-      <div class="swiper-button-prev vendor-prev"></div>
-      <div class="swiper-pagination vendor-pagination position-relative d-block mt-4"></div>
-    </div>
-  </div>
-</section>
 
 
 <!--<section id="vendor-products" class="position-relative mt-5">
@@ -1168,7 +1267,7 @@
 
     
 
-    <!--<section id="blogs" class="padding-medium">
+    <section id="blogs" class="padding-medium">
         <div class="container-fluid">
             <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
                 <h3 class="display-5 fw-medium">NEWS ARTICLES</h3>
@@ -1199,7 +1298,7 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section> 
 
 
     <section id="subscribe" class="padding-medium pt-0">
@@ -1282,6 +1381,7 @@
           <p class="m-0 pb-3">© CSS LOOTBOX</p>
         </div>
       </section>
+
 
 
 
@@ -1439,7 +1539,18 @@
     </div>
   </div>
      
-    
+   
+ <!-- Video Upload Toast -->
+<div id="videoUploadToast" class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 1080;">
+  <div class="d-flex">
+    <div class="toast-body" id="videoToastMsg">
+      🎬 <h6>Sucess!, video uploaded successfully</h6>
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+ 
+
 <style>
 .buy-now-overlay {
   position: absolute;
@@ -1472,7 +1583,7 @@
 
 
 
-/* From Uiverse.io by JaydipPrajapati1910 */ 
+
 .Revbutton {
   --width: 100px;
   --height: 35px;
@@ -1587,15 +1698,37 @@
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
 }
 
-
-
-
-
-
-
 </style>
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
@@ -1614,7 +1747,13 @@ const VideoProductData = {
   "apple monitor": {
     name: "Apple Desktop Monitor",
     link: "Single Products/Mac.html"
-  }
+  },
+  "Airpods": {
+      name: "Airpods",
+      link: "Shop/Shop.html"
+    }
+
+
   // ➕ Add more as needed
 };
 
@@ -1635,17 +1774,18 @@ const VideoProductData = {
         maxFileSize: 100000000,
         clientAllowedFormats: ['mp4', 'webm', 'mov', 'jpg', 'jpeg', 'png', 'gif']
       }, (error, result) => {
-        if (!error && result && result.event === "success") {
-          /*const videoURL = result.info.secure_url;
-          document.getElementById("videoURL").value = videoURL;
-          document.getElementById("videoUploadStatus").textContent = "✅ Video Added";*/
+       if (!error && result && result.event === "success") {
+        const videoUrl = result.info.secure_url;
+    analyzeVideoWithMobileNet(videoUrl);
+  uploadedVideoURL = result.info.secure_url;
+  showVideoToast("🎬 Success! Type a caption to Continue");
+  document.getElementById("videoUploadStatus").textContent = ""; //hide old text
+} else if (error) {
+  console.error("Upload Error:", error);
+  showVideoToast("❌ Upload failed. Please try again.", false);
+  document.getElementById("videoUploadStatus").textContent = "";
+}
 
-          uploadedVideoURL = result.info.secure_url; // ← new variable holds video URL
-        document.getElementById("videoUploadStatus").textContent = "✅ Video Added!";
-
-        } else if (error) {
-          document.getElementById("videoUploadStatus").textContent = "❌ Upload failed";
-        }
       });
     
       document.getElementById("uploadWidgetBtn").addEventListener("click", () => {
@@ -1705,7 +1845,9 @@ const newReview = {
         reviews.unshift(newReview);
         localStorage.setItem("reviews", JSON.stringify(reviews));
     
-        status.innerHTML = "<span class='text-success'>✅ Review submitted!</span>";
+        showVideoToast("✅ Your review has been uploaded successfully!");
+status.innerHTML = "";
+
         this.reset();
         document.getElementById("videoUploadStatus").textContent = '';
         loadReviews();
@@ -1766,12 +1908,12 @@ const newReview = {
           div.className = "review-card bg-dark text-white p-3 rounded-4 mb-4 shadow";
           div.innerHTML = `
   <div class="position-relative">
-    <video src="${review.url}" controls autoplay muted loop class="w-100 rounded-3" style="max-height: 500px;"></video>
+    <video src="${review.url}" controls muted autoplay loop onmouseover="this.play()" onmouseout="this.pause()"  class="w-100 rounded-3" style="max-height: 500px;"></video>
 
     
 ${review.product ? `
 
-  <!-- From Uiverse.io by JaydipPrajapati1910 --> 
+ <!--Buy Now Button-->
   <div class="buy-now-overlay">
 <div data-tooltip="${review.product.price}" class="Revbutton">
 <div class="button-wrapper">
@@ -1845,6 +1987,8 @@ deleteBtn.onclick = () => {
   reviews.splice(index, 1);
   localStorage.setItem("reviews", JSON.stringify(reviews));
   loadReviews();
+  showVideoToast("🗑️ Review deleted successfully!",true);
+
 };
 
 
@@ -2609,7 +2753,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
+<!----
 <script>//trackProduct function to track viewed products
 // This function will be called when a product is viewed
 function trackProduct(productId) {
@@ -2624,7 +2768,7 @@ function trackProduct(productId) {
 
   localStorage.setItem('viewedProducts', JSON.stringify(viewed));
 }
-</script>
+</script>-->
 
 
 
@@ -2694,7 +2838,26 @@ function trackProduct(productId) {
       price: 'GH₵40',
       image: 'https://i.pinimg.com/736x/60/21/c5/6021c56b49e529fb2a0c3c57e72e4d83.jpg',
       link: 'Clothes/Clothes.html'
+    },
+    "band aid": {
+  name: "Band Aid First Aid Strips",
+  link: "Single Products/BandAid.html"
+},
+"pill bottle": {
+  name: "Pill Bottle (Empty)",
+  link: "Single Products/Pill.html"
+},
+"lighter": {
+  name: "Mini Pocket Lighter",
+  link: "Single Products/Lighter.html"
+},
+'Airpods': {
+      name: 'Airpods',
+      price: 'GH₵50',
+      image: 'images/item5.jpg',
+      link: 'Shop/Shop.html'
     }
+
 
 
     // Add more product definitions here
@@ -2729,81 +2892,9 @@ function trackProduct(productId) {
   }*/
 
 function showRecommendations() {
-  const viewed = JSON.parse(localStorage.getItem('viewedProducts')) || [];
-  const wrapper = document.getElementById('recommended-products');
-  wrapper.innerHTML = ''; // Clear old content
-
-  viewed.forEach(productId => {
-    const p = productData[productId];
-    if (p) {
-      wrapper.innerHTML += `
-        <div class="swiper-slide">
-          <div class="blake product-item position-relative">
-            <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">
-                  Recommended
-                </div>
-            <img src="${p.image}" class="card-img-top recImage" alt="${p.name}">
-            
-            <div class="card-body d-flex justify-content-between mt-2">
-              <h5 class="item-name text-white">${p.name}</h5>
-              <h5 class="money fw-bold">${p.price}</h5>
-            </div>
-              <div class="mt-auto flex-column">
-               <a href="${p.link}" class="btn btn-dark btn-sm w-100" flex-column>View Product</a>
-              </div>
-            
-          </div>
-        </div>
-      `;
-    }
-  });
-
-
-  // recommendations swiper
-  if (viewed.length > 0) {
-    new Swiper('.recommended-swiper', {
-      slidesPerView: 4,
-      spaceBetween: 20,
-        simulateTouch: true,   // ✅ Enable dragging
-  grabCursor: true,      // ✅ Show grab cursor
-   cssMode: true,
-      // Add your Swiper options here
-      loop: true,
-      
-      
-
-
-      navigation: {
-        nextEl: '.recommended-next',
-        prevEl: '.recommended-prev',
-      },
-      pagination: {
-        el: '.recommended-pagination',
-        clickable: true,
-      },
-     /* breakpoints: {
-        
-        0: { slidesPerView: 1 },
-        576: { slidesPerView: 2 },
-        1024: { slidesPerView: 4 },
-      }*/
-
-        breakpoints: {
-    0: { slidesPerView: 2 },
-    576: { slidesPerView: 3 },
-    768: { slidesPerView: 4 },
-    1024: { slidesPerView: 5 },
-    1280: { slidesPerView: 5 }, // laptop
-  }
-    });
-  }
-
-
+  
 
   // New Arrival Swiper
-  if (viewed.length == 0) {
-    wrapper.innerHTML = '<h6 class="noRec style="position:center;"">No recommendations available yet.<h6>';
-  }
   if (viewed.length > 0) {
     new Swiper('.mySwiper', {
       slidesPerView: 4,
@@ -2814,14 +2905,11 @@ function showRecommendations() {
       // Add your Swiper options here
       loop: true,   
       autoplay: {
-        delay: 2000,
+        delay: 1500,// Delay between slides
         disableOnInteraction: true,
+        pauseOnMouseEnter: true, // Pause on hover
       },
-      speed: 500,
-      
-      
-      
-
+      speed: 500,// Speed of slide transition
 
       navigation: {
         nextEl: '.arrival-next',
@@ -2831,13 +2919,7 @@ function showRecommendations() {
         el: '.new-arrival-pagination',
         clickable: true,
       },
-     /* breakpoints: {
-        
-        0: { slidesPerView: 1 },
-        576: { slidesPerView: 2 },
-        1024: { slidesPerView: 4 },
-      }*/
-
+    
         breakpoints: {
     0: { slidesPerView: 2 },
     576: { slidesPerView: 3 },
@@ -2848,23 +2930,28 @@ function showRecommendations() {
     });
   }
 
-
 }
 
 
 
 
-  document.addEventListener("DOMContentLoaded", showRecommendations);
+  document.addEventListener("DOMContentLoaded", () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user || true) loadRecommendations(); // fallback for anonymous user
+  });
+});
+
 </script>
 
 
 
 
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
 
 <script>
-  // Initialize Firebase (same config as in your Account.html)
+  // Initialize Firebase (same config Account.html)
   const firebaseConfig = {
     apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
     authDomain: "lootbox-vproduct.firebaseapp.com",
@@ -2881,7 +2968,7 @@ function showRecommendations() {
       // 🚫 Not logged in, redirect to login
       window.location.href = "Account/Account.html";
     }
-    // ✅ User is logged in — stay on the page
+    // this shows that user is logged in so  stay on the page
   });
 </script>
 
@@ -2959,7 +3046,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<script>
+<!--<script>
   window.addEventListener("DOMContentLoaded", function () {
     const productContainer = document.getElementById("productList");
     let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -3021,7 +3108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
-</script>
+</script>-->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -3285,23 +3372,43 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
 <style>
   #chatToggleBtn {
     position: fixed;
+   
     bottom: 100px;
     right: 20px;
-    background: #000;
+  
     color: white;
-    border: none;
+  
     border-radius: 50%;
     width: 60px;
     height: 60px;
     font-size: 26px;
     display: flex;
     justify-content: center;
-    align-items: center;
+   
     cursor: pointer;
-    z-index: 9999;
-     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9995;// 
+     
   transition: all 0.3s ease;
+ background: linear-gradient(30deg, rgb(170 0 193) 20%, rgb(9 9 244) 80%);
+  transition: all 0.3s ease-in-out 0s;
+  box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 0px 0px;
+  animation: 1.2s cubic-bezier(0.8, 0, 0, 1) 0s infinite normal none running pulse;
+  align-items: center;
+  border: 0;
   }
+  #chatToggleBtn:hover {
+ background: linear-gradient(30deg, rgb(170 0 193) 20%, rgb(9 9 244) 80%);
+    box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 15px 5px;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+  @keyframes pulse  {
+  100%  {
+    box-shadow: 0 0 0 45px rgba(193,244,246,0);
+
+  }
+}
 
   #chatbotContainer {
     position: fixed;
@@ -3365,6 +3472,53 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
     box-shadow: 0 0 15px rgb(0 0 0);
 
   }
+
+ .chat-message.bot {
+  background-color: #f9f9f9;
+  color: #111;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  padding: 15px 18px;
+  border-radius: 10px;
+  margin: 12px 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  line-height: 1.2; 
+}
+
+.chat-message.bot img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.chat-message.bot b {
+  font-weight: 600;
+  color: #222;
+}
+
+.chat-message.bot br {
+  margin-bottom: 6px;
+}
+
+.chat-message.bot img {
+  margin-top: 10px;
+}
+
+.chat-message.bot ul {
+  margin: 8px 0 8px 18px;
+  padding: 0;
+  list-style: disc;
+  color: #333;
+
+}
+
+.chat-message.bot li {
+  margin-bottom: 4px;
+}
+
+
 
   #chatFooter {
     padding: 10px;
@@ -3475,12 +3629,18 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
   const chatToggleBtn = document.getElementById("chatToggleBtn");
 
   function appendMessage(content, sender) {
-    const msg = document.createElement("div");
-    msg.className = `chat-message ${sender}`;
-    msg.innerText = content;
-    chatBody.appendChild(msg);
-    chatBody.scrollTop = chatBody.scrollHeight;
+  const msg = document.createElement("div");
+  msg.className = `chat-message ${sender}`;
+  
+  if (sender === "bot") {
+    msg.innerHTML = content; // ✅ allow HTML like <img>
+  } else {
+    msg.innerText = content; // ✅ keep text-only for user input
   }
+
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
 
   async function sendMessage() {
     const userMessage = chatInput.value.trim();
@@ -3513,6 +3673,453 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
     chatbotContainer.style.display = chatbotContainer.style.display === "flex" ? "none" : "flex";
   });
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const db = firebase.firestore();
+    const productListContainer = document.getElementById('productList');
+
+    if (!productListContainer) {
+      console.error("❌ Element #productList not found");
+      return;
+    }
+
+    db.collection("products").get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          console.warn("⚠️ No products in Firestore.");
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.status === "Active") {
+            console.log("✅ Adding product:", data.name);
+
+             productListContainer.innerHTML += `
+          <div class="swiper-slide">
+            <div class="product-item position-relative">
+              <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-dark text-light">NEW</div>
+              <img src="${data.image}" alt="${data.name}" class="product-image img-fluid">
+              <div class="cart-concern">
+                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                  <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE
+                    <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
+                  </a>
+                  <a href="${data.image}" class="view-btn">
+                    <svg class="expand" width="16" height="16"><use xlink:href="#expand"></use></svg>
+                  </a>
+                  <a href="Cart/Cart.html" class="add-to-cart"
+                     data-name="${data.name}"
+                     data-price="${data.price}"
+                     data-image="${data.image}">
+                    <svg class="cart" width="16" height="16"><use xlink:href="#cart"></use></svg>
+                  </a>
+                  <a href="#" class="wishlist-btn">
+                    <svg class="wishlist" width="20" height="20"><use xlink:href="#wishlist"></use></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <h5><a href="#" class="item-name">${data.name}</a></h5>
+                <h5 class="money fw-bold">GH₵ ${data.price}</h5>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+        // ✅ Initialize Swiper AFTER adding slides
+        new Swiper('.vendor-swiper', {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        simulateTouch: true,   // ✅ Enable dragging
+  grabCursor: true,      // ✅ Show grab cursor
+   cssMode: true,
+      // Add your Swiper options here
+      loop: false,
+          autoplay: {
+            delay: 1500, // Delay between slides
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true, // Pause on hover
+          },
+          navigation: {
+            nextEl: '.vendor-next',
+            prevEl: '.vendor-prev',
+          },
+          pagination: {
+            el: '.vendor-pagination',
+            clickable: true,
+          },
+        });
+      })
+      .catch(err => {
+        console.error("🔥 Firestore error:", err);
+      });
+  });
+</script>
+
+
+
+<script>
+  console.log("🔥 script is running");
+
+  if (typeof firebase === 'undefined') {
+    console.error("❌ Firebase not loaded");
+  } else {
+    console.log("✅ Firebase loaded");
+  }
+
+  window.onload = function () {
+    const db = firebase.firestore();
+    console.log("📡 Fetching products...");
+
+    db.collection("products").get()
+      .then(snapshot => {
+        console.log("📦 Snapshot received:", snapshot);
+
+        if (snapshot.empty) {
+          console.warn("⚠️ Snapshot is empty — no documents found.");
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          console.log("✅ Product:", doc.data());
+        });
+      })
+      .catch(err => {
+        console.error("🔥 Firestore error:", err.message);
+      });
+  };
+</script>
+
+
+<script>
+  function showVideoToast(message = "🎬 Sucess!, Type a caption to upload", isSuccess = true) {
+    const toastEl = document.getElementById("videoUploadToast");
+    const toastMsg = document.getElementById("videoToastMsg");
+
+    toastMsg.textContent = message;
+
+    toastEl.classList.remove("bg-success", "bg-danger");
+    toastEl.classList.add(isSuccess ? "bg-success" : "bg-danger");
+
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  }
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: false,// Whether animation should happen only once - while scrolling down
+    mirror: false,// Whether elements should animate out while scrolling past them
+
+   
+  });
+</script>
+
+<script>
+  /* ---------- Countdown ---------- */
+  // ① Set your end date (YYYY-MM-DD hh:mm:ss, local time)
+  const targetDate = new Date('2025-07-31T23:59:59');
+
+  // ② Cache spans
+  const daysEl    = document.querySelector('.days');
+  const hoursEl   = document.querySelector('.hours');
+  const minsEl    = document.querySelector('.minutes');
+  const secsEl    = document.querySelector('.seconds');
+
+  function updateClock() {
+    const now   = new Date();
+    const diff  = targetDate - now;           // milliseconds remaining
+
+    if (diff <= 0) {                          // time’s up
+      clearInterval(timer);
+      [daysEl, hoursEl, minsEl, secsEl].forEach(el => el.textContent = '00');
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days   = Math.floor(totalSeconds / 86400);
+    const hours  = Math.floor((totalSeconds % 86400) / 3600);
+    const mins   = Math.floor((totalSeconds % 3600) / 60);
+    const secs   = totalSeconds % 60;
+
+    daysEl.textContent   = String(days).padStart(2, '0');
+    hoursEl.textContent  = String(hours).padStart(2, '0');
+    minsEl.textContent   = String(mins).padStart(2, '0');
+    secsEl.textContent   = String(secs).padStart(2, '0');
+  }
+
+  // ③ Initial call + interval
+  updateClock();
+  const timer = setInterval(updateClock, 1000);
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+  const db = firebase.firestore();
+
+  function getCurrentUserId() {
+    const user = firebase.auth().currentUser;
+    return user ? user.uid : 'anonymous';
+  }
+
+  function trackProduct(productName) {
+    const userId = getCurrentUserId();
+    db.collection("userActivity").doc(userId).set({
+      recentViews: firebase.firestore.FieldValue.arrayUnion(productName)
+    }, { merge: true });
+  }
+
+  async function getCategoryByProductName(name) {
+    const snapshot = await db.collection('recommendation')
+      .where('name', '==', name).limit(1).get();
+    return snapshot.empty ? null : snapshot.docs[0].data().category;
+  }
+
+  async function loadRecommendations() {
+    const userId = getCurrentUserId();
+    const userDoc = await db.collection('userActivity').doc(userId).get();
+    const recentViews = userDoc.exists ? userDoc.data().recentViews : [];
+
+    console.log("Recent views:", recentViews);
+
+    const recommendations = new Map();
+
+    for (let productName of recentViews) {
+      const category = await getCategoryByProductName(productName);
+        console.log("Matched product category:", category);
+        
+      if (!category) continue;
+
+      const snap = await db.collection('recommendation')
+        .where('category', '==', category)
+        .get();
+
+      snap.forEach(doc => {
+        const data = doc.data();
+        if (!recommendations.has(data.name)) {
+          recommendations.set(data.name, data);
+        }
+      });
+    }
+
+    
+    
+
+console.log("Recommendations loaded:", recommendations);
+    
+
+    showRecommendations(Array.from(recommendations.values()));
+  }
+
+  function showRecommendations(products) {
+    const container = document.getElementById('recommended-products');
+    container.innerHTML = ''; // Clear old content
+
+    products.forEach(product => {
+      container.innerHTML += `
+        <div class="swiper-slide">
+          <div class="blake product-item position-relative">
+            <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">
+                  Recommended
+                </div>
+            <img src="${product.image}" class="card-img-top recImage" alt="${product.name}">
+
+            <div class="card-body d-flex justify-content-between mt-2">
+              <h5 class="item-name text-white">${product.name}</h5>
+              <h5 class="money fw-bold">GH₵${product.price}</h5>
+            </div>
+              <div class="mt-auto flex-column">
+               <a href="${product.link}" class="btn btn-dark btn-sm w-100" flex-column>View Product</a>
+              </div>
+            
+          </div>
+        </div>
+      `;
+    });
+
+
+  // recommendations swiper
+    new Swiper('.recommended-swiper', {
+      slidesPerView: 4,
+      spaceBetween: 20,
+        simulateTouch: true,   // ✅ Enable dragging
+  grabCursor: true,      // ✅ Show grab cursor
+   
+      // Add your Swiper options here
+      loop: true,
+      cssMode: true,
+      autoplay: {
+        delay: 1500,// Delay between slides
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true, // Pause on hover
+      },
+      
+      navigation: {
+        nextEl: '.recommended-next',
+        prevEl: '.recommended-prev',
+      },
+      pagination: {
+        el: '.recommended-pagination',
+        clickable: true,
+      },
+     /* breakpoints: {
+        
+        0: { slidesPerView: 1 },
+        576: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 },
+      }*/
+
+        breakpoints: {
+    0: { slidesPerView: 2 },
+    576: { slidesPerView: 3 },
+    768: { slidesPerView: 4 },
+    1024: { slidesPerView: 5 },
+    1280: { slidesPerView: 5 }, // laptop
+  }
+    });
+  
+
+  }
+
+
+  
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user || true) loadRecommendations(); // `|| true` allows for anonymous testing
+  });
+</script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+<script>
+function analyzeVideoWithMobileNet(videoUrl) {
+  const video = document.createElement("video");
+  video.crossOrigin = "anonymous";
+  video.src = videoUrl;
+  video.muted = true;
+  video.playsInline = true;
+
+  // Wait for metadata (video dimensions)
+  video.addEventListener("loadedmetadata", () => {
+    video.currentTime = 2;
+  });
+
+  // After seeking to 2s
+  video.addEventListener("seeked", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const img = new Image();
+    img.src = canvas.toDataURL();
+    img.onload = () => {
+      document.body.appendChild(img); // optional: see the captured frame
+      runMobileNet(img);
+    };
+  });
+
+
+}
+</script>
+
+<script>
+  document.body.appendChild(img); // Show the captured frame on screen
+
+async function runMobileNet(img) {
+  const model = await mobilenet.load();
+  const predictions = await model.classify(img);
+  console.log("MobileNet predictions:", predictions);
+
+if (predictions.length > 0 && predictions[0].className) {
+  const label = predictions[0].className.toLowerCase();
+  findMatchingProduct(label);
+} else {
+  alert("⚠️ No prediction found — try a clearer video or later timestamp.");
+}
+
+}
+
+</script>
+
+
+<script>
+function findMatchingProduct(label) {
+  const cleanedLabel = label.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
+
+  for (const key in productData) {
+    const cleanedKey = key.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
+    if (cleanedLabel.includes(cleanedKey) || cleanedKey.includes(cleanedLabel)) {
+      const product = productData[key];
+
+      // ✅ Add this message to confirm detection
+      console.log(`✅ Detected and matched: ${product.name}`);
+      alert(`✅ Detected: ${product.name}. Redirect button will appear.`);
+
+      showBuyNowButton(product.link);
+      return;
+    }
+  }
+
+  // If no match found
+  console.log("No match found for", label);
+  alert(`We detected: ${label}, but couldn't find a matching product.`);
+}
+
+
+
+function showBuyNowButton(link) {
+  const button = document.createElement("a");
+  button.href = link;
+  button.innerText = "Buy Now";
+  button.target = "_blank";
+  button.className = "buy-now-button";
+
+  Object.assign(button.style, {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    background: "#ff4081",
+    color: "#fff",
+    padding: "10px",
+    borderRadius: "8px",
+    zIndex: "10",
+    textDecoration: "none"
+  });
+
+  document.body.appendChild(button);
+}
+</script>
+
+
+
+
+
+
+
 
 
 

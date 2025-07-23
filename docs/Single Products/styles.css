@@ -49,8 +49,87 @@ CSS STRUCTURE:
 
 /*--------------------------------------------------------------
 /** 1. VARIABLES
---------------------------------------------------------------*/
-.buybtn {
+/* From Uiverse.io by aCHEN-design */
+.buttonbuy {
+  border-radius: 48px;
+  border: 1px solid #fff;
+  background: rgb(255 193 7);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  position: relative;
+  left: 50px;
+  transition: all 0.3s ease-in-out;
+
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000000;
+  gap: 10px;
+
+  outline: none;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700 !important;
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+  transition: all 0.4s ease-in-out;
+  letter-spacing: 0.1rem;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttonbuy:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.buttonbuy:hover .icon {
+  transform: translate(4px);
+}
+
+.buttonbuy:hover::before {
+  animation: shine 1s ease-out infinite;
+}
+
+.buttonbuy::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+--------------------------------------------------------------*/ .buybtn {
   background: #0db412 !important;
   color: white !important;
   font-weight: 600 !important;
@@ -70,47 +149,50 @@ CSS STRUCTURE:
   color: #0db412 !important;
 }
 
-.bread{
+.bread {
   color: green !important;
   font-weight: 600;
 }
 
-.del{
+.del {
   color: red !important;
 }
 
-
-.navbar-brand                {font-family: 'Monoton', cursive;
-                              font-size: 1.5rem;
-                              font-weight: 400;
-                             /* background: rgba(0, 0, 0, 0.6);  Black background with 0.5 opacity */
-                              color: white;
-                             text-align: center;}
-
-.navtext  {text-align: center;
-            margin-top: 15px;
-            margin-left: 5px;
-  
+.navbar-brand {
+  font-family: "Monoton", cursive;
+  font-size: 1.5rem;
+  font-weight: 400;
+  /* background: rgba(0, 0, 0, 0.6);  Black background with 0.5 opacity */
+  color: white;
+  text-align: center;
 }
 
-.logo                        {width: 50px;
-                                margin-top: 1px;
-                                margin-bottom: 10px;}
+.navtext {
+  text-align: center;
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.logo {
+  width: 50px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+}
 
 :root {
   --primary-color: #111111;
-  --secondary-color: #F9F6F3;
+  --secondary-color: #f9f6f3;
   --black-color: #111111;
   --dark-color: #353535;
-  --primary-color-200: #E8F0F1;
+  --primary-color-200: #e8f0f1;
   --primary-color-400: #c4e9ed;
-  --gray-color: #777F81;
+  --gray-color: #777f81;
   --light-color: #fdfdfd;
 
   /* bootstrap color-scheme */
   --bs-dark-rgb: 80, 80, 80;
-  --bs-gray-100: #EAE5DD;
-  --bs-gray-300: #DCDCDC;
+  --bs-gray-100: #eae5dd;
+  --bs-gray-300: #dcdcdc;
   --bs-body-color-rgb: 53, 53, 53;
   --bs-primary-rgb: 17, 17, 17;
   --bs-secondary-rgb: 249, 246, 243;
@@ -160,7 +242,6 @@ a:hover {
   color: var(--primary-color);
 }
 
-
 /* 2.2 Background Color
 /*----------------------------------------------*/
 .bg-light {
@@ -195,7 +276,6 @@ a:hover {
   padding-bottom: 12em;
 }
 
-
 @media (max-width: 768px) {
   .padding-medium {
     padding-top: 6em;
@@ -224,7 +304,6 @@ a:hover {
   margin-bottom: 12em;
 }
 
-
 /* - Section Title
   --------------------------------------------------------------*/
 h1,
@@ -247,8 +326,6 @@ h6 {
 .breadcrumb .breadcrumb-light {
   --bs-breadcrumb-divider-color: var(--light-color);
 }
-
-
 
 /*--------------------------------------------------------------
   /** 2.4 Buttons
@@ -386,13 +463,14 @@ svg.primary-color {
 /* new arrival */
 .main-slider-button-next.swiper-button-disabled,
 .main-slider-button-prev.swiper-button-disabled {
-  opacity: .35;
+  opacity: 0.35;
   cursor: auto;
   pointer-events: none;
 }
 
-.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
-.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets
+  .swiper-pagination-bullet {
   margin: 0 8px;
 }
 
@@ -408,7 +486,6 @@ svg.primary-color {
   background-color: var(--primary-color);
 }
 
-
 /* modal video override
 ------------------------------------------------------------- */
 .modal-dialog {
@@ -423,9 +500,8 @@ svg.primary-color {
   padding: 0;
   background-color: #f5f3ef;
   border: none;
-  border-radius: 0
+  border-radius: 0;
 }
-
 
 /** Search Popup
 --------------------------------------------------------------*/
@@ -447,8 +523,15 @@ svg.primary-color {
 .search-popup.is-visible {
   opacity: 1;
   visibility: visible;
-  cursor: -webkit-image-set(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23FFF' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E") 1x, url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E") 2x), pointer;
-  cursor: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E"), pointer;
+  cursor: -webkit-image-set(
+      url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23FFF' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E")
+        1x,
+      url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E")
+        2x
+    ),
+    pointer;
+  cursor: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M20 1l-1-1-9 9-9-9-1 1 9 9-9 9 1 1 9-9 9 9 1-1-9-9'/%3E%3C/svg%3E"),
+    pointer;
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
   transition: opacity 0.3s 0s, visibility 0s 0s;
@@ -485,7 +568,7 @@ svg.primary-color {
 }
 
 .search-popup-form .form-control {
-  padding: 0 0 .375em 0;
+  padding: 0 0 0.375em 0;
   font-size: 2em;
 }
 
@@ -582,7 +665,6 @@ svg.primary-color {
 }
 
 @media only screen and (max-width: 991px) {
-
   .search-popup .cat-list-item,
   .search-popup-form .form-control {
     font-size: 1.425em;
@@ -597,7 +679,6 @@ svg.primary-color {
 }
 
 @media only screen and (max-width: 575px) {
-
   .search-popup .cat-list-item,
   .search-popup-form .form-control {
     font-size: 1.125em;
@@ -668,7 +749,6 @@ svg.primary-color {
   color: white;
 }
 
-
 /** 4.2 New-Arrival Section Style
 --------------------------------------------------------------*/
 .product-item .cart-concern {
@@ -690,7 +770,6 @@ svg.primary-color {
   bottom: 100px;
   opacity: 1;
 }
-
 
 /** 4.3 Video Section Style
 --------------------------------------------------------------*/
@@ -756,7 +835,7 @@ svg.play-icon {
 
 /* search bar style  */
 .search-bar {
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 }
 
 /*--------------------------------------------------------------
@@ -799,14 +878,13 @@ Single Product page style start
 
 a.btn-cart {
   border-radius: 0.25rem;
-  border: 1px solid rgba(65, 64, 62, 0.20);
+  border: 1px solid rgba(65, 64, 62, 0.2);
 }
 
 a.btn-wishlist {
   border-radius: 0.25rem;
-  border: 1px solid rgba(65, 64, 62, 0.20);
+  border: 1px solid rgba(65, 64, 62, 0.2);
 }
-
 
 /*--------------------------------------------------------------
 faqs page style start
@@ -828,12 +906,11 @@ faqs page style start
 }
 
 .accordion-button:not(.collapsed)::after {
-  background-image: url('https://api.iconify.design/eva/arrow-down-fill.svg?color=%2341403e');
-
+  background-image: url("https://api.iconify.design/eva/arrow-down-fill.svg?color=%2341403e");
 }
 
 .accordion-button::after {
-  background-image: url('https://api.iconify.design/eva/arrow-down-fill.svg?color=%2341403e');
+  background-image: url("https://api.iconify.design/eva/arrow-down-fill.svg?color=%2341403e");
 }
 
 .accordion-button:focus {
@@ -854,7 +931,7 @@ Blog page style start
 }
 
 .blog-paragraph {
-  color: #908F8D;
+  color: #908f8d;
   font-size: 1rem;
   font-weight: 400;
   line-height: normal;
@@ -862,19 +939,17 @@ Blog page style start
 }
 
 .blog-read {
-  color: #908F8D;
+  color: #908f8d;
   font-size: 1rem;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
 }
 
 a.blog-read {
-  border-bottom: 1px solid #D9D9D8;
+  border-bottom: 1px solid #d9d9d8;
   transition: all 0.3s ease-in;
 }
 
 a.blog-read:hover {
   border-bottom: 1px solid #8a8a8a;
 }
-
-

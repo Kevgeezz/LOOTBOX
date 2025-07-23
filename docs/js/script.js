@@ -82,7 +82,6 @@
         simulateTouch: true, // ✅ Enable dragging
         grabCursor: true, // ✅ Show grab cursor
         cssMode: true,
-        autoplay: true,
 
         navigation: {
           nextEl: ".swiper-button-next",
