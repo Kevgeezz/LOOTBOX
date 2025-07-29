@@ -437,8 +437,14 @@
 
                     <input type="text" id="loginEmail" name="email" placeholder="Enter email address"
                       class="form-control mb-3 p-4">
-                    <input type="password" id="loginPassword" placeholder="Enter password"
-                      class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+                    <div class="position-relative">
+                      <input type="password" id="loginPassword" placeholder="Enter password" 
+                        class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+                      <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" 
+                        onclick="togglePassword('loginPassword', this)">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
 
                     <label class="py-3 d-flex flex-wrap justify-content-between">
                       <div>
@@ -455,17 +461,31 @@
                      <button type="submit"  class="btn btn-dark btn-lg rounded-1">Log In</button>
 
                     </div>
+                    
 
-                  </div>
+
+<!-- switch to next form section -->
+<div class="text-center mt-3">
+  <h6 class="mb-0">Don't have an account? 
+    <a href="#" class="text-primary fw-bold" onclick="document.getElementById('nav-register-tab').click()"><h6 style="display: inline; color: #127d3a; font-weight: bold;">Create a new account</h6></a>
+  </h6>
+</div>
+                    
+
+     </div>
                 </form>
 
               </div>
 
             </div>
+
+
+
+
             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
               <div class="col-lg-8 offset-lg-2 mt-5">
 
-                <p class="mb-0">Sign-up With Social</p>
+                <h6 class="mb-0">Sign-up With Social</h6>
                 <hr class="my-1">
 
                <div class="row mt-4 mb-5">
@@ -516,7 +536,7 @@
 
                    </div>
                 
-                <!-- From Uiverse.io by TreepDeep --> 
+      
 
 
 
@@ -546,7 +566,7 @@
                 </div>
 
 
-                <p class="mb-0">Or Sign-Up With Email</p>
+                <h6 class="mb-0">Or Sign-Up With Email</h6>
                 <hr class="my-1">
 
                 <form id="form2" onsubmit="signup(event)" class="form-group flex-wrap ">
@@ -556,10 +576,22 @@
                       class="form-control mb-3 p-4">
                     <input type="text" id="signupEmail1" name="email" placeholder="Your email address"
                       class="form-control mb-3 p-4">
-                    <input type="password" id="signPassword" placeholder="Set your password"
-                      class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" required="">
-                    <input type="password" id="inputPassword2" placeholder="Retype your password"
-                      class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" required>
+                    <div class="position-relative">
+                      <input type="password" id="signPassword" placeholder="Set your password"
+                        class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" required="">
+                      <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" 
+                        onclick="togglePassword('signPassword', this)">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                    <div class="position-relative">
+                      <input type="password" id="inputPassword2" placeholder="Retype your password"
+                        class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" required>
+                      <button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2" 
+                        onclick="togglePassword('inputPassword2', this)">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
 
                     <label class="py-3 d-flex flex-wrap justify-content-between">
                       <div>
@@ -568,7 +600,7 @@
                       </div>
 
                       <div id="passwordHelpBlock" class="form-text ">
-                        <a href="#" class="text-primary  fw-bold"> Forgot Password?</a>
+                        <a href="#" class="text-primary  fw-bold"><h6>Forgot Password?</h6></a>
                       </div>
                     </label>
                     <div class="d-grid my-3">
@@ -576,6 +608,12 @@
                       <button type="submit" class="btn btn-dark btn-lg rounded-1">Sign Up</button>
 
                     </div>
+                    <!-- prev form section -->
+<div class="text-center mt-3">
+  <h6 class="mb-0">Don't have an account? 
+    <a href="#" class="text-primary fw-bold" onclick="document.getElementById('nav-sign-in-tab').click()"><h6 style="display: inline; color: #127d3a; font-weight: bold;">Already have an account?</h6></a>
+  </h6>
+</div>
 
                   </div>
                 </form>
@@ -704,34 +742,7 @@ const db = firebase.firestore();
 </script>
 
 
-<!---
-<h2>Vendor Login</h2>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="errorMsg" style="color: red;"></p>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
-      authDomain: "lootbox-vproduct.firebaseapp.com",
-      projectId: "lootbox-vproduct",
-      storageBucket: "lootbox-vproduct.firebasestorage.app",
-      messagingSenderId: "753114136209",
-      appId: "1:753114136209:web:75f2b96440b32c04c70930"
-    };
-    firebase.initializeApp(firebaseConfig);
-
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => window.location.href = "../index.html")
-        .catch(err => document.getElementById('errorMsg').innerText = err.message);
-    }
-
-  </script>
-  -->
   
 
 
@@ -800,7 +811,22 @@ const db = firebase.firestore();
   }
 </script>
 
-
+<script>
+function togglePassword(inputId, button) {
+  const passwordInput = document.getElementById(inputId);
+  const icon = button.querySelector('i');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  } else {
+    passwordInput.type = 'password';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  }
+}
+</script>
 
 </body>
 
