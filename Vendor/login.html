@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vendor Login | LOOTBOX</title>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+<!--Link Swiper's CSS ================================================== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <!-- Style Sheet ================================================== -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!--  Google Fonts (Mine) -->
+  
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+  
+  
+
+  
+    
+    <style>
+      :root {
+        --primary-color: #7c3aed;
+        --primary-hover: #6d28d9;
+        --text-color: #333;
+        --light-gray: #f8f9fa;
+        --border-color: #dee2e6;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #f5f5f5;
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+       
+.navbar-brand {
+  font-family: "Monoton", cursive;
+  font-size: 1.5rem;
+  font-weight: 400;
+  /* background: rgba(0, 0, 0, 0.6);  Black background with 0.5 opacity */
+  color: white;
+  text-align: center;
+}
+
+.navtext {
+  text-align: center;
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.logo {
+  width: 50px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+}
+
+      .login-container {
+        max-width: 450px;
+        width: 100%;
+        margin: auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .login-header img {
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+
+      .login-header h2 {
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      .form-control {
+        height: 50px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        padding-left: 45px;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(124, 58, 237, 0.25);
+      }
+
+      .input-group-text {
+        background: transparent;
+        border-right: none;
+        position: absolute;
+        z-index: 10;
+        height: 50px;
+        border-radius: 8px 0 0 8px;
+      }
+
+      .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        transform: scale(0.85) translateY(-1.5rem) translateX(-1.5rem);
+      }
+
+      .btn-login {
+        background-color: black;
+        border: none;
+        height: 50px;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-login:hover {
+        background-color: var(--primary-hover);
+        color: white;
+      }
+
+      .form-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .form-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .form-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .error-message {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      .input-icon {
+        position: relative;
+      }
+
+      .input-icon i {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        color: #6c757d;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header (same as original) -->
+    <header
+      id="header"
+      class="site-header py-3 px-3 px-lg-5 bg-black w-100 z-1"
+    >
+      <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
+      <div class="offcanvas-header justify-content-center">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0 text-capitalize">Product Item Name</h6>
+                <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary">GH&#8373;12</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0 text-capitalize">Product Item Name</h6>
+                <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary">GH&#8373;8</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0 text-capitalize">Product Item Name</h6>
+                <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary">GH&#8373;5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>GH&#8373;20</strong>
+            </li>
+          </ul>
+  
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+        </div>
+      </div>
+    </div>
+
+     <!-- header section start  -->
+  <header id="header" class="site-header py-3 px-3 px-lg-5 bg-black w-100 z-1">
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
+
+          <button class="navbar-toggler d-flex d-lg-none order-3 p-0 border-0 shadow-none" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <svg class="navbar-icon text-white" width="30" height="30">
+              <use xlink:href="#menu"></use>
+            </svg>
+          </button>
+        
+          <!--moblie-->
+          <a class="navbar-brand order-2 order-lg-2 d-flex d-lg-none" href="../index.html"> <img src="../images/cart.png" alt="Logo" width="30" height="50" class="logo d-inline-block align-text-center"><p class="navtext">LOOTBOX</p></a>
+
+          <div class="offcanvas offcanvas-end bg-black order-3" tabindex="-1" id="bdNavbar"
+            aria-labelledby="bdNavbarOffcanvasLabel">
+            <div class="offcanvas-body align-items-center">
+              <div class="offcanvas-header p-0 py-4 ms-2">
+                <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas"
+                  aria-label="Close" data-bs-target="#bdNavbar"></button>
+              </div>
+
+              <div class="col-md-2 d-flex">
+
+              <!-- navbrand on large screen--> 
+              <a class="navbar-brand order-2 order-lg-2 d-flex href="index.html"> <img src="../images/cart.png" alt="Logo" width="30" height="50" class="logo d-inline-block align-text-center"><p class="navtext">LOOTBOX</p></a>
+                
+              </div>
+
+              <div class="col-md-5 offset-lg-2">
+                <div class="navbar-collapse order-1 order-lg-1 ms-3 ms-lg-0" id="navbarMenu">
+                  <ul class="navbar-nav d-flex justify-content-center">
+                    <li class="nav-item me-5">
+                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-5">
+                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0" href="about-us.html">About</a>
+                    </li>
+
+                    <!-- Dropdown for Shop -->
+                    <li class="nav-item me-5 dropdown">
+                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle" href="#"
+                        id="navbarDropdownShop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Shop
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownShop">
+                        <li><a class="dropdown-item" href="../clothes/clothes.html">Clothes <span
+                                    class="badge bg-primary">New Arrivals</span></a>
+                        </li>
+                        <li><a class="dropdown-item" href="../Shop/shop.html">Electronics
+                                <span class="badge bg-primary">New</span></a></li>
+                         <li><a class="dropdown-item" href="single-product.html">Food Stuff
+                                    <span class="badge bg-primary">New</span></a></li>
+                    </ul>
+                    </li>
+
+
+                    <!-- Dropdown for Pages -->
+                    <li class="nav-item me-5 dropdown">
+                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle" href="#"
+                        id="navbarDropdownPages" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pages
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownPages">
+                        <li>
+                          <a href="about-us.html" class="dropdown-item">About</a>    
+                        </li>
+                        <li>
+                          <a href="../cart/cart.html" class="dropdown-item">Cart</a>
+                        </li>
+                        <li>
+                          <a href="../wishlist/index.html" class="dropdown-item">Wishlist</a>       
+                        </li>
+                        <li>
+                          <a href="../checkout/checkout.html" class="dropdown-item">Checkout</a>
+                             
+                        </li>
+                        <li>
+                          <a href="contact.html" class="dropdown-item">Contact</a>
+                              
+                        </li>
+                        <li>
+                          <a href="faqs.html" class="dropdown-item">FAQs</a>
+                        </li>
+                        <li>
+                          <a href="../Account/Account.html" class="dropdown-item">Account</a>
+                        </li>      
+                      </ul>
+                    </li>
+
+                    
+                  </ul>
+
+                </div>
+              </div>
+              <div class="col-md-3">
+                <ul
+                  class="user-items list-unstyled d-none d-lg-flex justify-content-end align-items-center order-3 flex-grow-1 gap-4 m-0">
+                  <li class="search-item" data-bs-toggle="collapse" data-bs-target="#search-box"
+                    aria-controls="search-box" aria-expanded="false" aria-label="Toggle navigation">
+                    <a href="#" class="search-button">
+                      <svg class="text-white search" width="20" height="20">
+                        <use xlink:href="#search"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="../cart/cart.html" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                      aria-controls="offcanvasCart">
+                      <svg class="text-white cart" width="20" height="20">
+                        <use xlink:href="#cart"></use>
+                      </svg>
+                    </a>
+                  <li>
+                    <a href="../wishlist/index.html" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                      aria-controls="offcanvasCart">
+                      <svg class="text-white wishlist" width="20" height="20">
+                        <use xlink:href="#wishlist"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  </li>
+                  <li>
+                    <a href="../Account/Account.html">
+                      <svg class="text-white man" width="20" height="20">
+                        <use xlink:href="#man"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+    </header>
+
+    <main class="flex-grow-1 d-flex align-items-center">
+      <div class="container py-5">
+        <div class="login-container">
+          <div class="login-header">
+            <img src="../images/cart.png" alt="LOOTBOX Logo" />
+            <h2>Vendor Portal</h2>
+            <p class="text-muted">Sign in to manage your products</p>
+          </div>
+
+          <form id="loginForm">
+            <div class="mb-4 input-icon">
+              <i class="fas fa-envelope"></i>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="Email"
+                required
+              />
+              <label for="email" class="form-label ps-4"></label>
+            </div>
+
+            <div class="mb-4 input-icon">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder=" Password"
+                required
+              />
+              <label for="password" class="form-label ps-4"></label>
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="rememberMe"
+                />
+                <label class="form-check-label" for="rememberMe"
+                  >Remember me</label
+                >
+              </div>
+              <a href="#" class="text-decoration-none">Forgot password?</a>
+            </div>
+
+            <button
+              type="button"
+              onclick="login()"
+              class="btn btn-login w-100 mb-3"
+            >
+              <i class="fas fa-sign-in-alt me-2"></i> Login
+            </button>
+
+            <div id="errorMsg" class="error-message text-center"></div>
+
+            <div class="form-footer">
+              <p>Don't have an account? <a href="#">Contact support</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+        authDomain: "lootbox-vproduct.firebaseapp.com",
+        projectId: "lootbox-vproduct",
+        storageBucket: "lootbox-vproduct.firebasestorage.app",
+        messagingSenderId: "753114136209",
+        appId: "1:753114136209:web:75f2b96440b32c04c70930",
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const errorElement = document.getElementById("errorMsg");
+
+        // Clear previous errors
+        errorElement.innerText = "";
+
+        // Basic validation
+        if (!email || !password) {
+          errorElement.innerText = "Please fill in all fields";
+          return;
+        }
+
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(() => (window.location.href = "Vproduct.html"))
+          .catch((err) => {
+            let errorMessage = err.message;
+            if (err.code === "auth/user-not-found") {
+              errorMessage = "No account found with this email";
+            } else if (err.code === "auth/wrong-password") {
+              errorMessage = "Incorrect password";
+            }
+            errorElement.innerText = errorMessage;
+          });
+      }
+
+      // Allow login on Enter key press
+      document
+        .getElementById("password")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            login();
+          }
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

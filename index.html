@@ -1,0 +1,4130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LootBox</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="LootBox">
+    <meta name="keywords" content="LootBox">
+    <meta name="description" content="LootBox (Final Year Project)">
+    
+
+    <!--Bootstrap ================================================== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!--Link Swiper's CSS ================================================== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+    <!-- Style Sheet ================================================== -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Fonts ================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+<!--  Google Fonts (Mine) -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+ <!--  Font Awesome -->
+ <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+ <script src="https://kit.fontawesome.com/a8b3cd8f70.js" crossorigin="anonymous"></script>
+
+ <!-- Flaticon-->
+
+ <link rel="stylesheet" type="text/css" href="/website/css/uicons-solid-rounded.css">
+ <link rel="stylesheet" type="text/css" href="/website/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" type="text/css" href="/website/css/uicons-regular-straight.css">
+    <link rel="stylesheet" type="text/css" href="/website/css/uicons-line.css">
+
+    
+
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+ 
+</head>
+
+<body>
+     <!---- <script>
+        window.location.href = "Account/Account.html";
+      </script>-->
+      
+    <!-- svg icon -->
+    
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol
+        xmlns="http://www.w3.org/2000/svg"
+        id="alt-arrow-right-outline"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057"
+          clip-rule="evenodd"
+        />
+      </symbol>
+      <symbol
+        xmlns="http://www.w3.org/2000/svg"
+        id="alt-arrow-left-outline"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M15.488 4.43a.75.75 0 0 1 .081 1.058L9.988 12l5.581 6.512a.75.75 0 1 1-1.138.976l-6-7a.75.75 0 0 1 0-.976l6-7a.75.75 0 0 1 1.057-.081"
+          clip-rule="evenodd"
+        />
+      </symbol>
+        <symbol id="arrow-left" viewBox="0 0 256 256">
+            <path fill="currentColor"
+                d="M220 128a4 4 0 0 1-4 4H49.66l65.17 65.17a4 4 0 0 1-5.66 5.66l-72-72a4 4 0 0 1 0-5.66l72-72a4 4 0 0 1 5.66 5.66L49.66 124H216a4 4 0 0 1 4 4" />
+        </symbol>
+        <symbol id="arrow-right" viewBox="0 0 256 256">
+            <path fill="currentColor"
+                d="m218.83 130.83l-72 72a4 4 0 0 1-5.66-5.66L206.34 132H40a4 4 0 0 1 0-8h166.34l-65.17-65.17a4 4 0 0 1 5.66-5.66l72 72a4 4 0 0 1 0 5.66" />
+        </symbol>
+        <symbol id="man" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M332.64 64.58C313.18 43.57 286 32 256 32c-30.16 0-57.43 11.5-76.8 32.38c-19.58 21.11-29.12 49.8-26.88 80.78C156.76 206.28 203.27 256 256 256s99.16-49.71 103.67-110.82c2.27-30.7-7.33-59.33-27.03-80.6M432 480H80a31 31 0 0 1-24.2-11.13c-6.5-7.77-9.12-18.38-7.18-29.11C57.06 392.94 83.4 353.61 124.8 326c36.78-24.51 83.37-38 131.2-38s94.42 13.5 131.2 38c41.4 27.6 67.74 66.93 76.18 113.75c1.94 10.73-.68 21.34-7.18 29.11A31 31 0 0 1 432 480" />
+        </symbol>
+        <symbol id="search" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M456.69 421.39L362.6 327.3a173.8 173.8 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.8 173.8 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3M97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8" />
+        </symbol>
+        <symbol id="expand" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="m25.545 23.328l-7.627-7.705l7.616-7.616l1.857 1.857l2.26-8.428l-8.428 2.258l1.836 1.836l-7.603 7.604l-7.513-7.59L9.81 3.695L1.392 1.394l2.215 8.44l1.848-1.83l7.524 7.604l-7.515 7.515l-1.856-1.855l-2.26 8.427l8.43-2.257L7.94 25.6l7.503-7.502l7.614 7.693l-1.867 1.848l8.416 2.3l-2.213-8.438z" />
+        </symbol>
+        <symbol id="wishlist" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M256 448a32 32 0 0 1-18-5.57c-78.59-53.35-112.62-89.93-131.39-112.8c-40-48.75-59.15-98.8-58.61-153C48.63 114.52 98.46 64 159.08 64c44.08 0 74.61 24.83 92.39 45.51a6 6 0 0 0 9.06 0C278.31 88.81 308.84 64 352.92 64c60.62 0 110.45 50.52 111.08 112.64c.54 54.21-18.63 104.26-58.61 153c-18.77 22.87-52.8 59.45-131.39 112.8a32 32 0 0 1-18 5.56" />
+        </symbol>
+        <symbol id="cart" viewBox="0 0 512 512">
+            <circle cx="176" cy="416" r="32" fill="currentColor" />
+            <circle cx="400" cy="416" r="32" fill="currentColor" />
+            <path fill="currentColor"
+                d="M456.8 120.78a23.92 23.92 0 0 0-18.56-8.78H133.89l-6.13-34.78A16 16 0 0 0 112 64H48a16 16 0 0 0 0 32h50.58l45.66 258.78A16 16 0 0 0 160 368h256a16 16 0 0 0 0-32H173.42l-5.64-32h241.66A24.07 24.07 0 0 0 433 284.71l28.8-144a24 24 0 0 0-5-19.93" />
+        </symbol>
+        <symbol id="play" viewBox="0 0 512 512">
+            <path fill="currentColor" d="m96 448l320-192L96 64z" />
+        </symbol>
+        <symbol id="down" viewBox="0 0 24 24">
+            <g fill="none" fill-rule="evenodd">
+                <path
+                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                <path fill="currentColor"
+                    d="M13.06 16.06a1.5 1.5 0 0 1-2.12 0l-5.658-5.656a1.5 1.5 0 1 1 2.122-2.121L12 12.879l4.596-4.596a1.5 1.5 0 0 1 2.122 2.12l-5.657 5.658Z" />
+            </g>
+        </symbol>
+        <symbol id="navbar-icon" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 17h18M3 12h18M3 7h18" />
+        </symbol>
+    </svg>
+
+    
+    <div class="search-popup">
+      <img src="https://cdn-icons-png.flaticon.com/128/2763/2763138.png" class="search-popup-close imgclose position-absolute top-0 end-0 m-3" aria-label="Close">
+        <div class="search-popup-container">
+
+
+<!-- Updated Search Form -->
+<form role="search" class="form-group" id="searchForm">
+  <div class="input-group">
+    <!-- Text Search Input -->
+    <input type="search" id="searchInput" class="form-control border-0 border-bottom" 
+           placeholder="Search Products By text..." name="q" required/>
+    
+    <!-- Voice Search Button -->
+    <button id="voiceSearchBtn" type="button" class="btn border-0 bg-white px-2" title="Search by Voice">
+       <i class="icc fa-solid fa-microphone-lines"></i> 
+    </button>
+    
+    <!-- Image Search Button -->
+    <button id="imageSearchBtn" type="button" class="btn border-0 bg-white px-2" title="Search by Image">
+      <i class="icc fa-solid fa-camera-retro"></i>
+    </button>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="search-submit border-0 bg-white px-2">
+      <svg class="search" width="20" height="20">
+        <use xlink:href="#search"></use>
+      </svg>
+    </button>
+  </div>
+  
+  <!-- Status Messages -->
+  <div id="searchStatus" class="small text-muted mt-1" style="min-height: 20px;"></div>
+  
+  <!-- Hidden Image Input -->
+  <input type="file" id="imageInput" accept="image/*" class="d-none" />
+</form>
+<div id="liveResults" class="list-group mt-2"></div>
+
+
+<div id="voiceSearchStatus" class="small text-muted mt-1" style="min-height: 20px;"></div>
+
+<!-- Add this just below your form -->
+<h3 class="Sresults">Search Results:</h3>
+
+<div id="results" class="mt-3"></div>
+
+   <!-- Image Search Upload -->
+
+<div id="previewCard" class="card shadow-sm mt-3" style="max-width: 220px; display: none;">
+  
+                <div class="similarity-badge">Preview</div>
+  <img id="previewImage" class=" card-img-top previewcard" alt="Uploaded preview" />
+</div>
+
+
+<!-- Image search results will be shown here -->
+<p id="imageSearchStatus" class="text-muted mt-2">Waiting for image...</p>
+<div id="imageResults" class="row mt-3"></div>
+
+            <h5 class="cat-list-title">Browse Categories</h5>
+
+            <ul class="cat-list">
+                <li class="cat-list-item mb-3">
+                    <a href="Clothes/Clothes.html" title="Clothes">Clothes</a>
+                </li>
+                <li class="cat-list-item mb-3">
+                    <a href="Shop/Shop.html" title="Electronics">Electronics</a>
+                </li>
+
+                
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart"
+        aria-labelledby="My Cart">
+        <div class="offcanvas-header justify-content-center"> 
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-circle pt-2">3</span>
+                </h4>
+
+                <ul class="list-group mb-4">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Product one</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">GH&#8373;120</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Product Two</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">GH&#8373;80</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Product three</h6>
+                            <small class="text-body-secondary">Brief description</small>
+                        </div>
+                        <span class="text-body-secondary">GH&#8373;50</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span class="fw-bold">Total (GH&#8373;)</span>
+                        <strong>GH&#8373;250</strong>
+                    </li>
+                </ul>
+
+                <button class="w-100 btn btn-dark" type="submit" href="../checkout/checkout.html">Continue to checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- header section start  -->
+    <header id="header" class="site-header py-3 px-3 px-lg-5 position-absolute top-0 start-0 w-100 z-1" data-aos="fade-down">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg position-relative>">
+                    
+                  <a class="navbar-brand order-2 order-lg-2 d-flex d-lg-none" href="index.html"> <img src="images/cart.png" alt="Logo" width="30" height="50" class="logo d-inline-block align-text-center"><p class="navtext">LOOTBOX</p></a>
+
+                         <li class="search-item d-lg-none" data-bs-toggle="collapse" data-bs-target="#search-box" aria-controls="search-box" aria-expanded="false" aria-label="Toggle navigation">
+                                        <a href="#" class="search-button">
+                                            <svg class="text-white search" width="20" height="20">
+                                                <use xlink:href="#search"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+
+                    <button class="navbar-toggler d-flex d-lg-none order-3 p-0 border-0 shadow-none" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <svg class="navbar-icon text-white" width="30" height="30">
+                            <use xlink:href="#navbar-icon"></use>
+                        </svg>
+                    </button>
+
+                   <!---- <a href="index.html" class="navbar-brand order-2 order-lg-2 d-flex d-lg-none"> 
+                        <img src="images/logo.png" alt="Logo">
+                    </a> -->
+
+                    
+                           
+                       
+
+                    <div class="offcanvas offcanvas-end bg-black order-3" tabindex="-1" id="bdNavbar"
+                        aria-labelledby="bdNavbarOffcanvasLabel">
+                        <div class="offcanvas-body align-items-center">
+                            <div class="offcanvas-header p-0 py-4 ms-2">
+                                <button type="button" class="btn-close btn-close-white shadow-none"
+                                    data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+                            </div>
+                            <div class="col-md-2 d-flex">
+                               <!---- <a href="index.html" class="navbar-brand order-2 order-lg-2 d-none d-lg-flex">
+                                    <img src="images/logo.png" alt="Logo"> 
+                                </a> -->
+                                   <a class="navbar-brand order-2 order-lg-2 d-lg-flex d-none" href="index.html"> <img src="images/cart.png" alt="Logo" width="30" height="50" class="logo d-inline-block align-text-center"><p class="navtext">LOOTBOX</p></a>
+                            
+                            </div>
+                            
+                            
+                            <div class="col-md-5 offset-lg-2">
+                                <div class="navbar-collapse order-1 order-lg-1 ms-3 ms-lg-0" id="navbarMenu">
+                                    <ul class="navbar-nav d-flex justify-content-center">
+
+                                        <li class="nav-item me-5 dropdowns">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-0"
+                                                href="index.html">Home</a>
+                                        </li>
+
+                                      <!----  <li class="nav-item me-5">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-0"
+                                                href="about-us.html">About</a>
+                                        </li>-->
+
+                                        <!-- Dropdown for Shop -->
+                                        <li class="nav-item me-5 dropdown">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle"
+                                                href="#" id="navbarDropdownShop" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Shop
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownShop">
+                                                <li><a class="dropdown-item" href="Clothes/Clothes.html">Clothes <span
+                                                            class="badge bg-primary">New Arrivals</span></a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="Shop/Shop.html">Electronics
+                                                        <span class="badge bg-primary">New</span></a></li>
+                                                 <li><a class="dropdown-item" href="single-product.html">Food Stuff
+                                                            <span class="badge bg-primary">New</span></a></li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- Dropdown for Blog 
+
+                                        <li class="nav-item me-5 dropdown">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle"
+                                                href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Blog
+                                            </a> -->
+                                            
+                                            <!--<ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
+                                                <li><a class="dropdown-item" href="blog.html">Blog <span
+                                                            class="badge bg-primary">PRO</span></a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="single-post.html">Single Post <span
+                                                            class="badge bg-primary">PRO</span></a></li> 
+                                            </ul> -->
+                                        </li>
+
+                                        <!-- Dropdown for Pages -->
+                                        <li class="nav-item me-5 dropdown">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle"
+                                                href="#" id="navbarDropdownPages" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Pages
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownPages">
+                                               
+                                                <li>
+                                                    <a href="Cart/Cart.html" class="dropdown-item">Cart</a>
+                                                <li>
+                                                    <a href="wishlist/index.html" class="dropdown-item">Wishlist</a>
+                                                            
+                                                </li>
+                                                <li>
+                                                    <a href="checkout/checkout.html" class="dropdown-item">Checkout</a>
+                                                            
+                                                </li>
+                                                <li>
+                                                    <a href="Account/Account.html" class="dropdown-item">Account</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                      <!-- From Uiverse.io by Nawsome --> 
+                                     <li class="nav-item me-5 dropdown">
+                                         <div class="buttons">
+                                            <a class="nav-link nav-link-ltr text-white pb-1 pe-"
+                                         href="Vendor/login.html"  role="button" aria-expanded="false">
+                                              <button class="btn"><span></span><p data-start="good luck!" data-text="SELL!" data-title="BE A VENDOR"></p></button>
+                                         </a>
+                                         </div>
+                                     </li>
+                                         
+                                       <!-- From Uiverse.io by satyamchaudharydev -->
+                                        
+                                       
+                                    </ul>
+                                 
+                                </div>
+                            </div>
+
+                            <!--Outside the humburger toggle-->
+                            <div class="col-md-3">
+                                <ul class="user-items list-unstyled d-none d-lg-flex justify-content-end align-items-center order-3 flex-grow-1 gap-4 m-0">
+                                    <li class="search-item" data-bs-toggle="collapse" data-bs-target="#search-box"
+                                        aria-controls="search-box" aria-expanded="false" aria-label="Toggle navigation">
+                                        <a href="#" class="search-button">
+                                            <svg class="text-white search" width="20" height="20">
+                                                <use xlink:href="#search"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+
+                               <li style="position: relative;">
+                                 <a href="Cart/Cart.html">
+                                   <div style="position: relative; display: inline-block;">
+                                       <svg class="text-white cart" width="20" height="20">
+                                         <use xlink:href="#cart"></use>
+                                      </svg>
+                                     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><h6>0<h6></span>
+                                    </div>
+                                 </a>
+                               </li>
+
+                                        <a href="wishlist.html" data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                            <svg class="text-white wishlist" width="20" height="20">
+                                                <use xlink:href="#wishlist"></use>
+                                            </svg>
+                                            
+                                        </a>
+                                    </li>
+                                    </li>
+                                    <!--<li>
+                                        <a href="Account/Account.html">
+                                            <svg class="text-white man" width="20" height="20">
+                                                <use xlink:href="#man"></use>
+                                            </svg>
+                                        </a>
+                                    </li>-->
+
+                                    <!--Logout button-->
+                                    <li><button onclick="logout()" class="LBtn">
+  
+                                     <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+  
+                                    <div class="text Ltext">Logout</div>
+                                           </button></li>
+
+
+
+                                   <!---- <li>
+                                        <span id="vendorEmail" class="text-muted small"></span>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                </nav>
+            </div>
+        </div>
+    </header>
+
+  <main id="billboard" class="page-load" data-aos="fade-left">
+        <div class="position-relative"
+            style="background: url('images/header-img.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+            <div class="container">
+                <div class="offset-2 position-absolute top-50 start-0 translate-middle-y">
+                    <p class="fs-2 text-white" data-aos="fade-right">up to <span class="money" >GH&#8373;100</span> off</p>
+                    <h2 class="display-1 text-white fw-medium  mt-3" data-aos="fade-left" >On all apple <br > Products</h2>
+                    <a href="Shop/Shop.html" class="btn btn-outline-light mt-3">SHOP COLLECTION</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+<section id="collection">
+        <div class="container-fluid">
+            <div class="row mt-4">
+                <div class="col-lg-6 ps-lg-0" data-aos="fade-right">
+                    <div class="position-relative img-fluid"
+                        style=" background: url(images/JBLBanner.png);background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;" >
+                        
+                        <div class="text position-absolute text-center m-auto w-100 top-50 bg-white bg-opacity-10 py-5">
+                            <h3 class="display-4 fw-medium text-white mb-3" data-aos="fade-right">Deal Of the day</h3>
+                            <p class="fs-3 text-white" data-aos="fade-left">Up to 5% off on JBL Xtreme</p>
+                            <div>
+                                <a href="./Single Products/JBL Xtreme.html" class="btn btn-light mt-3" data-aos="fade-right">SHOP Now </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-lg-0" data-aos="fade-left">
+                    <div class="position-relative img-fluid"
+                        style="background: url(images/groupBanner.png);background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+                        <div class="text position-absolute text-center m-auto w-100 top-50 bg-white bg-opacity-10 py-5">
+                            <h3 class="display-4 fw-medium text-white mb-3" data-aos="fade-left">The Best Selling</h3>
+                            <p class="fs-3 text-white" data-aos="fade-right">Starting price from GH&#8373;80</p>
+                            <div>
+                                <a href="Clothes/Clothes.html" class="btn btn-light mt-3" data-aos="fade-left" >SHOP COLLECTION </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- New Arrivals Section -->
+    <section id="new-arrivals" class="newAv1 position-relative">
+        <div class="container-fluid">
+            <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
+                <h3 class="display-5 fw-medium " data-aos="fade-right">NEW ARRIVAL ITEMS</h3>
+                <div><a href="./Shop/Shop.html" class="btn btn-dark" data-aos="fade-left">SHOP ALL</a></div>
+            </div>
+
+            <div class="newswiper swiper mySwiper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-easing="ease-in-out" >
+                <div class="swiper-wrapper">
+
+                    <!--Playstation-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                          <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">
+                  new
+                </div>
+                            <img src="images/ps55.png" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Play.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('PLAYSTATION 5 (DIGITAL)')">PURCHASE
+                                         <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="images/ps55.png" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="PLAYSTATION 5 (DIGITAL)" 
+                                       data-price="7500.00"
+                                       data-image="images/ps55.png"
+                                       onclick="trackProduct('PS5')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                   </a>
+
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">PLAYSTATION 5 (DIGITAL)</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;7,500.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--JBL XTREME-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                          <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-dark text-light">
+                  new
+                </div>
+                            <img src="images/JJ.jpg" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single ProductS/JBL Xtreme.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('JBL Xtreme')">PURCHASE
+                                         <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    
+                                     <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="JBL Xtreme"
+                                       data-price="500.00"
+                                       data-image="images/JJ.jpg"
+                                       onclick="trackProduct('JBL Xtreme')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                   </a>
+
+
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">JBL XTREME</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;500.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--JBL HEADPHONE-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                          <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">
+                  new
+                </div>
+                            <img src="images/article2.jpg" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/JBL Headset.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('JBL Headphone')">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                     
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="JBL Headphone"
+                                       data-price="250.00"
+                                       data-image="images/article2.jpg"
+                                       onclick="trackProduct('JBL Headphone')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>  
+
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">JBL HEADPHONE</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;250.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--APPLE MONITOR-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                            <img src="images/item1.jpg" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Mac.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('Apple Monitor')">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="Apple Monitor"
+                                       data-price="45000.00"
+                                       data-image="images/item1.jpg"
+                                       onclick="trackProduct('Apple Monitor')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="../Single Product/Sp.html" class="item-name">APPLE DESKTOP MONITOR 8K</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;45,000.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+<!--NEXUS-->
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                            <img src="images/item6.jpg" alt="new1" class="product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Mac.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6" onclick="trackProduct('Nexus')">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="Nexus Buds Pro"
+                                       data-price="700.00"
+                                       data-image="images/item6.jpg"
+                                       onclick="trackProduct('Nexus')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="../Single Product/Sp.html" class="item-name">Nexus Buds Pro</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;700</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                            <img src="images/item5.jpg" alt="new1" class="img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">add
+                                        to cart <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">Product five</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;22.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-item position-relative">
+                            <img src="images/item2.jpg" alt="new1" class="img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">add
+                                        to cart <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">Product six</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;22.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next arrival-next "></div>
+                 <div class="swiper-button-prev arrival-prev"></div>
+                <div class="swiper-pagination new-arrival-pagination position-relative d-block mt-4"></div>
+            </div>
+        </div>
+    </section>
+    
+  
+
+
+    <!-----------------------------------Recommended for you---------------------------->
+    <section id="rec" class=" rec position-relative">
+        <div class="container-fluid">
+            <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
+                <h2 class="display-6 fw-medium " data-aos="fade-right">Recommended for you</h2>
+            </div>
+    
+  <!--<h4 class="mb-3">Recommended for You</h4>-->
+  
+<div class="swiper recommended-swiper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" data-aos-easing="ease-in-out" >
+  <div class="swiper-wrapper" id="recommended-products">
+    <!-- Slides will be injected here -->
+  </div>
+
+   <!--Optional Swiper navigation-->
+  <div class="swiper-button-next recommended-next"></div>
+  <div class="swiper-button-prev recommended-prev"></div>
+  <div class="swiper-pagination recommended-pagination position-relative d-block  mt-4"></div>
+</div>
+</div>
+    </section>
+
+
+    <section class="section-padding pt-0">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="banner-blocks">
+            
+              <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('Clothes/images/Black Woman.png') no-repeat; background-size: cover;" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" data-aos-easing="ease-in-out" >
+                <div class="banner-content p-5">
+                  <div class="content-wrapper text-light">
+                    <h3 class="banner-title text-light">Items on SALE</h3>
+                    <p>Discounts up to 30%</p>
+                    <div>
+                                <a href="./Clothes/Clothes.html" class="btn btn-light mt-3">SHOP Now </a>
+                            </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="banner-ad bg-success-subtle block-2" style="background:url('Clothes/images/banner-ad-2.jpg') no-repeat;background-size: cover" data-aos="fade-down" data-aos-duration="400" data-aos-delay="800" data-aos-easing="ease-in-out" >
+                <div class="banner-content align-items-center p-5">
+                  <div class="content-wrapper text-light">
+                    <h3 class="banner-title text-light">Combo offers</h3>
+                    <p>Discounts up to 50%</p>
+                    <div>
+                                <a href="./Clothes/Clothes.html" class="btn btn-light mt-3">SHOP Now </a>
+                            </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="banner-ad bg-danger block-3" style="background:url('Clothes/images/banner-ad-3.jpg') no-repeat;background-size: cover" data-aos="fade-up" data-aos-duration="600" data-aos-delay="800" data-aos-easing="ease-in-out" >
+                <div class="banner-content align-items-center p-5">
+                  <div class="content-wrapper text-light">
+                    <h3 class="banner-title text-light">Discount Coupons</h3>
+                    <p>Discounts up to 40%</p>
+                    <div>
+                                <a href="./Clothes/Clothes.html" class="btn btn-light mt-3">SHOP Now </a>
+                            </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- / Banner Blocks -->
+              
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="new-arrivals" class="newAv2 position-relative" data-aos="fade-up"
+        data-aos-duration="1000" >
+        <div class="container-fluid">
+            <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
+                <h3 class="display-5 fw-medium ">NEW ARRIVAL ITEMS</h3>
+                <div><a href="./Shop/Shop.html" class="btn btn-dark">SHOP ALL</a></div>
+            </div>
+
+            <div class="newswiper swiper mySwiper">
+                <div class="swiper-wrapper">
+
+                    <!--Playstation-->
+                    <div class="swiper-slide" data-aos="fade-left" >
+                        <div class="Av product-item position-relative">
+                            <img src="images/ps55.png" alt="new1" class="AvI product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Play.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6">Purchase
+                                         <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="images/ps55.png" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="PLAYSTATION 5 (DIGITAL)" 
+                                       data-price="7500.00"
+                                       data-image="images/ps55.png"
+                                       onclick="trackProduct('PS5')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">PLAYSTATION 5 (DIGITAL)</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;7,500.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--JBL XTREME-->
+                    <div class="swiper-slide">
+                        <div class="Av product-item position-relative">
+                            <img src="images/JJ.jpg" alt="new1" class="AvI product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single ProductS/JBL Xtreme.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="JBL Xtreme"
+                                       data-price="500.00"
+                                       data-image="images/JJ.jpg"
+                                       onclick="trackProduct('JBL Xtreme')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">JBL XTREME</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;500.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--JBL HEADPHONE-->
+                    <div class="swiper-slide">
+                        <div class="Av product-item position-relative">
+                            <img src="images/article2.jpg" alt="new1" class="AvI product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/JBL Headset.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="JBL Headphone"
+                                       data-price="250.00"
+                                       data-image="images/article2.jpg"
+                                       onclick="trackProduct('JBL Headphone')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">JBL HEADPHONE</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;250.00</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--APPLE MONITOR-->
+                    <div class="swiper-slide">
+                        <div class="Av product-item position-relative">
+                            <img src="images/item1.jpg" alt="new1" class="AvI product-image img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="Single Products/Mac.html" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE<svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="Cart/Cart.html" 
+                                      class="add-to-cart" 
+                                       data-name="Apple Monitor"
+                                       data-price="45000.00"
+                                       data-image="images/item1.jpg"
+                                       onclick="trackProduct('Apple Monitor')">
+                                       
+                                       <svg class="cart" width="16" height="16">
+                                       <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="../Single Product/Sp.html" class="item-name">APPLE DESKTOP MONITOR</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;45,000.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="Av product-item position-relative">
+                            <img src="images/item5.jpg" alt="new1" class="AvI img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">add
+                                        to cart <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">Apple Mouse</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;22.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="Av product-item position-relative">
+                            <img src="images/item2.jpg" alt="new1" class="AvI img-fluid">
+                            <div class="cart-concern">
+                                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                                    <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">add
+                                        to cart <svg class="arrow" width="20" height="20">
+                                            <use xlink:href="#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="single-product.html" class="view-btn">
+                                        <svg class="expand" width="16" height="16">
+                                            <use xlink:href="#expand"></use>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="wishlist-btn">
+                                        <svg class="wishlist" width="20" height="20">
+                                            <use xlink:href="#wishlist"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5><a href="single-product.html" class="item-name">Apple Series 5</a></h5>
+                                <h5 class="money fw-bold ">GH&#8373;22.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination new-arrival-pagination position-relative d-block mt-4"></div>
+            </div>
+        </div>
+    </section>
+
+
+ <!-- ===== Limited-time offer – Bootstrap version ===== -->
+<section id="limited-offer" class="py-5 text-white" style="
+     background: url('Bimages/banner-image-bg-1.jpg') center / cover no-repeat;
+">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Image column (optional separate PNG if you prefer) -->
+      <div class="col-12 col-md-6 text-center mb-4 mb-md-0">
+        <img src="Bimages/banner-image3.png"
+             class="img-fluid" alt="Limited time offer">
+      </div>
+
+      <!-- Content column -->
+      <div class="col-12 col-md-5 offset-md-1 text-center text-md-start">
+
+        <h2 class=" clocktxt display-5 fw-bold mb-4">
+          30% Discount on Books. Hurry Up !!!
+        </h2>
+
+        <!-- Countdown clock -->
+        <div id="countdown-clock" class="d-flex justify-content-center
+                    justify-content-md-start gap-3 mb-4 flex-wrap">
+
+          <!-- days -->
+          <div class="time px-2">
+            <span class="count-value days"></span>
+            <small class="d-block">Days</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- hours -->
+          <div class="time px-2">
+            <span class="count-value hours"></span>
+            <small class="d-block">Hrs</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- minutes -->
+          <div class="time px-2">
+            <span class="count-value minutes"></span>
+            <small class="d-block">Min</small>
+          </div>
+
+          <div class="separator">:</div>
+
+          <!-- seconds -->
+          <div class="time px-2">
+            <span class="count-value seconds"></span>
+            <small class="d-block">Sec</small>
+          </div>
+        </div>
+
+        <a href="books/index.html"
+           class="btn btn-dark px-4 py-2 fw-semibold">
+           Shop Collection
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-----------------------------------Customer's Reviews---------------------------->
+    <section id="review" >
+        <h3 class="cus display-2 mb-5 text-muted opacity-100 fw-medium secondary-font" style="margin-top:10% !important">CUSTOMER'S REVIEWS</h3>
+        <div class="container">
+            <div class="swiper testimonial-Swiper text-center">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide">
+                        <p class="review fw-light fs-5 lh-base">"Outstanding customer service! They kept me updated every step of the way until my order was delivered."</p>           
+                            <img class="testimonial-image" src="images/profile1.png" alt="dog-profile"><em class="fw-bold mt-3">JOHN AWUSI,Tema</em>
+                              
+                    </div>
+
+                    <div class="swiper-slide">
+                        <p class="review fw-light fs-5 lh-base">"Excellent service! My order arrived earlier than expected, and the quality exceeded my expectations. Will definitely Shop again!"</p>
+                            <img class="testimonial-image" src="images/profile1.png" alt="dog-profile"><em class="fw-bold mt-3">Sarah Mensah,Accra</em>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="review fw-light fs-5 lh-base">"Thank you soo muchhhh"</p>
+                            <img class="testimonial-image" src="images/profile1.png" alt="dog-profile"><em class="fw-bold mt-3">Nana Poku, Pokuase</em>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="review fw-light fs-5 lh-base">"Everything works perfectly"</p>
+                            <img class="testimonial-image" src="images/profile1.png" alt="dog-profile"><em class="fw-bold mt-3">Jones Asante,Tema</em>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="review fw-light fs-5 lh-base">"Its soo eaasy to Navigate"</p>
+                            <img class="testimonial-image" src="images/profile1.png" alt="dog-profile"><em class="fw-bold mt-3">King Kwakye,Accra</em>
+                    </div>
+                </div>
+                <div class="swiper-pagination testimonial-pagination position-relative mt-5"></div>
+            </div>
+        </div>
+    </section>
+
+
+<section class="mt-5">
+  <div class="container-fluid">
+    <h2 class="display-6 fw-medium">Vendor Added Products</h2>
+    <div class="swiper vendor-swiper">
+      <div class="swiper-wrapper" id="productList"></div>
+      <div class="swiper-button-next vendor-next"></div>
+      <div class="swiper-button-prev vendor-prev"></div>
+      <div class="swiper-pagination vendor-pagination position-relative d-block mt-4"></div>
+    </div>
+  </div>
+</section>
+
+    <section id="video-modish" class="padding-medium">
+        <div class="imageblock position-relative">
+            <img class="img-fluid" src="images/video.jpg" alt="img">
+            <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                <div class="play border border-2 border-white p-4 p-md-5 rounded-circle">
+                    <svg class="play-icon text-white" width="60" height="60">
+                        <use xlink:href="#play"></use>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </section>
+
+
+<!--<section id="vendor-products" class="position-relative mt-5">
+  <div class="container-fluid">
+    <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
+      <h2 class="display-6 fw-medium">Vendor Latest Products</h2>
+    </div>
+
+    <div class="swiper vendor-swiper">
+      <div class="swiper-wrapper" id="vendor-products-container">
+        Vendor products will be injected here 
+      </div>
+
+      <div class="swiper-button-next vendor-next"></div>
+      <div class="swiper-button-prev vendor-prev"></div>
+      <div class="swiper-pagination vendor-pagination position-relative d-block mt-4"></div>
+    </div>
+  </div>
+</section>-->
+
+    
+
+    <section id="blogs" class="padding-medium">
+        <div class="container-fluid">
+            <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
+                <h3 class="display-5 fw-medium">NEWS ARTICLES</h3>
+                <div><a href="blog.html" class="btn btn-dark">read all</a></div>
+            </div>
+            <div class="article">
+                <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <a href="single-post.html"> <img src="images/article1.jpg" class="img-fluid" alt="blog-img">
+                        </a>
+                        <h5 class="fs-3 mt-2"><a href="single-post.html" class="article-names">Best electric product to
+                                buy this season.</a></h5>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <a href="single-post.html"> <img src="images/article2.jpg" class="img-fluid" alt="blog-img">
+                        </a>
+                        <h5 class="fs-3 mt-2"><a href="single-post.html" class="article-names">How to follow the trend
+                                in budget
+                                list.</a></h5>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <a href="single-post.html"> <img src="images/article5.jpg" class="img-fluid" alt="blog-img">
+                        </a>
+                        <h5 class="fs-3 mt-2"><a href="single-post.html" class="article-names">unique gadget to own by
+                                tech collectors.</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+
+    <section id="subscribe" class="padding-medium pt-0">
+        <div class="container">
+            <h3 class="sus display-1 text-center mb-5 text-muted opacity-25 secondary-font fw-medium">SUBSCRIBE US</h3>
+            <div class="offset-lg-3 col-lg-6">
+                <form>
+                    <div class="input-group mb-5">
+                        <input type="email" class="form-control rounded-0 border-black"
+                            placeholder="Write your email address here...">
+                        <span class="input-group-btn subscribe-btn">
+                            <button class="btn btn-primary rounded-0 px-5" type="submit">Subscribe</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+      </section>
+
+        <!-- Chatbot -->
+
+
+
+
+    <section id="footer" class="bg-black text-white">
+        <div class="container padding-medium">
+          <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+              <a class="navbar-brand order-2 order-lg-2 d-flex" href="index.html"> <img src="images/cart.png" alt="Logo" width="30" height="50" class="logo d-inline-block align-text-center"><p class="navtext">LOOTBOX</p></a>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3 mb-lg-0">
+              <nav>
+                <ul class="list-unstyled">
+                  <li class="nav-item mb-2">
+                    <a class="nav-link nav-link-ltr" href="#">ABOUT</a>
+                  </li>
+                  <li class="nav-item mb-2 ">
+                    <a class="nav-link nav-link-ltr">SHOP</a>
+                  <li class="nav-item mb-2">
+                    <a class="nav-link nav-link-ltr" href="#">SALE</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a class="nav-link nav-link-ltr" href="#">ARTICLES</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3 mb-lg-0">
+              <nav>
+                <ul class="list-unstyled">
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">TRACK ORDER</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">RETURN POLICY</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">SHIPPING</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">CONTACT US</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-3 mb-lg-0">
+              <nav>
+                <ul class="list-unstyled">
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">FACEBOOK</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">INSTAGRAM</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">TWITTER</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">YOUTUBE</a></li>
+                  <li class="nav-item mb-2"><a class="nav-link nav-link-ltr" href="#">PINTEREST</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+              Do you have any queries?<br>
+              <a href="#" class="text-decoration-underline text-white">kevin13asante@gmail.com</a> <br>
+              If you need support? Give us a call. <br>
+              +233 59 277 2646
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="copyright text-center">
+          <p class="m-0 pb-3">© CSS LOOTBOX</p>
+        </div>
+      </section>
+
+
+
+
+
+    <!-- Video Popup -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="bi"
+                            width="40" height="40">
+                            <use xlink:href="#close-sharp"></use>
+                        </svg></button>
+                    <div class="ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+   
+   <!-- Review Button -->
+    <button class="btn btn-outline-dark shadow-lg rounded-circle" id="watchReviewsBtn" title="Watch Reviews"
+  data-bs-toggle="offcanvas" data-bs-target="#videoReviewPanel">
+  <img src="images/video.png" alt="Upload" style="width: 60px; height: auto; cursor: pointer;" />
+  
+</button>
+
+
+<style>
+  #watchReviewsBtn {
+    position: fixed;
+    bottom: 20px;
+    border: 20px;
+    
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Ensure it appears above everything */
+  }
+</style>
+
+                    <!-- Unified Video Review Panel -->
+
+<div class="offcanvas offcanvas-end  vh-100" tabindex="-1" id="videoReviewPanel" aria-labelledby="videoReviewPanelLabel">
+    <div class="offcanvas-header">
+
+      <h5 class="offcanvas-title" id="videoReviewPanelLabel">🎥Reviews</h5>
+
+      <button type="button" class="icon-btn add-btn " id="uploadWidgetBtn">
+        <div class="add-icon"></div>
+        <div class="btn-txt">Add</div>
+    </button>
+
+    <input type="hidden" id="videoURL" required>
+    <p id="videoUploadStatus" class="small text-muted mt-1"></p>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+  
+    <div class="offcanvas-body" id="Vbody"style="overflow-y: auto; max-height: 100vh;">
+      <!-- Upload Section -->
+
+
+
+      <form id="uploadForm" class="mb-4">
+        
+       <!---- <div class="mb-2">
+          <input type="file" accept="video/*" class="form-control" id="videoFile" required>
+        </div>-->
+        <div class="mb-2">
+
+            <input type="hidden" id="videoURL" required>
+            <p id="videoUploadStatus" class="small text-muted text-white mt-1"></p>
+
+            <!--<button type="button" class="btn btn-success btn-sm" id="uploadWidgetBtn">Upload Video</button>
+            <input type="hidden" id="videoURL" required>
+            <p id="videoUploadStatus" class="small text-muted mt-1"></p>-->
+          </div>
+          
+<!-- From Uiverse.io by vinodjangid07 --> 
+<div class="messageBox">
+    <!--<div class="fileUploadWrapper">
+      <label for="file">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 337 337">
+          <circle
+            stroke-width="20"
+            stroke="#6c6c6c"
+            fill="none"
+            r="158.5"
+            cy="168.5"
+            cx="168.5"
+          ></circle>
+          <path
+            stroke-linecap="round"
+            stroke-width="25"
+            stroke="#6c6c6c"
+            d="M167.759 79V259"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-width="25"
+            stroke="#6c6c6c"
+            d="M79 167.138H259"
+          ></path>
+        </svg>
+        <span class="tooltip">Upload</span>
+      </label>
+      
+      <input type="file" id="file" name="file" />
+    </div>-->
+    <input class="form-control formTxt" required="" placeholder="Type a caption..." type="text" id="caption" />
+    <button id="sendButton" type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+        <path
+          fill="none"
+          d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+        ></path>
+        <path
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="33.67"
+          stroke="#6c6c6c"
+          d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  
+     <!--SUBMIT BUTTON <button type="submit" class="btn btn-primary btn-sm">SEND</button>-->
+
+        <div id="uploadStatus" class="small mt-2"></div>
+      </form>
+
+  
+      <!-- Feed Section -->
+      <hr> 
+<h6 class="mt-3">Watch Other Reviews</h6>
+<div id="reviewPanel" style="max-height: 400px; overflow-y: auto;"></div>
+    </div>
+  </div>
+     
+   
+ <!-- Video Upload Toast -->
+<div id="videoUploadToast" class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 1080;">
+  <div class="d-flex">
+    <div class="toast-body" id="videoToastMsg">
+      🎬 <h6>Sucess!, video uploaded successfully</h6>
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+ 
+
+<style>
+.buy-now-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: rgb(1 255 137 / 95%); /* green with transparency */
+  padding: 1px 1px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.buy-now-button {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.buy-now-button:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+.Revbutton {
+  --width: 100px;
+  --height: 35px;
+  --tooltip-height: 35px;
+  --tooltip-width: 90px;
+  --gap-between-tooltip-to-button: 18px;
+  --button-color: #222;
+  --tooltip-color: #fff;
+  width: var(--width);
+  height: var(--height);
+  background: var(--button-color);
+  position: relative;
+  text-align: center;
+  border-radius: 0.45em;
+  font-family: "Arial";
+  transition: background 0.3s;
+}
+
+.Revbutton::before {
+  position: absolute;
+  content: attr(data-tooltip);
+  width: var(--tooltip-width);
+  height: var(--tooltip-height);
+  background-color: #555;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: 1.25em;
+  line-height: var(--tooltip-height);
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+  left: calc(50% - var(--tooltip-width) / 2);
+  visibility: hidden;
+  transition: all 0.5s;
+  
+  
+}
+
+.Revbutton::after {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #555;
+  left: calc(50% - 10px);
+  bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+}
+
+.Revbutton::after,.button::before {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+}
+
+.Revtext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-wrapper,.Revtext,.Revicon {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  color: #fff;
+}
+
+.Revtext {
+  top: 0
+}
+
+.Revtext,.Revicon {
+  transition: top 0.5s;
+}
+
+.Revicon {
+  color: #fff;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Revicon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.Revbutton:hover {
+  background: #222;
+}
+
+.Revbutton:hover .Revtext {
+  top: -100%;
+}
+
+.Revbutton:hover .Revicon {
+  top: 0;
+}
+
+.Revbutton:hover:before,.Revbutton:hover:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.Revbutton:hover:after {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+}
+
+.Revbutton:hover:before {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+}
+
+</style>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+
+<script>
+
+const VideoProductData = {
+  "jbl xtreme": {
+    name: "JBL Xtreme",
+    link: "Single Products/JBL Xtreme.html"
+  },
+  "playstation 5": {
+    name: "PlayStation 5 (Digital)",
+    link: "Single Products/Play.html"
+    
+  },
+  "apple monitor": {
+    name: "Apple Desktop Monitor",
+    link: "Single Products/Mac.html"
+  },
+  "Airpods": {
+      name: "Airpods",
+      link: "Shop/Shop.html"
+    }
+
+
+  // ➕ Add more as needed
+};
+
+
+
+    let uploadedVideoURL = ""; // Variable to hold the uploaded video URL
+    window.addEventListener("load", () => {
+
+      const cloudName = "dwjm3bvio";
+      const uploadPreset = "video_reviews";
+    
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: cloudName,
+        uploadPreset: uploadPreset,
+        sources: ['local'],
+        multiple: false,
+        resourceType: 'auto',
+        maxFileSize: 100000000,
+        clientAllowedFormats: ['mp4', 'webm', 'mov', 'jpg', 'jpeg', 'png', 'gif']
+      }, (error, result) => {
+       if (!error && result && result.event === "success") {
+        const videoUrl = result.info.secure_url;
+    analyzeVideoWithMobileNet(videoUrl);
+  uploadedVideoURL = result.info.secure_url;
+  showVideoToast("🎬 Success! Type a caption to Continue");
+  document.getElementById("videoUploadStatus").textContent = ""; //hide old text
+} else if (error) {
+  console.error("Upload Error:", error);
+  showVideoToast("❌ Upload failed. Please try again.", false);
+  document.getElementById("videoUploadStatus").textContent = "";
+}
+
+      });
+    
+      document.getElementById("uploadWidgetBtn").addEventListener("click", () => {
+        myWidget.open();
+      });
+
+      const uploadBtn = document.getElementById("uploadWidgetBtn");
+    if (uploadBtn) {
+      uploadBtn.addEventListener("click", () => {
+        console.log("Upload button clicked"); // for debugging
+        myWidget.open();
+      });
+    } else {
+      console.warn("uploadWidgetBtn not found in DOM");
+    }
+  });
+
+  </script>
+    
+  <script>
+      document.getElementById("uploadForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+    
+        const videoURL = uploadedVideoURL;
+        console.log("Submitting with video URL:", videoURL);
+        const caption = document.getElementById("caption").value;
+        
+        function matchProduct(caption) {
+  const lower = caption.toLowerCase();
+  for (let key in VideoProductData) {
+    if (lower.includes(key)) {
+      return VideoProductData[key];
+    }
+  }
+  return null;
+}
+
+        const status = document.getElementById("uploadStatus");
+    
+        if (!videoURL) {
+          status.innerHTML = "<span class='text-danger'>Please upload a video first.</span>";
+          return;
+        }
+    
+        const matchedProduct = matchProduct(caption);
+
+const newReview = {
+  url: videoURL,
+  caption: caption,
+  product: matchedProduct,  // ✅ link to matched product
+  likes: 0,
+  comments: []
+};
+;
+    
+        const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+        reviews.unshift(newReview);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+    
+        showVideoToast("✅ Your review has been uploaded successfully!");
+status.innerHTML = "";
+
+        this.reset();
+        document.getElementById("videoUploadStatus").textContent = '';
+        loadReviews();
+
+
+      });
+    
+    
+      function loadReviews() {
+        const panel = document.getElementById("reviewPanel");
+        panel.innerHTML = "";
+        const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+    
+        reviews.forEach((review, index) => {
+            /*
+          const div = document.createElement("div");
+          div.className = "mb-4";
+          div.innerHTML = `
+
+          
+           <video src="${review.url}" controls autoplay muted loop 
+  style="width: 100%; max-height: 400px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+</video>
+
+            <p class="mt-1 mb-0"><strong>Caption:</strong> ${review.caption || "No caption"}</p>
+
+
+
+<button class="bookmarkBtn likeB" onclick="likeReview(${index})" style="background: transparent; border: none; cursor: pointer;">
+  <span class="IconContainer" id="LikeContainer"> 
+    <span fill="white" viewBox="0 0 512 512" height="1em">❤️</span>
+  </span>
+    <span class="text-white" id="likeCount-${index}">${review.likes}</span>
+</button>
+
+<!-- From Uiverse.io by vinodjangid07 --> 
+<button class="bookmarkBtn" onclick="toggleComments(${index})" style="background: transparent; border: none; cursor: pointer;">
+  <span class="IconContainer"> 
+   <svg fill="blue" viewBox="0 0 512 512" height="1em"><path d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"></path></svg>
+  </span>
+    <span class="text-white" id="commentCount-${index}">${review.comments.length}</span>
+</button>
+
+
+  
+  <div id="commentSection-${index}" style="display: none;" class="mt-2">
+    <ul class="small" id="commentList-${index}">
+      ${review.comments.map(comment => `<li>${comment}</li>`).join("")}
+    </ul>
+    <input type="text" id="commentInput-${index}" class="form-control form-control-sm mb-1" placeholder="Write a comment">
+    <button class="btn btn-sm btn-secondary" onclick="addComment(${index})">Post</button>
+  </div>
+</div>
+
+          `;
+          panel.appendChild(div);*/
+          const div = document.createElement("div");
+          div.className = "review-card bg-dark text-white p-3 rounded-4 mb-4 shadow";
+          div.innerHTML = `
+  <div class="position-relative">
+    <video src="${review.url}" controls muted autoplay loop onmouseover="this.play()" onmouseout="this.pause()"  class="w-100 rounded-3" style="max-height: 500px;"></video>
+
+    
+${review.product ? `
+
+ <!--Buy Now Button-->
+  <div class="buy-now-overlay">
+<div data-tooltip="${review.product.price}" class="Revbutton">
+<div class="button-wrapper">
+  <div class="Revtext"><a href="${review.product.link}" target="_blank" class="btn text-white">
+      Buy
+    </a></div>
+    <span class="Revicon">
+      <a href="${review.product.link}" target="_blank" class="btn text-white">
+      <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+</svg></a>
+    </span>
+  </div>
+
+</div>
+</div>
+
+` : ''}
+
+              
+              <div class="review-actions d-flex justify-content-between align-items-center mt-3">
+                <p class="capTxt mb-1 flex-grow-1"><strong>📢</strong> ${review.caption || "No caption"}</p>
+                <div class="d-flex align-items-center gap-2">
+
+                  <button class="bookmarkBtn likeB" onclick="likeReview(${index})" style="background: transparent; border: none; cursor: pointer;">
+  <span class="IconContainer" id="LikeContainer"> 
+    <span fill="white" viewBox="0 0 512 512" height="1em">❤️</span>
+  </span>
+    <span class="iconTxt" id="likeCount-${index}">${review.likes}</span>
+</button>
+                  <button class="bookmarkBtn" onclick="toggleComments(${index})" style="background: transparent; border: none; cursor: pointer;">
+  <span class="IconContainer"> 
+   <svg fill="white" viewBox="0 0 512 512" height="1em"><path d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"></path></svg>
+  </span>
+    <span class="iconTxt" id="commentCount-${index}">${review.comments.length}</span>
+</button>
+                </div>
+              </div>
+          
+              <div id="commentSection-${index}" style="display: none;" class="mt-3">
+                <ul class="list-unstyled small mb-2" id="commentList-${index}">
+                  ${review.comments.map(comment => `<li class="border-bottom pb-1">${comment}</li>`).join("")}
+                </ul>
+                <div class="input-group input-group-sm">
+                  <input type="text" id="commentInput-${index}" class="form-control" placeholder="Write a comment">
+                  <button class="btn btn-primary" onclick="addComment(${index})">Post</button>
+                </div>
+              </div>
+            </div>
+          `;
+          panel.appendChild(div);
+
+      //Create delete button
+    /*const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "🗑️";
+    deleteBtn.className = "btn btn-danger btn-sm m-2";
+    deleteBtn.addEventListener("click", () => {
+      reviews.splice(index, 1); // Remove from array
+      localStorage.setItem("reviews", JSON.stringify(reviews)); // Save new state
+      loadReviews(); // Reload UI
+    });*/
+
+    const deleteBtn = document.createElement("button");
+deleteBtn.className = "delete-button";
+deleteBtn.innerHTML = `
+  <svg class="delete-svgIcon" viewBox="0 0 448 512">
+    <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+  </svg>`;
+deleteBtn.title = "Delete Review";
+deleteBtn.onclick = () => {
+  reviews.splice(index, 1);
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+  loadReviews();
+  showVideoToast("🗑️ Review deleted successfully!",true);
+
+};
+
+
+      // ✅ Add delete button to card
+      div.appendChild(deleteBtn);
+       reviewPanel.appendChild(div);
+          
+        });
+      }
+      
+    
+      window.likeReview = function(index) {
+        const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+        reviews[index].likes += 1;
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+        loadReviews();
+      };
+    
+      window.addComment = function(index) {
+        const input = document.getElementById(`commentInput-${index}`);
+        const comment = input.value.trim();
+        if (!comment) return;
+    
+        const reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+        reviews[index].comments.push(comment);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+        input.value = "";
+        loadReviews();
+      };
+    
+      loadReviews();
+    
+
+    function toggleComments(index) {
+        const section = document.getElementById(`commentSection-${index}`);
+        section.style.display = section.style.display === "none" ? "block" : "none";
+      }
+ </script>
+
+ <!-- Search Functionality -->
+<script>
+  function searchProducts() {
+    const query = document.getElementById("search-form").value.toLowerCase().trim();
+    const slides = document.querySelectorAll(".swiper-slide");
+
+    let matchFound = false;
+
+    slides.forEach(slide => {
+      const itemNameElement = slide.querySelector(".item-name");
+      const itemName = itemNameElement?.textContent.toLowerCase() || "";
+
+      if (itemName.includes(query)) {
+        slide.style.display = "block";
+        matchFound = true;
+      } else {
+        slide.style.display = "none";
+      }
+    });
+
+    // Optional: reset Swiper layout
+    const swipers = document.querySelectorAll(".swiper");
+    swipers.forEach(swiperContainer => {
+      if (swiperContainer.swiper) {
+        swiperContainer.swiper.update();
+      }
+    });
+
+    console.log(`Search query: "${query}" — matches found: ${matchFound}`);
+  }
+</script>
+
+<!--<script>
+  const allProducts = [
+    { name: "PLAYSTATION 5 (DIGITAL)", link: "Single Products/Play.html" },
+    { name: "JBL XTREME", link: "Single Products/JBL Xtreme.html" },
+    { name: "APPLE MONITOR", link: "Single Products/Mac.html" },
+    { name: "COTTON T-SHIRT", link: "Clothes/Clothes.html" },
+    { name: "EARPHONES", link: "Shop/Shop.html" },
+    { name: "VEST", link: "Clothes/Clothes.html" }
+  ];
+
+  document.getElementById("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Stop the page from refreshing
+
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = ""; // Clear previous results
+
+    const matches = allProducts.filter(p => p.name.toLowerCase().includes(query));
+
+    if (matches.length > 0) {
+      matches.forEach(p => {
+        const item = document.createElement("p");
+        item.innerHTML = `<a href="${p.link}">${p.name}</a>`;
+        resultsContainer.appendChild(item);
+      });
+    } else {
+      resultsContainer.innerHTML = "<p>No products found.</p>";
+    }
+  });
+</script>-->
+
+
+
+<!-- Search Functionality by Text-->
+<script>
+  const allProducts = [
+    {
+      name: "PLAYSTATION 5 (DIGITAL)",
+      link: "Single Products/Play.html",
+      image: "images/ps55.png",
+      price: "GH₵7,500.00"
+    },
+    {
+      name: "JBL XTREME",
+      link: "Single Products/JBL Xtreme.html",
+      image: "images/JJ.jpg",
+      price: "GH₵500.00"
+    },
+    {
+      name: "APPLE MONITOR",
+      link: "Single Products/Mac.html",
+      image: "images/item1.jpg",
+      price: "GH₵45,000.00"
+    },
+    {
+      name: "GHANAIAN VINTAGE TOP",
+      link: "Clothes/Clothes.html",
+      image: "https://i.pinimg.com/736x/60/21/c5/6021c56b49e529fb2a0c3c57e72e4d83.jpg",
+      price: "GH₵100.00"
+    },
+    {
+      name: "LONG DRESS GHANAIAN PRINT",
+      link: "Shop/Shop.html",
+      image: "https://th.bing.com/th/id/OIP.A8P_lK-PPmRAhqw-DTsIowAAAA?cb=iwp2&pid=ImgDet&w=197&h=314&c=7&dpr=1.3",
+      price: "GH₵60.00"
+    },
+    {
+      name: "YELLOW SILK AFRICAN PRINT",
+      link: "Clothes/Clothes.html",
+      image: "https://th.bing.com/th/id/OIP.BeuJlzhByE7eI7rDfw51uQHaKV?cb=iwp2&pid=ImgDet&w=197&h=274&c=7&dpr=1.3",
+      price: "GH₵75.00"
+    },
+    {
+      name: "SHORT YELLOW KAFTAN",
+      link: "Clothes/Clothes.html",
+      image: "https://i.etsystatic.com/20209891/r/il/a91bfa/1984710768/il_1140xN.1984710768_1mup.jpg",
+      price: "GH₵60.00"
+    },
+    {
+      name: "BLACK KAFTAN",
+      link: "Clothes/Clothes.html",
+      image: "https://i.etsystatic.com/23834877/r/il/27e7e0/4947911332/il_1080xN.4947911332_4wi5.jpg",
+      price: "GH₵80.00"
+    },
+    {
+      name: "WHITE SHIRT + FREE CAP",
+      link: "Clothes/Clothes.html",
+      image: "clothes/images/product-thumb-3.jpg",
+      price: "GH₵90.00"
+    },
+    {
+      name: "JBL HEADPHONE",
+      link: "Shop/Shop.html",
+      image: "images/article2.jpg",
+      price: "GH₵500.00"
+    },
+    {
+      name: "PLAYSTATION VR HEADSET",
+      link: "Shop/Shop.html",
+      image: "images/psVR.png",
+      price: "GH₵6000.00"
+    }
+
+    // Add more products as needed
+  ];
+
+  document.getElementById("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = ""; // Clear previous results
+
+    const matches = allProducts.filter(p =>
+      p.name.toLowerCase().includes(query)
+    );
+
+    if (matches.length > 0) {
+      matches.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-item position-relative mb-4"; // reuse your site's styles
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.name}" class="product-image img-fluid">
+          <div class="cart-concern">
+            <div class="cart-button d-flex justify-content-between align-items-center px-4">
+              <a href="${p.link}" class="btn-wrap d-flex align-items-center text-capitalize fs-6">Purchase
+                <svg class="arrow" width="20" height="20">
+                  <use xlink:href="#arrow-right"></use>
+                </svg>
+              </a>
+              <a href="${p.image}" class="view-btn">
+                <svg class="expand" width="16" height="16">
+                  <use xlink:href="#expand"></use>
+                </svg>
+              </a>
+              <a href="#" class="wishlist-btn">
+                <svg class="wishlist" width="20" height="20">
+                  <use xlink:href="#wishlist"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <h5><a href="${p.link}" class="item-name">${p.name}</a></h5>
+            <h5 class="money fw-bold">${p.price}</h5>
+          </div>
+        `;
+        resultsContainer.appendChild(card);
+      });
+    } else {
+      resultsContainer.innerHTML = "<p>No products found.</p>";
+    }
+  });
+</script>
+
+
+  <!--<script>
+  const productImages = [
+    {
+      name: "JBL XTREME",
+      image: "images/JJ.jpg",
+      link: "Single Products/JBL Xtreme.html",
+      price: "GH₵500.00"
+    },
+    {
+      name: "APPLE MONITOR",
+      image: "images/item1.jpg",
+      link: "Single Products/Mac.html",
+      price: "GH₵45,000.00"
+    },
+    {
+      name: "PLAYSTATION 5",
+      image: "images/ps55.png",
+      link: "Single Products/Play.html",
+      price: "GH₵7,500.00"
+    }
+  ];
+
+  document.getElementById("imageInput").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const preview = document.getElementById("previewImage");
+      preview.src = event.target.result;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+
+    // Simulate image-based product matches
+    const container = document.getElementById("imageResults");
+    container.innerHTML = "";
+
+    productImages.forEach(p => {
+      const col = document.createElement("div");
+      col.className = "col-md-4 col-sm-6 mb-4";
+      col.innerHTML = `
+        <div class="product-item position-relative">
+          <img src="${p.image}" class="product-image img-fluid" style="height: 200px; object-fit: cover;">
+          <div class="cart-concern">
+            <div class="cart-button d-flex justify-content-between align-items-center px-4">
+              <a href="${p.link}" class="btn-wrap d-flex align-items-center text-capitalize fs-6">Purchase
+                <svg class="arrow" width="20" height="20">
+                  <use xlink:href="#arrow-right"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <h5><a href="${p.link}" class="item-name">${p.name}</a></h5>
+            <h5 class="money fw-bold">${p.price}</h5>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+  });
+</script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+
+<script>
+  // Global variables
+  let model;
+  let productFeatures = [];
+  let isModelReady = false;
+
+  // Product database
+  const products = [
+    {
+      name: "PLAYSTATION 5 (DIGITAL)",
+      image: "images/ps55.png",
+      link: "Single Products/Play.html",
+      price: "GH₵7,500.00"
+    },
+    {
+      name: "JBL XTREME",
+      image: "images/JJ.jpg",
+      link: "Single Products/JBL Xtreme.html",
+      price: "GH₵500.00"
+    },
+    {
+      name: "APPLE MONITOR",
+      image: "images/item1.jpg",
+      link: "Single Products/Mac.html",
+      price: "GH₵45,000.00"
+    },
+    {
+      name: "Apple 8K Monitor",
+      price: "GH₵45,000",
+      image: "images/item1.jpg",
+      link: "Single Products/Mac.html"
+    },
+    
+    {
+      name: "JBL Headphone",
+      price: "GH₵250",
+      image: "images/article2.jpg",
+      link: "Single Products/Mac.html"
+    },
+
+    {
+      name: "Long Dress Ghanaian Print",
+      price: "GH₵80",
+      image: "https://th.bing.com/th/id/OIP.A8P_lK-PPmRAhqw-DTsIowAAAA?cb=iwp2&pid=ImgDet&w=197&h=314&c=7&dpr=1.3",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "Yellow Silk African Print",
+      price: "GH₵80",
+      image: "https://th.bing.com/th/id/OIP.BeuJlzhByE7eI7rDfw51uQHaKV?cb=iwp2&pid=ImgDet&w=197&h=274&c=7&dpr=1.3",
+      link: "Single Products/Yellow Silk Dress.html"
+    },
+    {
+      name: "Black Hoodie",
+      price: "GH₵100",
+      image: "images/item5.jpg",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "Earphones",
+      price: "GH₵50",
+      image: "images/item5.jpg",
+      link: "Shop/Shop.html"
+    },
+     {
+      name: "Vest",
+      price: "GH₵30",
+      image: "images/item5.jpg",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "Ghanaian Vintage Top",
+      price: "GH₵40",
+      image: "https://i.pinimg.com/736x/60/21/c5/6021c56b49e529fb2a0c3c57e72e4d83.jpg",
+      link: "Clothes/Clothes.html"
+    }
+  // Add more products as needed
+  ];
+
+  // Initialize the image search system
+  async function initImageSearch() {
+    try {
+      document.getElementById("imageSearchStatus").textContent = "Loading AI model...";
+      
+      // Load MobileNet model
+      model = await mobilenet.load({
+        version: 2,
+        alpha: 1.0
+      });
+      
+      // Extract features from all product images
+      await extractProductFeatures();
+      
+      document.getElementById("imageSearchStatus").textContent = "Ready...Results will be shown here.";
+      isModelReady = true;
+    } catch (error) {
+      console.error("Initialization failed:", error);
+      document.getElementById("imageSearchStatus").textContent = "Error loading model. Please refresh the page or check internet connection.";
+    }
+  }
+
+  // Extract features from all product images
+  async function extractProductFeatures() {
+    productFeatures = [];
+    
+    for (let product of products) {
+      try {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = product.image;
+        
+        // Wait for image to load
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = () => reject(new Error(`Failed to load image: ${product.image}`));
+        });
+        
+        // Process image through MobileNet
+        const tensor = tf.browser.fromPixels(img)
+          .resizeBilinear([224, 224]) // MobileNet expects 224x224 images
+          .expandDims()
+          .toFloat();
+        
+        // Get feature vector (this returns a tensor with shape [1, 1280])
+        const features = model.infer(tensor, 'conv_preds');
+        
+        // Store product with its feature vector
+        productFeatures.push({
+          ...product,
+          features: features
+        });
+        
+        // Clean up
+        tensor.dispose();
+      } catch (error) {
+        console.error(`Error processing ${product.name}:`, error);
+      }
+    }
+  }
+
+  // Calculate cosine similarity between two feature vectors
+  function cosineSimilarity(vecA, vecB) {
+    // Ensure both vectors have the same shape
+    if (vecA.shape[1] !== vecB.shape[1]) {
+      console.error('Feature vector dimensions do not match:', vecA.shape, vecB.shape);
+      return 0;
+    }
+    
+    return tf.tidy(() => {
+      // Normalize vectors
+      const normA = vecA.norm();
+      const normB = vecB.norm();
+      
+      // Calculate dot product
+      const dotProduct = vecA.matMul(vecB.transpose()).dataSync()[0];
+      
+      // Calculate cosine similarity
+      return dotProduct / (normA.dataSync()[0] * normB.dataSync()[0]);
+    });
+  }
+
+  // Handle image upload
+  document.getElementById("imageInput").addEventListener("change", async function(e) {
+    if (!isModelReady) {
+      alert("Image search system not ready yet. Please wait...");
+      return;
+    }
+    
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = async function(event) {
+      try {
+        // Show preview
+        const preview = document.getElementById("previewImage");
+const previewCard = document.getElementById("previewCard");
+preview.src = event.target.result;
+previewCard.style.display = "block";
+
+        
+        document.getElementById("imageSearchStatus").textContent = "Processing image...";
+        
+        // Create image element
+        const img = new Image();
+        img.src = event.target.result;
+        
+        // Wait for image to load
+        await new Promise((resolve) => {
+          img.onload = resolve;
+        });
+        
+        // Process image through MobileNet
+        const tensor = tf.tidy(() => {
+          return tf.browser.fromPixels(img)
+            .resizeBilinear([224, 224])
+            .expandDims()
+            .toFloat();
+        });
+        
+        // Get feature vector
+        const queryFeatures = model.infer(tensor, 'conv_preds');
+        
+        // Compare with product features
+        const results = [];
+        
+        for (let product of productFeatures) {
+          const similarity = cosineSimilarity(queryFeatures, product.features);
+          results.push({
+            ...product,
+            similarity: similarity
+          });
+        }
+        
+        // Sort by similarity and get top 3
+        //const topResults = results.sort((a, b) => b.similarity - a.similarity).slice(0, 3);
+
+        // Filter for similarity ≥ 0.5 (50%), then sort and take top 3
+          const topResults = results
+             .filter(r => r.similarity >= 0.5)
+             .sort((a, b) => b.similarity - a.similarity)
+             .slice(0, 3);
+
+        
+        // Display results
+        displayResults(topResults);
+        document.getElementById("imageSearchStatus").textContent = `Found ${topResults.length} similar products`;
+        
+        // Clean up
+        tensor.dispose();
+        queryFeatures.dispose();
+      } catch (error) {
+        console.error("Error processing uploaded image:", error);
+        document.getElementById("imageSearchStatus").textContent = "Error processing image. Please try another one.";
+      }
+    };
+    
+    reader.readAsDataURL(file);
+  });
+
+  // Display results
+  function displayResults(results) {
+    const container = document.getElementById("imageResults");
+    container.innerHTML = "";
+    
+    if (results.length === 0) {
+      container.innerHTML = "<p>No similar products found.</p>";
+      return;
+    }
+    
+    results.forEach(product => {
+      const col = document.createElement("div");
+      col.className = "product-item position-relative col-md-4 col-sm-6 mb-4";
+      
+      col.innerHTML = `
+        
+          <div class="similarity-badge">${Math.round(product.similarity * 100)}% match</div>
+          <img src="${product.image}" alt="${product.name}" 
+               class="product-image img-fluid" style="height: 180px; object-fit: contain;">
+          <div class="product-info mt-2">
+            
+            <div class="card-body d-flex justify-content-between mt-2">
+              <h5 class="item-name">${product.name}</h5>
+              <h5 class="price money fw-bold">${product.price}</h5>
+           </div>
+           <div class="mt-auto flex-column">
+              <a href="${product.link}" class="btn btn-dark btn-sm w-100"">View</a>
+              </div>
+            </div>
+        
+      `;
+      
+      container.appendChild(col);
+    });
+  }
+
+  // Initialize when page loads
+  window.addEventListener("load", initImageSearch);
+</script>
+
+<style>
+  .similarity-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgb(9 147 125);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 15px;
+    z-index: 10;
+    font-family: var(--heading-font);
+    font-weight: 500;
+  }
+  .previewcard {
+  transition: transform 0.2s;
+  border: 4px solid #5d1b1b;
+  padding: 10px;
+  border-radius: 18px;
+}
+  .product-item {
+    transition: transform 0.2s;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+    
+  }
+  
+  .product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .blake{
+    background-color: black;
+  }
+</style>
+
+
+<script>
+  // Voice search implementation
+  const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+  const voiceSearchStatus = document.getElementById('voiceSearchStatus');
+  const searchInput = document.getElementById('searchInput'); // Your existing search input
+
+  // Check if browser supports speech recognition
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition;
+
+  if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    voiceSearchBtn.addEventListener('click', () => {
+      try {
+        if (voiceSearchBtn.classList.contains('listening')) {
+          stopVoiceSearch();
+        } else {
+          startVoiceSearch();
+        }
+      } catch (error) {
+        console.error('Voice search error:', error);
+        voiceSearchStatus.textContent = 'Error: ' + error.message;
+      }
+    });
+
+    recognition.onstart = () => {
+      voiceSearchBtn.classList.add('listening', 'btn-danger');
+      voiceSearchBtn.innerHTML = '<i class="fas fa-microphone-slash me-2"></i> Listening';
+      voiceSearchStatus.textContent = 'Listening... Speak now', "btn-danger";
+      searchInput.value = ''; // Clear previous input
+
+    };
+
+    recognition.onresult = (event) => { //i replaced const with let
+      let transcript = event.results[0][0].transcript;
+
+      // Remove trailing punctuation (period, comma, exclamation, question mark)
+       transcript = transcript.trim().replace(/[.,!?]$/, "");
+
+      searchInput.value = transcript;
+      voiceSearchStatus.textContent = `You said: "${transcript}"`;
+      
+      // Trigger search automatically
+      document.getElementById('searchForm').dispatchEvent(new Event('submit'));
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error', event.error);
+      voiceSearchStatus.textContent = 'Error: ' + event.error;
+      stopVoiceSearch();
+    };
+
+    recognition.onend = () => {
+      if (voiceSearchBtn.classList.contains('listening')) {
+        stopVoiceSearch();
+      }
+    };
+  } else {
+    voiceSearchBtn.disabled = true;
+    voiceSearchStatus.textContent = 'Voice search not supported in your browser';
+  }
+
+  function startVoiceSearch() {
+    try {
+      recognition.start();
+    } catch (error) {
+      console.error('Failed to start recognition:', error);
+      voiceSearchStatus.textContent = 'Error starting voice recognition';
+    }
+  }
+
+  function stopVoiceSearch() {
+    recognition.stop();
+    voiceSearchBtn.classList.remove('listening', 'btn-danger');
+    voiceSearchBtn.innerHTML = '<i class="fas fa-microphone me-2"></i> Search Again';
+    voiceSearchStatus.textContent = 'Voice search stopped. You can search again.';
+    
+
+  }
+
+
+
+
+  // Integrated Search Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Voice Search
+  const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+  const imageSearchBtn = document.getElementById('imageSearchBtn');
+  const searchStatus = document.getElementById('searchStatus');
+  const imageInput = document.getElementById('imageInput');
+  
+  /*Voice Search Implementation (from previous working version)
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new Recognition();
+    
+    voiceSearchBtn.addEventListener('click', function() {
+      if (voiceSearchBtn.classList.contains('listening')) {
+        recognition.stop();
+      } else {
+        recognition.start();
+        searchStatus.textContent = "Listening...";
+      }
+    });
+    
+    recognition.onresult = function(e) {
+      document.getElementById('searchInput').value = e.results[0][0].transcript;
+      searchStatus.textContent = "Voice search: " + e.results[0][0].transcript;
+      document.getElementById('searchForm').dispatchEvent(new Event('submit'));
+    };
+    
+    recognition.onend = function() {
+      voiceSearchBtn.classList.remove('listening');
+    };
+    
+    recognition.onerror = function(e) {
+      searchStatus.textContent = "Error: " + e.error;
+    };
+  } else {
+    voiceSearchBtn.style.display = 'none';
+  }*/
+  
+  // Image Search Implementation
+  imageSearchBtn.addEventListener('click', function() {
+    imageInput.click();
+  });
+  
+  imageInput.addEventListener('change', function(e) {
+    if (e.target.files.length) {
+      searchStatus.textContent = "Processing image...";
+      // Your existing image processing code here
+    }
+  });
+  
+  // Text Search
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const query = document.getElementById('searchInput').value.trim();
+    if (query) {
+      searchStatus.textContent = "Searching for: " + query;
+      // Your existing search functionality
+    }
+  });
+});
+</script>
+
+<!----
+<script>//trackProduct function to track viewed products
+// This function will be called when a product is viewed
+function trackProduct(productId) {
+  let viewed = JSON.parse(localStorage.getItem('viewedProducts')) || [];
+
+  // If it's already tracked, move it to the top (to prioritize recent views)
+  viewed = viewed.filter(id => id !== productId);
+  viewed.unshift(productId);
+
+  // Limit to last 10 viewed products
+  if (viewed.length > 10) viewed.pop();
+
+  localStorage.setItem('viewedProducts', JSON.stringify(viewed));
+}
+</script>-->
+
+
+
+
+
+
+<script>
+  const productData = {
+    'JBL Xtreme': {
+      name: 'JBL XTREME',
+      price: 'GH₵500',
+      image: 'images/JJ.jpg',
+      link: 'Single Products/JBL Xtreme.html'
+    },
+    'PS5': {
+      name: 'PlayStation 5 (Digital)',
+      price: 'GH₵7,500',
+      image: 'images/ps55.png',
+      link: 'Single Products/Play.html'
+    },
+    'Apple Monitor': {
+      name: 'Apple 8K Monitor',
+      price: 'GH₵45,000',
+      image: 'images/item1.jpg',
+      link: 'Single Products/Mac.html'
+    },
+    
+    'JBL Headphone': {
+      name: 'JBL Headphone',
+      price: 'GH₵250',
+      image: 'images/article2.jpg',
+      link: 'Single Products/Mac.html'
+    },
+
+    'Long Dress Ghanaian Print': {
+      name: 'Long Dress Ghanaian Print',
+      price: 'GH₵80',
+      image: 'https://th.bing.com/th/id/OIP.A8P_lK-PPmRAhqw-DTsIowAAAA?cb=iwp2&pid=ImgDet&w=197&h=314&c=7&dpr=1.3',
+      link: 'Clothes/Clothes.html'
+    },
+    'Yellow Silk African Print': {
+      name: 'Yellow Silk African Print',
+      price: 'GH₵80',
+      image: 'https://th.bing.com/th/id/OIP.BeuJlzhByE7eI7rDfw51uQHaKV?cb=iwp2&pid=ImgDet&w=197&h=274&c=7&dpr=1.3',
+      link: 'Single Products/Yellow Silk Dress.html'
+    },
+    'Black Hoodie': {
+      name: 'Black Hoodie',
+      price: 'GH₵100',
+      image: 'images/item5.jpg',
+      link: 'Clothes/Clothes.html'
+    },
+    'Earphones': {
+      name: 'Earphones',
+      price: 'GH₵50',
+      image: 'images/item5.jpg',
+      link: 'Shop/Shop.html'
+    },
+    'Vest': {
+      name: 'Vest',
+      price: 'GH₵30',
+      image: 'images/item5.jpg',
+      link: 'Clothes/Clothes.html'
+    },
+    'Ghanaian Vintage Top': {
+      name: 'Ghanaian Vintage Top',
+      price: 'GH₵40',
+      image: 'https://i.pinimg.com/736x/60/21/c5/6021c56b49e529fb2a0c3c57e72e4d83.jpg',
+      link: 'Clothes/Clothes.html'
+    },
+    "band aid": {
+  name: "Band Aid First Aid Strips",
+  link: "Single Products/BandAid.html"
+},
+"pill bottle": {
+  name: "Pill Bottle (Empty)",
+  link: "Single Products/Pill.html"
+},
+"lighter": {
+  name: "Mini Pocket Lighter",
+  link: "Single Products/Lighter.html"
+},
+'Airpods': {
+      name: 'Airpods',
+      price: 'GH₵50',
+      image: 'images/item5.jpg',
+      link: 'Shop/Shop.html'
+    }
+
+
+
+    // Add more product definitions here
+  };
+
+ /* function showRecommendations() {
+    const container = document.getElementById('recommended-products');
+    const viewed = JSON.parse(localStorage.getItem('viewedProducts')) || [];
+
+    container.innerHTML = ''; // Clear previous recommendations
+   viewed.forEach(productId => {
+  const p = productData[productId];
+  if (p) {
+    container.innerHTML += `
+      <div class="col-8 col-sm-4 col-md-3 col-lg-2 me-3">
+        <div class="card h-100">
+          <img src="${p.image}" class="card-img-top" alt="${p.name}">
+          <div class="card-body">
+            <h5 class="card-title">${p.name}</h5>
+            <p class="card-text">${p.price}</p>
+            <a href="${p.link}" class="btn btn-dark btn-sm">View</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+});
+
+    if (viewed.length === 0) {
+      container.innerHTML += '<p>No recommendations available.</p>';
+    }
+  }*/
+
+function showRecommendations() {
+  
+
+  // New Arrival Swiper
+  if (viewed.length > 0) {
+    new Swiper('.mySwiper', {
+      slidesPerView: 4,
+      spaceBetween: 20,
+        simulateTouch: true,   // ✅ Enable dragging
+  grabCursor: true,      // ✅ Show grab cursor
+   cssMode: true,
+      // Add your Swiper options here
+      loop: true,   
+      autoplay: {
+        delay: 1500,// Delay between slides
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true, // Pause on hover
+      },
+      speed: 500,// Speed of slide transition
+
+      navigation: {
+        nextEl: '.arrival-next',
+        prevEl: '.arrival-prev',
+      },
+      pagination: {
+        el: '.new-arrival-pagination',
+        clickable: true,
+      },
+    
+        breakpoints: {
+    0: { slidesPerView: 2 },
+    576: { slidesPerView: 3 },
+    768: { slidesPerView: 4 },
+    1024: { slidesPerView: 5 },
+    1280: { slidesPerView: 4 }, // laptop
+  }
+    });
+  }
+
+}
+
+
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user || true) loadRecommendations(); // fallback for anonymous user
+  });
+});
+
+</script>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+
+<script>
+  // Initialize Firebase (same config Account.html)
+  const firebaseConfig = {
+    apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+    authDomain: "lootbox-vproduct.firebaseapp.com",
+    projectId: "lootbox-vproduct",
+    storageBucket: "lootbox-vproduct.firebasestorage.app",
+    messagingSenderId: "753114136209",
+    appId: "1:753114136209:web:75f2b96440b32c04c70930"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) {
+      // 🚫 Not logged in, redirect to login
+      window.location.href = "Account/Account.html";
+    }
+    // this shows that user is logged in so  stay on the page
+  });
+</script>
+
+<script>
+  function logout() {
+    firebase.auth().signOut().then(() => {
+      // Redirect to login page after logout
+      window.location.href = "Account/Account.html";
+    }).catch((error) => {
+      alert("Logout failed: " + error.message);
+    });
+  }
+</script>
+
+<!-- Toast Alert -->
+<div id="recommendationAlert" class="toast align-items-center text-bg-primary border-0 position-fixed bottom-0 start-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex align-items-center">
+    <div class="toast-body d-flex align-items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/128/10384/10384429.png" class="ToastImage"><h6 class="text-white">Recommendations Updated<h6>
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
+<script>
+  // Show the toast when the page loads
+const toastEl = document.getElementById('recommendationAlert');
+const toast = new bootstrap.Toast(toastEl);
+toast.show();
+</script>
+
+
+<!--<script src="//code.tidio.co/ocbbb6au5vbxgncdryjsoy94brbesxb4.js" async></script>-->
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function (e) {
+            const product = {
+                name: this.dataset.name,
+                price: parseFloat(this.dataset.price),
+                image: this.dataset.image,
+                quantity: 1
+            };
+
+            // Load cart from localStorage
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Check if item exists
+            const existing = cart.find(item => item.name === product.name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+        });
+    });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.getElementById("cart-count");
+  if (badge) badge.textContent = count;
+});
+</script>
+
+
+
+
+<!--<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const productContainer = document.getElementById("productList");
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+
+    products.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "swiper-slide"; // So it looks like others
+      div.innerHTML = `
+        <div class="vendor product-item position-relative">
+          <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">new</div>
+          <img src="${product.image}" alt="${product.name}" class="product-image img-fluid">
+          <div class="cart-concern">
+            <div class="cart-button d-flex justify-content-between align-items-center px-4">
+              <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE
+                <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
+              </a>
+              <a href="${product.image}" class="view-btn">
+                <svg class="expand" width="16" height="16"><use xlink:href="#expand"></use></svg>
+              </a>
+              <a href="Cart/Cart.html"
+                class="add-to-cart"
+                data-name="${product.name}"
+                data-price="${product.price}"
+                data-image="${product.image}">
+                <svg class="cart" width="16" height="16"><use xlink:href="#cart"></use></svg>
+              </a>
+              <a href="#" class="wishlist-btn">
+                <svg class="wishlist" width="20" height="20"><use xlink:href="#wishlist"></use></svg>
+              </a>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <h5><a href="#" class="item-name">${product.name}</a></h5>
+            <h5 class="money fw-bold">GH₵${parseFloat(product.price).toFixed(2)}</h5>
+          </div>
+        </div>
+      `;
+      productContainer.appendChild(div);
+    });
+
+    // Optional: If you're using swiper here
+    if (document.querySelector('.swiper') && typeof Swiper !== "undefined") {
+      new Swiper(".vendor-swiper", {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        navigation: {
+          nextEl: ".vendor-next",
+          prevEl: ".vendor-prev",
+        },
+        pagination: {
+          el: ".vendor-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          992: { slidesPerView: 3 },
+          1200: { slidesPerView: 4 },
+        },
+      });
+    }
+  });
+</script>-->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const liveResults = document.getElementById("liveResults");
+
+    // Product list with name, image, price, and link
+    const products = [
+        {
+            name: "PLAYSTATION 5 (DIGITAL)",
+            image: "images/ps55.png",
+            price: "GH₵7,500.00",
+            link: "Single Products/Play.html"
+        },
+        {
+            name: "JBL XTREME",
+            image: "images/JJ.jpg",
+            price: "GH₵500.00",
+            link: "Single Products/JBL Xtreme.html"
+        },
+        {
+            name: "JBL HEADPHONE",
+            image: "images/article2.jpg",
+            price: "GH₵250.00",
+            link: "Single Products/JBL Headset.html"
+        },
+        {
+            name: "APPLE DESKTOP MONITOR",
+            image: "images/item1.jpg",
+            price: "GH₵45,000.00",
+            link: "Single Products/Mac.html"
+        },
+    {
+      name: "Long Dress Ghanaian Print",
+      price: "GH₵80",
+      image: "https://th.bing.com/th/id/OIP.A8P_lK-PPmRAhqw-DTsIowAAAA?cb=iwp2&pid=ImgDet&w=197&h=314&c=7&dpr=1.3",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "Yellow Silk African Print",
+      price: "GH₵80",
+      image: "https://th.bing.com/th/id/OIP.BeuJlzhByE7eI7rDfw51uQHaKV?cb=iwp2&pid=ImgDet&w=197&h=274&c=7&dpr=1.3",
+      link: "Single Products/Yellow Silk Dress.html"
+    },
+    {
+      name: "Black Hoodie",
+      price: "GH₵100",
+      image: "images/item5.jpg",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "PLAYSTATION VR HEADSET",
+      link: "Shop/Shop.html",
+      image: "images/psVR.png",
+      price: "GH₵6000.00"
+    },
+     {
+      name: "Vest",
+      price: "GH₵30",
+      image: "images/item5.jpg",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "Ghanaian Vintage Top",
+      price: "GH₵40",
+      image: "https://i.pinimg.com/736x/60/21/c5/6021c56b49e529fb2a0c3c57e72e4d83.jpg",
+      link: "Clothes/Clothes.html"
+    },
+    {
+      name: "SHORT YELLOW KAFTAN",
+      link: "Clothes/Clothes.html",
+      image: "https://i.etsystatic.com/20209891/r/il/a91bfa/1984710768/il_1140xN.1984710768_1mup.jpg",
+      price: "GH₵60.00"
+    },
+    {
+      name: "BLACK KAFTAN",
+      link: "Clothes/Clothes.html",
+      image: "https://i.etsystatic.com/23834877/r/il/27e7e0/4947911332/il_1080xN.4947911332_4wi5.jpg",
+      price: "GH₵80.00"
+    },
+    {
+      name: "WHITE SHIRT + FREE CAP",
+      link: "Clothes/Clothes.html",
+      image: "clothes/images/product-thumb-3.jpg",
+      price: "GH₵90.00"
+    }
+    ];
+
+    // Listen for typing
+    searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        liveResults.innerHTML = "";
+
+        if (query.trim() === "") return;
+
+        const matches = products.filter(product =>
+            product.name.toLowerCase().includes(query)
+        );
+
+        if (matches.length === 0) {
+            liveResults.innerHTML = '<div class="list-group-item text-muted">No results found</div>';
+            return;
+        }
+
+        matches.forEach(product => {
+            const item = document.createElement("a");
+            item.href = product.link;
+            item.className = "list-group-item list-group-item-action d-flex align-items-center gap-3";
+            item.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <div class="fw-bold"><h6>${product.name}<h6></div>
+                    <small class="money text-muted"><h6 class="money">${product.price}<h6></small>
+                </div>
+            `;
+            liveResults.appendChild(item);
+        });
+    });
+});
+</script>
+
+<!--<div class="chat-container border p-3" style="max-width: 600px;">
+  <div id="chatBox" style="max-height: 300px; overflow-y: auto;"></div>
+
+  <div class="input-group mt-3">
+    <input type="text" id="userInput" class="form-control" placeholder="Ask me anything...">
+    <button id="sendBtn" class="btn btn-primary">Send</button>
+  </div>
+</div>
+
+
+<script>
+document.getElementById('sendBtn').addEventListener('click', async () => {
+    const input = document.getElementById('userInput');
+    const chatBox = document.getElementById('chatBox');
+    const userMessage = input.value.trim();
+
+    if (!userMessage) return;
+
+    // Show user message
+    chatBox.innerHTML += `<div><strong>You:</strong> ${userMessage}</div>`;
+    input.value = '';
+
+    // Send message to PHP backend
+    const response = await fetch('chat.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage })
+    });
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || 'No reply';
+
+    // Show chatbot reply
+    chatBox.innerHTML += `<div><strong>LootBox:</strong> ${reply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
+</script>-->
+
+
+
+<!-- Chat Toggle Button 
+<button id="chatToggleBtn" class="btn btn-primary rounded-circle shadow" 
+        style="position: relative; bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 1001;">
+  💬
+</button>
+
+ Chat Widget 
+<div id="chatWidget" class="card shadow" 
+     style="width: 350px; position: fixed; bottom: 90px; right: 20px; display: none; z-index: 1001;">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <span>Chat with us</span>
+    <button type="button" class="btn-close btn-close-white" id="closeChat"></button>
+  </div>
+  <div class="card-body" style="height: 300px; overflow-y: auto;" id="chatBox"></div>
+  <div class="card-footer">
+    <div class="input-group">
+      <input type="text" id="userInput" class="form-control" placeholder="Ask about a product...">
+      <button id="sendBtn" class="btn btn-primary">Send</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const products = [
+      { name: "PLAYSTATION 5 (DIGITAL)", keywords: ["playstation", "ps5"], price: "GH₵7,500.00", description: "High-end gaming console from Sony." },
+      { name: "JBL XTREME", keywords: ["jbl", "xtreme", "speaker"], price: "GH₵500.00", description: "Portable Bluetooth speaker with powerful sound." },
+      { name: "JBL HEADPHONE", keywords: ["jbl", "headphone", "headset"], price: "GH₵250.00", description: "Wireless headphones with great sound quality." },
+      { name: "APPLE DESKTOP MONITOR 8K", keywords: ["apple", "monitor", "desktop"], price: "GH₵45,000.00", description: "8K Retina display for professional use." }
+    ];
+
+    const responses = [
+      "Here’s what I found for you:",
+      "Yes! Take a look at this:",
+      "Absolutely, we have that:",
+      "Sure thing! Details below:",
+      "You might like this:"
+    ];
+
+    const notFoundResponses = [
+      "Hmm, I couldn't find that product. Try another name.",
+      "Sorry, that’s not in our catalog. Try JBL, PlayStation, etc.",
+      "I didn’t find that. Can you try another keyword?",
+      "No match yet. Please ask about something else!"
+    ];
+
+    const chatToggleBtn = document.getElementById("chatToggleBtn");
+    const chatWidget = document.getElementById("chatWidget");
+    const closeChat = document.getElementById("closeChat");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    chatToggleBtn.addEventListener("click", () => {
+      chatWidget.style.display = "block";
+      chatToggleBtn.style.display = "none";
+    });
+
+    closeChat.addEventListener("click", () => {
+      chatWidget.style.display = "none";
+      chatToggleBtn.style.display = "block";
+    });
+
+    sendBtn.addEventListener("click", () => {
+      const query = userInput.value.trim().toLowerCase();
+      if (!query) return;
+
+      chatBox.innerHTML += `<div><strong>You:</strong> ${query}</div>`;
+
+      let matchedProduct = null;
+      for (let product of products) {
+        for (let keyword of product.keywords) {
+          if (query.includes(keyword)) {
+            matchedProduct = product;
+            break;
+          }
+        }
+        if (matchedProduct) break;
+      }
+
+      if (matchedProduct) {
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        chatBox.innerHTML += `<div><strong>Bot:</strong> ${reply} <br><b>${matchedProduct.name}</b> costs <b>${matchedProduct.price}</b>. ${matchedProduct.description}</div>`;
+      } else {
+        const miss = notFoundResponses[Math.floor(Math.random() * notFoundResponses.length)];
+        chatBox.innerHTML += `<div><strong>Bot:</strong> ${miss}</div>`;
+      }
+
+      userInput.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  });
+</script>-->
+
+
+<!-- Modern Chatbot Widget with Toggle -->
+<style>
+  #chatToggleBtn {
+    position: fixed;
+   
+    bottom: 100px;
+    right: 20px;
+  
+    color: white;
+  
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+   
+    cursor: pointer;
+    z-index: 9995;// 
+     
+  transition: all 0.3s ease;
+ background: linear-gradient(30deg, rgb(170 0 193) 20%, rgb(9 9 244) 80%);
+  transition: all 0.3s ease-in-out 0s;
+  box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 0px 0px;
+  animation: 1.2s cubic-bezier(0.8, 0, 0, 1) 0s infinite normal none running pulse;
+  align-items: center;
+  border: 0;
+  }
+  #chatToggleBtn:hover {
+ background: linear-gradient(30deg, rgb(170 0 193) 20%, rgb(9 9 244) 80%);
+    box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 15px 5px;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+  @keyframes pulse  {
+  100%  {
+    box-shadow: 0 0 0 45px rgba(193,244,246,0);
+
+  }
+}
+
+  #chatbotContainer {
+    position: fixed;
+    bottom: 180px;
+    right: 30px;
+    width: 340px;
+    max-height: 500px;
+    background: #aaa2a8;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgb(0 0 0);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9998;
+  }
+
+  #chatHeader {
+    background-color: #000;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #chatBody {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--black-color);
+  font-family: var(--heading-font);
+  font-weight: 500;
+  }
+
+  .chat-message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+        margin: 5px 0px;
+  }
+
+  .user {
+    align-self: flex-start;
+    background: #582454;
+    color: #f7f7f7;
+    border-bottom-left-radius: 0;
+        box-shadow: 0 0 15px rgb(0 0 0);
+      
+  }
+
+  .bot {
+    align-self: flex-end;
+    background: #fff8f8;
+    color: #000000;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 0 15px rgb(0 0 0);
+
+  }
+
+ .chat-message.bot {
+  background-color: #f9f9f9;
+  color: #111;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  padding: 15px 18px;
+  border-radius: 10px;
+  margin: 12px 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  line-height: 1.2; 
+}
+
+.chat-message.bot img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.chat-message.bot b {
+  font-weight: 600;
+  color: #222;
+}
+
+.chat-message.bot br {
+  margin-bottom: 6px;
+}
+
+.chat-message.bot img {
+  margin-top: 10px;
+}
+
+.chat-message.bot ul {
+  margin: 8px 0 8px 18px;
+  padding: 0;
+  list-style: disc;
+  color: #333;
+
+}
+
+.chat-message.bot li {
+  margin-bottom: 4px;
+}
+
+
+
+  #chatFooter {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+  }
+
+  #chatInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 10px;
+    background: #f8f8f8;
+  }
+
+  #sendBtn {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #typingIndicator {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30px;
+    padding-right: 20px;
+    margin-top: -10px;
+    display: none;
+  }
+
+   .dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #33ac1e;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+
+  .dot:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  .dot:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  .dot:nth-child(3) {
+    animation-delay: 0;
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    } 40% {
+      transform: scale(1);
+    }
+  }
+</style>
+
+<!-- Toggle Button -->
+<button id="chatToggleBtn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg></button>
+
+<!-- Chatbot Panel -->
+<div id="chatbotContainer">
+ <!--- <div id="chatHeader"><p class="botH">LootBox Assistant</p>
+  <p style="margin: 0; font-size: 12px; opacity: 0.8; color:green;">Online</p>-->
+<div id="chatHeader">
+<div class="voice-chat-card-header">
+    <img src="images/bot.png" class="avatar">
+    <div class="botH username">LOOTBOX ASSISTANT</div>
+    <div class="status"></div>
+  </div></div>
+  
+  
+  <div id="chatBody">
+    <!-- Messages will appear here -->
+  </div>
+
+  <div id="typingIndicator" style="display: none;">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <div id="chatFooter">
+    <input type="text" id="chatInput" placeholder="Type your message..." />
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+  const chatBody = document.getElementById("chatBody");
+  const chatInput = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const typingIndicator = document.getElementById("typingIndicator");
+  const chatbotContainer = document.getElementById("chatbotContainer");
+  const chatToggleBtn = document.getElementById("chatToggleBtn");
+
+  function appendMessage(content, sender) {
+  const msg = document.createElement("div");
+  msg.className = `chat-message ${sender}`;
+  
+  if (sender === "bot") {
+    msg.innerHTML = content; // ✅ allow HTML like <img>
+  } else {
+    msg.innerText = content; // ✅ keep text-only for user input
+  }
+
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+  async function sendMessage() {
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+    appendMessage(userMessage, "user");
+    chatInput.value = "";
+    typingIndicator.style.display = "flex";
+
+    try {
+      const res = await fetch("chat-assistant.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage })
+      });
+      const data = await res.json();
+      appendMessage(data.reply || "Sorry, I didn’t understand that.", "bot");
+    } catch (err) {
+      appendMessage("Error talking to bot.", "bot");
+    }
+
+    typingIndicator.style.display = "none";
+  }
+
+  sendBtn.onclick = sendMessage;
+  chatInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  chatToggleBtn.addEventListener("click", () => {
+    chatbotContainer.style.display = chatbotContainer.style.display === "flex" ? "none" : "flex";
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const db = firebase.firestore();
+    const productListContainer = document.getElementById('productList');
+
+    if (!productListContainer) {
+      console.error("❌ Element #productList not found");
+      return;
+    }
+
+    db.collection("products").get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          console.warn("⚠️ No products in Firestore.");
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.status === "Active") {
+            console.log("✅ Adding product:", data.name);
+
+             productListContainer.innerHTML += `
+          <div class="swiper-slide">
+            <div class="product-item position-relative">
+              <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-dark text-light">NEW</div>
+              <img src="${data.image}" alt="${data.name}" class="product-image img-fluid">
+              <div class="cart-concern">
+                <div class="cart-button d-flex justify-content-between align-items-center px-4">
+                  <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE
+                    <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
+                  </a>
+                  <a href="${data.image}" class="view-btn">
+                    <svg class="expand" width="16" height="16"><use xlink:href="#expand"></use></svg>
+                  </a>
+                  <a href="Cart/Cart.html" class="add-to-cart"
+                     data-name="${data.name}"
+                     data-price="${data.price}"
+                     data-image="${data.image}">
+                    <svg class="cart" width="16" height="16"><use xlink:href="#cart"></use></svg>
+                  </a>
+                  <a href="#" class="wishlist-btn">
+                    <svg class="wishlist" width="20" height="20"><use xlink:href="#wishlist"></use></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <h5><a href="#" class="item-name">${data.name}</a></h5>
+                <h5 class="money fw-bold">GH₵ ${data.price}</h5>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+        // ✅ Initialize Swiper AFTER adding slides
+        new Swiper('.vendor-swiper', {
+          slidesPerView: 4,
+          spaceBetween: 20,
+        simulateTouch: true,   // ✅ Enable dragging
+  grabCursor: true,      // ✅ Show grab cursor
+   cssMode: true,
+      // Add your Swiper options here
+      loop: false,
+          autoplay: {
+            delay: 1500, // Delay between slides
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true, // Pause on hover
+          },
+          navigation: {
+            nextEl: '.vendor-next',
+            prevEl: '.vendor-prev',
+          },
+          pagination: {
+            el: '.vendor-pagination',
+            clickable: true,
+          },
+        });
+      })
+      .catch(err => {
+        console.error("🔥 Firestore error:", err);
+      });
+  });
+</script>
+
+
+
+<script>
+  console.log("🔥 script is running");
+
+  if (typeof firebase === 'undefined') {
+    console.error("❌ Firebase not loaded");
+  } else {
+    console.log("✅ Firebase loaded");
+  }
+
+  window.onload = function () {
+    const db = firebase.firestore();
+    console.log("📡 Fetching products...");
+
+    db.collection("products").get()
+      .then(snapshot => {
+        console.log("📦 Snapshot received:", snapshot);
+
+        if (snapshot.empty) {
+          console.warn("⚠️ Snapshot is empty — no documents found.");
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          console.log("✅ Product:", doc.data());
+        });
+      })
+      .catch(err => {
+        console.error("🔥 Firestore error:", err.message);
+      });
+  };
+</script>
+
+
+<script>
+  function showVideoToast(message = "🎬 Sucess!, Type a caption to upload", isSuccess = true) {
+    const toastEl = document.getElementById("videoUploadToast");
+    const toastMsg = document.getElementById("videoToastMsg");
+
+    toastMsg.textContent = message;
+
+    toastEl.classList.remove("bg-success", "bg-danger");
+    toastEl.classList.add(isSuccess ? "bg-success" : "bg-danger");
+
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  }
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: false,// Whether animation should happen only once - while scrolling down
+    mirror: false,// Whether elements should animate out while scrolling past them
+
+   
+  });
+</script>
+
+<script>
+  /* ---------- Countdown ---------- */
+  // ① Set your end date (YYYY-MM-DD hh:mm:ss, local time)
+  const targetDate = new Date('2025-07-31T23:59:59');
+
+  // ② Cache spans
+  const daysEl    = document.querySelector('.days');
+  const hoursEl   = document.querySelector('.hours');
+  const minsEl    = document.querySelector('.minutes');
+  const secsEl    = document.querySelector('.seconds');
+
+  function updateClock() {
+    const now   = new Date();
+    const diff  = targetDate - now;           // milliseconds remaining
+
+    if (diff <= 0) {                          // time’s up
+      clearInterval(timer);
+      [daysEl, hoursEl, minsEl, secsEl].forEach(el => el.textContent = '00');
+      return;
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days   = Math.floor(totalSeconds / 86400);
+    const hours  = Math.floor((totalSeconds % 86400) / 3600);
+    const mins   = Math.floor((totalSeconds % 3600) / 60);
+    const secs   = totalSeconds % 60;
+
+    daysEl.textContent   = String(days).padStart(2, '0');
+    hoursEl.textContent  = String(hours).padStart(2, '0');
+    minsEl.textContent   = String(mins).padStart(2, '0');
+    secsEl.textContent   = String(secs).padStart(2, '0');
+  }
+
+  // ③ Initial call + interval
+  updateClock();
+  const timer = setInterval(updateClock, 1000);
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+  const db = firebase.firestore();
+
+  function getCurrentUserId() {
+    const user = firebase.auth().currentUser;
+    return user ? user.uid : 'anonymous';
+  }
+
+  function trackProduct(productName) {
+    const userId = getCurrentUserId();
+    db.collection("userActivity").doc(userId).set({
+      recentViews: firebase.firestore.FieldValue.arrayUnion(productName)
+    }, { merge: true });
+  }
+
+  async function getCategoryByProductName(name) {
+    const snapshot = await db.collection('recommendation')
+      .where('name', '==', name).limit(1).get();
+    return snapshot.empty ? null : snapshot.docs[0].data().category;
+  }
+
+  async function loadRecommendations() {
+    const userId = getCurrentUserId();
+    const userDoc = await db.collection('userActivity').doc(userId).get();
+    const recentViews = userDoc.exists ? userDoc.data().recentViews : [];
+
+    console.log("Recent views:", recentViews);
+
+    const recommendations = new Map();
+
+    for (let productName of recentViews) {
+      const category = await getCategoryByProductName(productName);
+        console.log("Matched product category:", category);
+        
+      if (!category) continue;
+
+      const snap = await db.collection('recommendation')
+        .where('category', '==', category)
+        .get();
+
+      snap.forEach(doc => {
+        const data = doc.data();
+        if (!recommendations.has(data.name)) {
+          recommendations.set(data.name, data);
+        }
+      });
+    }
+
+    
+    
+
+console.log("Recommendations loaded:", recommendations);
+    
+
+    showRecommendations(Array.from(recommendations.values()));
+  }
+
+  function showRecommendations(products) {
+    const container = document.getElementById('recommended-products');
+    container.innerHTML = ''; // Clear old content
+
+    products.forEach(product => {
+      container.innerHTML += `
+        <div class="swiper-slide">
+          <div class="blake product-item position-relative">
+            <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">
+                  Recommended
+                </div>
+            <img src="${product.image}" class="card-img-top recImage" alt="${product.name}">
+
+            <div class="card-body d-flex justify-content-between mt-2">
+              <h5 class="item-name text-white">${product.name}</h5>
+              <h5 class="money fw-bold">GH₵${product.price}</h5>
+            </div>
+              <div class="mt-auto flex-column">
+               <a href="${product.link}" class="btn btn-dark btn-sm w-100" flex-column>View Product</a>
+              </div>
+            
+          </div>
+        </div>
+      `;
+    });
+
+
+  // recommendations swiper
+    new Swiper('.recommended-swiper', {
+      slidesPerView: 4,
+      spaceBetween: 20,
+        simulateTouch: true,   // ✅ Enable dragging
+  grabCursor: true,      // ✅ Show grab cursor
+   
+      // Add your Swiper options here
+      loop: true,
+      cssMode: true,
+      autoplay: {
+        delay: 1500,// Delay between slides
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true, // Pause on hover
+      },
+      
+      navigation: {
+        nextEl: '.recommended-next',
+        prevEl: '.recommended-prev',
+      },
+      pagination: {
+        el: '.recommended-pagination',
+        clickable: true,
+      },
+     /* breakpoints: {
+        
+        0: { slidesPerView: 1 },
+        576: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 },
+      }*/
+
+        breakpoints: {
+    0: { slidesPerView: 2 },
+    576: { slidesPerView: 3 },
+    768: { slidesPerView: 4 },
+    1024: { slidesPerView: 5 },
+    1280: { slidesPerView: 5 }, // laptop
+  }
+    });
+  
+
+  }
+
+
+  
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user || true) loadRecommendations(); // `|| true` allows for anonymous testing
+  });
+</script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+<script>
+function analyzeVideoWithMobileNet(videoUrl) {
+  const video = document.createElement("video");
+  video.crossOrigin = "anonymous";
+  video.src = videoUrl;
+  video.muted = true;
+  video.playsInline = true;
+
+  // Wait for metadata (video dimensions)
+  video.addEventListener("loadedmetadata", () => {
+    video.currentTime = 2;
+  });
+
+  // After seeking to 2s
+  video.addEventListener("seeked", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const img = new Image();
+    img.src = canvas.toDataURL();
+    img.onload = () => {
+      document.body.appendChild(img); // optional: see the captured frame
+      runMobileNet(img);
+    };
+  });
+
+
+}
+</script>
+
+<script>
+  document.body.appendChild(img); // Show the captured frame on screen
+
+async function runMobileNet(img) {
+  const model = await mobilenet.load();
+  const predictions = await model.classify(img);
+  console.log("MobileNet predictions:", predictions);
+
+if (predictions.length > 0 && predictions[0].className) {
+  const label = predictions[0].className.toLowerCase();
+  findMatchingProduct(label);
+} else {
+  alert("⚠️ No prediction found — try a clearer video or later timestamp.");
+}
+
+}
+
+</script>
+
+
+<script>
+function findMatchingProduct(label) {
+  const cleanedLabel = label.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
+
+  for (const key in productData) {
+    const cleanedKey = key.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
+    if (cleanedLabel.includes(cleanedKey) || cleanedKey.includes(cleanedLabel)) {
+      const product = productData[key];
+
+      // ✅ Add this message to confirm detection
+      console.log(`✅ Detected and matched: ${product.name}`);
+      alert(`✅ Detected: ${product.name}. Redirect button will appear.`);
+
+      showBuyNowButton(product.link);
+      return;
+    }
+  }
+
+  // If no match found
+  console.log("No match found for", label);
+  alert(`We detected: ${label}, but couldn't find a matching product.`);
+}
+
+
+
+function showBuyNowButton(link) {
+  const button = document.createElement("a");
+  button.href = link;
+  button.innerText = "Buy Now";
+  button.target = "_blank";
+  button.className = "buy-now-button";
+
+  Object.assign(button.style, {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    background: "#ff4081",
+    color: "#fff",
+    padding: "10px",
+    borderRadius: "8px",
+    zIndex: "10",
+    textDecoration: "none"
+  });
+
+  document.body.appendChild(button);
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
