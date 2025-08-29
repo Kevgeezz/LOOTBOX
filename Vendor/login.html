@@ -416,7 +416,10 @@
                   >Remember me</label
                 >
               </div>
-              <a href="#" class="text-decoration-none">Forgot password?</a>
+              <a href="javascript:void(0)" onclick="resetPassword()" class="text-decoration-none">
+  Forgot password?
+</a>
+
             </div>
 
             <button
@@ -430,7 +433,7 @@
             <div id="errorMsg" class="error-message text-center"></div>
 
             <div class="form-footer">
-              <p>Don't have an account? <a href="#">Contact support</a></p>
+              <p>&copy; LootBox 2025</p>
             </div>
           </form>
         </div>
@@ -467,14 +470,28 @@
           .signInWithEmailAndPassword(email, password)
           .then(() => (window.location.href = "Vproduct.html"))
           .catch((err) => {
-            let errorMessage = err.message;
-            if (err.code === "auth/user-not-found") {
-              errorMessage = "No account found with this email";
-            } else if (err.code === "auth/wrong-password") {
-              errorMessage = "Incorrect password";
-            }
-            errorElement.innerText = errorMessage;
-          });
+      let errorMessage;
+
+      switch (err.code) {
+        case "auth/user-not-found":
+          errorMessage = "No account found with this email";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Incorrect password. Please try again.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Please enter a valid email address.";
+          break;
+        case "auth/invalid-credential": // Firebase’s generic invalid login
+        case "auth/invalid-login-credentials":
+          errorMessage = "Incorrect email or password. Please try again.";
+          break;
+        default:
+          errorMessage = "Login failed: " + err.message;
+      }
+
+      errorElement.innerText = errorMessage;
+    });
       }
 
       // Allow login on Enter key press
@@ -486,6 +503,26 @@
           }
         });
     </script>
+
+    <script>
+  function resetPassword() {
+    const email = document.getElementById("email").value;
+
+    if (!email) {
+      alert("Please enter your email address first.");
+      return;
+    }
+
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(() => {
+        alert("Password reset email sent! Please check your inbox.");
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+  }
+</script>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

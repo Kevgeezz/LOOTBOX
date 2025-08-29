@@ -1,3 +1,21 @@
+/* List view styling */
+#imageResults.list-view .product-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+#imageResults.list-view .product-card img {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+}
+
+#imageResults.list-view .card-body {
+  text-align: left;
+}
+
 @keyframes slideInFade {
   from {
     opacity: 0;
