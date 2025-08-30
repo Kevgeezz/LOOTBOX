@@ -111,46 +111,7 @@
     </symbol>
   </svg>
 
-  <div class="search-popup">
-    <div class="search-popup-container">
-
-      <form role="search" method="get" class="form-group" action="">
-        <input type="search" id="search-form" class="form-control border-0 border-bottom"
-          placeholder="Type and press enter" value="" name="s" />
-        <button type="submit" class="search-submit border-0 position-absolute bg-white"
-          style="top: 15px;right: 15px;"><svg class="search" width="24" height="24">
-            <use xlink:href="#search"></use>
-          </svg></button>
-      </form>
-
-      <h5 class="cat-list-title">Browse Categories</h5>
-
-      <ul class="cat-list">
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-1">Product-1</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-2">Product-2</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-3">Product-3</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-4">Product-4</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-5">Product-5</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-6">Product-6</a>
-        </li>
-        <li class="cat-list-item mb-3">
-          <a href="#" title="Product-7">Product-7</a>
-        </li>
-      </ul>
-
-    </div>
-  </div>
+ 
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
     <div class="offcanvas-header justify-content-center">
@@ -334,12 +295,13 @@
                                     </a>
                                 </li>
                                 <li style="position: relative;">
-                                 <a href="Cart/Cart.html">
+                                 <a href="#">
                                    <div style="position: relative; display: inline-block;">
                                        <svg class="text-white cart" width="20" height="20">
                                          <use xlink:href="#cart"></use>
                                       </svg>
-                                     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><h6>0<h6></span>
+                                     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+
                                    </div>
                                  </a>
                                </li>
@@ -394,8 +356,14 @@
             <thead>
               <tr>
                 <th scope="col" class="card-title text-uppercase"><h6>Product<h6></th>
-                <th scope="col" class="card-title text-uppercase "><h6>Quantity<h6></th>
-                <th scope="col" class="card-title text-uppercase"><h6>Subtotal<h6></th>
+                <th scope="col" class="card-title text-uppercase "><h6 style="
+    text-align:  center !important;
+    margin-left: 5px;
+">Quantity</h6></th>
+                <th scope="col" class="card-title text-uppercase"><h6 style="
+    text-align:  center !important;
+    margin-left: 90px;
+">Subtotal</h6></th>
                 <th scope="col" class="card-title text-uppercase"></th> 
               </tr>
             </thead>
@@ -724,9 +692,9 @@ function hideLoading() {
 }
 </script>
 
-  <script>//cart
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const tbody = document.getElementById("cart-body");
     let total = 0;
 
@@ -735,57 +703,164 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
+    // ✨ Function to animate numbers
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = (progress * (end - start) + start).toFixed(2);
+            element.innerHTML = `<span class="price-currency-symbol">GH₵</span>${value}`;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
 
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td class="py-4">
-                <div class="cart-info d-flex flex-wrap align-items-center">
-                    <div class="col-lg-3">
-                        <div class="card-image">
-                            <img src="${item.image}" alt="${item.name}" class="img-fluid">
+    function renderCart() {
+        tbody.innerHTML = "";
+        let oldTotal = total;
+        total = 0;
+
+        cart.forEach((item, index) => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="py-4">
+                    <div class="cart-info d-flex flex-wrap align-items-center">
+                        <div class="col-lg-3">
+                            <div class="card-image">
+                                <img src="${item.image}" alt="${item.name}" class="img-fluid rounded shadow-sm">
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="card-detail ps-3">
+                                <h5 class="card-title mb-1">${item.name}</h5>
+                                <small class="text-muted">GH₵${item.price.toFixed(2)} each</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-9">
-                        <div class="card-detail ps-3">
-                            <h5 class="card-title">${item.name}</h5>
-                        </div>
+                </td>
+                <td class="py-4 align-middle">
+                    <div class="quantity-control">
+                        <button class="quantity-btn decrease" data-index="${index}">−</button>
+                        <span class="quantity"><h6>${item.quantity}</h6></span>
+                        <button class="quantity-btn increase" data-index="${index}">+</button>
                     </div>
-                </div>
-            </td>
-            <td class="py-4 align-middle"><h6>${item.quantity}<h6></td>
-            <td class="py-4 align-middle"><h6>GH₵${subtotal.toFixed(2)}<h6></td>
-            <td class="py-4 align-middle">
-                <a href="#" class="remove-item text-danger" data-name="${item.name}">
-                    <svg width="24" height="24">
-                        <use xlink:href="#trash"></use>
-                    </svg>
-                </a>
-                
-            </td>
-        `;
-        tbody.appendChild(row);
-    });
-
-    // Update totals
-    document.querySelectorAll(".price-amount bdi").forEach(el => {
-        el.innerHTML = `<span class="price-currency-symbol">GH₵</span>${total.toFixed(2)}`;
-    });
-
-    // Handle remove
-    document.querySelectorAll(".remove-item").forEach(btn => {
-        btn.addEventListener("click", e => {
-            e.preventDefault();
-            const name = btn.dataset.name;
-            const updatedCart = cart.filter(item => item.name !== name);
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
-            location.reload();
+                </td>
+                <td class="py-4 align-middle"><h6 class="mb-0">GH₵${subtotal.toFixed(2)}</h6></td>
+                <td class="py-4 align-middle">
+                    <a href="#" class="remove-item text-danger" data-index="${index}" title="Remove Item">
+                        <svg width="24" height="24"><use xlink:href="#trash"></use></svg>
+                    </a>
+                </td>
+            `;
+            tbody.appendChild(row);
         });
-    });
+
+        // ✨ Animate totals update
+        document.querySelectorAll(".price-amount bdi").forEach(el => {
+            const currentValue = parseFloat(el.textContent.replace("GH₵", "")) || 0;
+            animateValue(el, currentValue, total, 500); // animate in 0.5s
+        });
+
+        attachEvents();
+    }
+
+    function attachEvents() {
+        document.querySelectorAll(".increase").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const index = btn.dataset.index;
+                cart[index].quantity++;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            });
+        });
+
+        document.querySelectorAll(".decrease").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const index = btn.dataset.index;
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+        });
+
+        // disable "−" if qty = 1
+        document.querySelectorAll(".decrease").forEach((btn, i) => {
+            if (cart[i].quantity <= 1) btn.setAttribute("disabled", "true");
+        });
+
+        document.querySelectorAll(".remove-item").forEach(btn => {
+            btn.addEventListener("click", e => {
+                e.preventDefault();
+                const index = btn.dataset.index;
+                cart.splice(index, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            });
+        });
+    }
+
+    renderCart();
 });
 </script>
+
+<style>
+/* Quantity buttons modern style */
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.quantity-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: #f8f9fa;
+  font-size: 23px;
+  font-weight: bold;
+  color: #2c9214;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+  background: #127d3a;
+  color: #fff;
+  border-color: #127d3a;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* 👇 Add breathing room between quantity and subtotal */
+td:nth-child(3) {
+  padding-left: 90px;
+}
+
+</style>
+
 
 <!-- Add this before the closing body tag -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -898,6 +973,22 @@ document.getElementById('clear-cart').addEventListener('click', async () => {
 });
 
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+  const cartBadge = document.getElementById("cart-count");
+  if (cartCount > 0) {
+    cartBadge.textContent = cartCount; // show total quantity
+    cartBadge.style.display = "inline-block";
+  } else {
+    cartBadge.style.display = "none"; // hide badge if empty
+  }
+});
+</script>
+
 </body>
 
 </html>
