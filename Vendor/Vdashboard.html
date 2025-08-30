@@ -229,6 +229,7 @@
             </p>
           </div>
           <button
+            onclick="window.location.href='../Vendor/Vproduct.html'"
             class="btn btn-primary"
             style="
               background-color: var(--lootbox-purple);
@@ -237,6 +238,16 @@
           >
             <i class="bi bi-plus-lg me-2"></i>
             Add New Product
+          </button>
+        </div>
+
+        <!-- Add this right after your header section, before the Stats Cards -->
+        <div class="mb-3">
+          <button onclick="testLogin()" class="btn btn-secondary me-2">
+            Test Login
+          </button>
+          <button onclick="addTestData()" class="btn btn-primary">
+            Add Test Data
           </button>
         </div>
 
@@ -249,7 +260,7 @@
                 <span class="text-muted">Total Sales</span>
                 <i class="bi bi-cart text-muted"></i>
               </div>
-              <h3 class="mb-1">GH&#8373;10,256.54</h3>
+              <h3 class="mb-1" data-stat="total-sales">GH₵0.00</h3>
               <p class="mb-0 small">
                 <span class="trend-up">
                   <i class="bi bi-arrow-up"></i>
@@ -267,7 +278,7 @@
                 <span class="text-muted">Orders</span>
                 <i class="bi bi-bag text-muted"></i>
               </div>
-              <h3 class="mb-1">145</h3>
+              <h3 class="mb-1" data-stat="total-orders">145</h3>
               <p class="mb-0 small">
                 <span class="trend-up">
                   <i class="bi bi-arrow-up"></i>
@@ -334,7 +345,7 @@
                       <th>Status</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="recent-orders-table">
                     <tr>
                       <td>ORD-001</td>
                       <td>John Smith</td>
@@ -384,7 +395,7 @@
                   >View All</a
                 >
               </div>
-              <div class="card-body">
+              <div class="card-body" id="top-products">
                 <!-- Product Item -->
                 <div class="d-flex align-items-center mb-3">
                   <img
@@ -488,6 +499,331 @@
         </div>
       </div>
     </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-storage-compat.js"></script>
+
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+        authDomain: "lootbox-vproduct.firebaseapp.com",
+        projectId: "lootbox-vproduct",
+        storageBucket: "lootbox-vproduct.firebasestorage.app",
+        messagingSenderId: "753114136209",
+        appId: "1:753114136209:web:75f2b96440b32c04c70930",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Auth state observer
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          loadDashboardData(user.uid);
+        } else {
+          window.location.href = "../Account/Account.html"; // Redirect to login if not authenticated
+        }
+      });
+
+      // Add this function to handle real-time updates
+      function listenToOrderUpdates(vendorId) {
+        // Listen for real-time order updates
+        db.collection("orders")
+          .where("vendorId", "==", vendorId)
+          .orderBy("date", "desc")
+          .onSnapshot((snapshot) => {
+            let totalSales = 0;
+            const orders = [];
+
+            snapshot.forEach((doc) => {
+              const order = { id: doc.id, ...doc.data() };
+              orders.push(order);
+              totalSales += order.total || 0;
+            });
+
+            // Update total sales
+            document.querySelector(
+              '[data-stat="total-sales"]'
+            ).textContent = `GH₵${totalSales.toFixed(2)}`;
+
+            // Update total orders
+            document.querySelector('[data-stat="total-orders"]').textContent =
+              orders.length;
+
+            // Update recent orders table
+            const recentOrders = orders.slice(0, 5);
+            const ordersTableBody = document.querySelector(
+              "#recent-orders-table"
+            );
+            ordersTableBody.innerHTML = recentOrders
+              .map(
+                (order) => `
+          <tr>
+            <td>${order.id.slice(0, 8)}</td>
+            <td>${order.customerName}</td>
+            <td>${new Date(order.date?.toDate()).toLocaleDateString()}</td>
+            <td>GH₵${order.total.toFixed(2)}</td>
+            <td>
+              <span class="badge bg-${getStatusColor(order.status)}">
+                ${order.status}
+              </span>
+            </td>
+          </tr>
+        `
+              )
+              .join("");
+          });
+
+        // Listen for real-time product updates
+        db.collection("products")
+          .where("vendorId", "==", vendorId)
+          .orderBy("sales", "desc")
+          .onSnapshot((snapshot) => {
+            const products = [];
+            snapshot.forEach((doc) => {
+              products.push({ id: doc.id, ...doc.data() });
+            });
+
+            // Update top products
+            const topProducts = products.slice(0, 3);
+            const topProductsContainer =
+              document.querySelector("#top-products");
+            topProductsContainer.innerHTML = topProducts
+              .map(
+                (product) => `
+          <div class="d-flex align-items-center mb-3">
+            <img src="${product.image || "https://placehold.co/50x50"}" 
+                 class="rounded me-3" alt="${product.name}" 
+                 style="width: 50px; height: 50px; object-fit: cover;">
+            <div class="flex-grow-1">
+              <h6 class="mb-0">${product.name}</h6>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                <small class="text-muted">${product.stock} in stock</small>
+                <span class="fw-medium">GH₵${product.price}</span>
+              </div>
+            </div>
+          </div>
+        `
+              )
+              .join("");
+          });
+      }
+
+      // Modify your existing onAuthStateChanged to use the new listener
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // Start listening for real-time updates
+          listenToOrderUpdates(user.uid);
+        } else {
+          window.location.href = "../Account/Account.html";
+        }
+      });
+
+      async function loadDashboardData(vendorId) {
+        console.log("Loading dashboard data for vendor:", vendorId);
+        try {
+          // Get products collection
+          const productsSnapshot = await db
+            .collection("products")
+            .where("vendorId", "==", vendorId)
+            .get();
+
+          console.log("Products found:", productsSnapshot.size);
+
+          // Get orders collection (assuming you have one)
+          const ordersSnapshot = await db
+            .collection("orders")
+            .where("vendorId", "==", vendorId)
+            .get();
+
+          console.log("Orders found:", ordersSnapshot.size);
+
+          // Calculate dashboard metrics
+          const totalProducts = productsSnapshot.size;
+          let totalSales = 0;
+          let totalOrders = ordersSnapshot.size;
+
+          // Calculate total sales from orders
+          ordersSnapshot.forEach((doc) => {
+            const order = doc.data();
+            totalSales += order.total || 0;
+          });
+
+          // Update dashboard stats
+          document.querySelector(
+            '[data-stat="total-sales"]'
+          ).textContent = `GH₵${totalSales.toFixed(2)}`;
+          document.querySelector('[data-stat="total-orders"]').textContent =
+            totalOrders;
+
+          // Load top products
+          const topProducts = productsSnapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => (b.sales || 0) - (a.sales || 0))
+            .slice(0, 3);
+
+          // Update top products section
+          const topProductsContainer = document.querySelector("#top-products");
+          topProductsContainer.innerHTML = topProducts
+            .map(
+              (product) => `
+            <div class="d-flex align-items-center mb-3">
+              <img src="${product.image || "https://via.placeholder.com/50"}" 
+                   class="rounded me-3" alt="${product.name}" 
+                   style="width: 50px; height: 50px; object-fit: cover;">
+              <div class="flex-grow-1">
+                <h6 class="mb-0">${product.name}</h6>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                  <small class="text-muted">${product.stock} in stock</small>
+                  <span class="fw-medium">GH₵${product.price}</span>
+                </div>
+              </div>
+            </div>
+          `
+            )
+            .join("");
+
+          // Load recent orders
+          const recentOrders = ordersSnapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => b.date - a.date)
+            .slice(0, 5);
+
+          // Update recent orders table
+          const ordersTableBody = document.querySelector(
+            "#recent-orders-table"
+          );
+          ordersTableBody.innerHTML = recentOrders
+            .map(
+              (order) => `
+            <tr>
+              <td>${order.id}</td>
+              <td>${order.customerName}</td>
+              <td>${new Date(order.date).toLocaleDateString()}</td>
+              <td>GH₵${order.total.toFixed(2)}</td>
+              <td>
+                <span class="badge bg-${getStatusColor(order.status)}">${
+                order.status
+              }</span>
+              </td>
+            </tr>
+          `
+            )
+            .join("");
+        } catch (error) {
+          console.error("Error loading dashboard data:", error);
+        }
+      }
+
+      function getStatusColor(status) {
+        switch (status?.toLowerCase()) {
+          case "completed":
+            return "success";
+          case "processing":
+            return "warning text-dark";
+          case "cancelled":
+            return "danger";
+          default:
+            return "secondary";
+        }
+      }
+
+      // Test Login function
+      async function testLogin() {
+        try {
+          // Use test credentials - replace with your test vendor account
+          await firebase
+            .auth()
+            .signInWithEmailAndPassword(
+              "testvendor@example.com",
+              "password123"
+            );
+          console.log("Logged in successfully");
+        } catch (error) {
+          console.error("Login failed:", error);
+        }
+      }
+
+      // Update your addTestData function to include error details
+      async function addTestData() {
+        try {
+          const user = firebase.auth().currentUser;
+          if (!user) {
+            alert("Please login first!");
+            return;
+          }
+          console.log("Adding test data for user:", user.uid);
+
+          // Add test products
+          const products = [
+            {
+              name: "Gaming Mouse",
+              price: 59.99,
+              stock: 15,
+              image: "https://placehold.co/50x50",
+              vendorId: user.uid,
+              sales: 5,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            },
+            {
+              name: "Mechanical Keyboard",
+              price: 129.99,
+              stock: 8,
+              image: "https://placehold.co/50x50",
+              vendorId: user.uid,
+              sales: 3,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            },
+          ];
+
+          // Add products to Firebase
+          for (const product of products) {
+            console.log("Adding product:", product);
+            await db.collection("products").add(product);
+          }
+
+          console.log("Products added successfully");
+
+          // Add orders with proper timestamp
+          const orders = [
+            {
+              customerName: "John Smith",
+              date: firebase.firestore.FieldValue.serverTimestamp(),
+              total: 125.99,
+              status: "completed",
+              vendorId: user.uid,
+            },
+            {
+              customerName: "Sarah Johnson",
+              date: firebase.firestore.FieldValue.serverTimestamp(),
+              total: 89.99,
+              status: "processing",
+              vendorId: user.uid,
+            },
+          ];
+
+          // Add orders to Firebase
+          for (const order of orders) {
+            console.log("Adding order:", order);
+            await db.collection("orders").add(order);
+          }
+
+          console.log("Orders added successfully");
+          alert("Test data added successfully!");
+          loadDashboardData(user.uid);
+        } catch (error) {
+          console.error("Detailed error:", error);
+          alert(
+            `Error adding test data: ${error.message}\nCheck console for details`
+          );
+        }
+      }
+    </script>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

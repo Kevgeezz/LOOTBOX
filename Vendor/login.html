@@ -179,6 +179,10 @@
         z-index: 10;
       }
     </style>
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body>
     <!-- Header (same as original) -->
@@ -461,16 +465,32 @@
 
         // Basic validation
         if (!email || !password) {
-          errorElement.innerText = "Please fill in all fields";
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Please fill in all fields",
+            confirmButtonColor: '#127d3a'
+          });
+
           return;
         }
 
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(() => (window.location.href = "Vproduct.html"))
-          .catch((err) => {
-      let errorMessage;
+    firebase
+  .auth()
+  .signInWithEmailAndPassword(email, password)
+  .then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Vendor Login Successful 🎉',
+      text: 'Start Selling!',
+      confirmButtonColor: '#127d3a'
+    }).then(() => {
+      // Redirect only after user clicks "OK"
+      window.location.href = "Vproduct.html";
+    });
+  })
+  .catch((err) => {
+    let errorMessage;
 
       switch (err.code) {
         case "auth/user-not-found":
@@ -490,7 +510,12 @@
           errorMessage = "Login failed: " + err.message;
       }
 
-      errorElement.innerText = errorMessage;
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: errorMessage,
+        confirmButtonColor: '#d33'
+      });
     });
       }
 
@@ -509,16 +534,31 @@
     const email = document.getElementById("email").value;
 
     if (!email) {
-      alert("Please enter your email address first.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Email',
+        text: "Please enter your email address first.",
+        confirmButtonColor: '#d33'
+      });
       return;
     }
 
     firebase.auth().sendPasswordResetEmail(email)
       .then(() => {
-        alert("Password reset email sent! Please check your inbox.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Email Sent',
+          text: 'A password reset link has been sent to your email.',
+          confirmButtonColor: '#127d3a'
+        });
       })
       .catch((error) => {
-        alert("Error: " + error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.message,
+          confirmButtonColor: '#d33'
+        });
       });
   }
 </script>

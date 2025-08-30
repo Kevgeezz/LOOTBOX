@@ -1701,3 +1701,34 @@ a.blog-read {
 a.blog-read:hover {
   border-bottom: 1px solid #8a8a8a;
 }
+
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-processing {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-shipped {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-delivered {
+  background-color: #def7ec;
+  color: #03543f;
+}
+
+.status-cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +36,19 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Font Awesome ================================================== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmCULaM6tU8zTtIk2+qvJrXcU1cUilj6jI5q+brn2bO4W1s9q+nuZB+E1Pi6jizoU9g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Favicon ================================================== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="manifest" href="../images/site.webmanifest">
 </head>
 
 <body>
@@ -148,38 +160,37 @@
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-4">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-circle pt-2">3</span>
+          <span id="cart-badge" class="badge bg-primary rounded-circle pt-2">0</span>
         </h4>
 
-        <ul class="list-group mb-4">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product one</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">GH&#8373;120</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product Two</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">GH&#8373;80</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product three</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">GH&#8373;50</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span class="fw-bold">Total (GH&#8373;)</span>
-            <strong>GH&#8373;250</strong>
-          </li>
+        <ul id="cart-items" class="list-group mb-4">
+          <!-- Cart items will be dynamically inserted here -->
         </ul>
 
-        <button class="w-100 btn btn-dark" type="submit">Continue to checkout</button>
+        <div class="card p-2 mb-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Apply</button>
+          </div>
+        </div>
+
+        <div class="card p-2 mb-4">
+          <div class="d-flex justify-content-between">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">GH₵0.00</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Shipping</span>
+            <span id="cart-shipping">GH₵0.00</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between">
+            <span class="fw-bold">Total</span>
+            <span id="cart-total" class="fw-bold">GH₵0.00</span>
+          </div>
+        </div>
+
+        <button id="checkout-button" class="w-100 btn btn-dark" type="button">Continue to checkout</button>
       </div>
     </div>
   </div>
@@ -329,7 +340,7 @@
                                          <use xlink:href="#cart"></use>
                                       </svg>
                                      <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><h6>0<h6></span>
-                                    </div>
+                                   </div>
                                  </a>
                                </li>
                                     <a href="Wishlist.html" data-bs-toggle="offcanvas"
@@ -620,6 +631,7 @@
               </li>
               <li class="nav-item mb-2 ">
                 <a class="nav-link nav-link-ltr">SHOP</a>
+              </li>
               <li class="nav-item mb-2">
                 <a class="nav-link nav-link-ltr" href="#">SALE</a>
               </li>
@@ -685,15 +697,32 @@
 
   <!-- Script -->
   <script src="js/jquery-1.11.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script type="text/javascript" src="js/plugins.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+<script src="../js/firebase-config.js"></script>
+
+  <!-- Then your custom scripts -->
+  <script src="../js/cart-manager.js"></script>
+  <script src="../js/cart-ui.js"></script>
 
 
+<script>
+function showLoading() {
+    // You can create a loading spinner or use the bootstrap spinner
+    document.body.style.cursor = 'wait';
+}
+
+function hideLoading() {
+    document.body.style.cursor = 'default';
+}
+</script>
 
   <script>//cart
 document.addEventListener("DOMContentLoaded", () => {
@@ -758,31 +787,117 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script>//  Update Cart Count
-document.addEventListener("DOMContentLoaded", () => {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const badge = document.getElementById("cart-count");
-  if (badge) badge.textContent = count;
-});
-</script>
+<!-- Add this before the closing body tag -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="addToCartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Item added to cart successfully!
+    </div>
+  </div>
 
-<script>//  Clear Cart
-document.addEventListener("DOMContentLoaded", () => {
-  const clearBtn = document.getElementById("clear-cart");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevents default anchor behavior
-      localStorage.removeItem("cart");
-      alert("Cart has been cleared.");
-      location.reload(); // Reload to reflect changes
+  <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-danger text-white">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      There was an error processing your request.
+    </div>
+  </div>
+</div>
+
+<script>
+// Replace the authentication listener code with this:
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log('Starting cart initialization for user:', user.uid);
+        const cartManager = new CartManager();
+        
+        // Create a test cart document
+        const cartRef = firebase.firestore().collection('carts').doc(user.uid);
+        console.log('Step 3: Creating cart document...');
+        cartRef.set({
+            userId: user.uid,
+            items: [],
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true })
+        .then(() => {
+            console.log('Step 4: Cart document created/updated successfully');
+            // Verify the cart was created
+            return cartRef.get();
+        })
+        .then((doc) => {
+            console.log('Step 5: Cart verification:', doc.exists ? 'Cart exists' : 'Cart does not exist');
+            if (doc.exists) {
+                console.log('Cart data:', doc.data());
+            }
+        })
+        .catch(error => {
+            console.error('Error in cart initialization:', error);
+            console.error('Error code:', error.code);
+            console.error('Error message:', error.message);
+        });
+    } else {
+        console.log('No user is logged in');
+    }
+});
+
+// Clear cart button listener
+document.getElementById('clear-cart').addEventListener('click', async () => {
+  const result = await Swal.fire({
+    title: 'Clear Cart?',
+    text: "Are you sure you want to remove all items from your cart?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, clear it!',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!result.isConfirmed) return; // stop if user cancels
+
+  try {
+    showLoading();
+
+    const cartManager = new CartManager();
+
+    // Clear Firebase cart if user is logged in
+    await cartManager.clearCart();
+
+    // Clear local storage cart
+    localStorage.setItem("cart", JSON.stringify([]));
+
+    hideLoading();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Cart Cleared!',
+      text: 'All items have been removed from your cart.',
+      confirmButtonColor: '#127d3a'
+    }).then(() => {
+      location.reload(); // reload after success
+    });
+
+  } catch (error) {
+    console.error('Error clearing cart:', error);
+    hideLoading();
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Failed to clear your cart. Please try again.',
+      confirmButtonColor: '#127d3a'
     });
   }
 });
+
 </script>
-
-
-  
 </body>
 
 </html>

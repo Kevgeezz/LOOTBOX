@@ -527,8 +527,13 @@ h6 {
 }
 
     </style>
+
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
-  <body>
+  <body onload="initPage() ">
     <!-- Sidebar (Same as previous pages) -->
     <nav class="sidebar" id="sidebar">
       <div
@@ -1057,27 +1062,71 @@ function showToast(message, type = "success") {
         }
       }*/
 
-     async function saveProduct(product, id = null) {
+   async function saveProduct(product, id = null) {
   const user = firebase.auth().currentUser;
-  if (!user) return alert("Not authenticated");
+  if (!user) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Not Authenticated',
+      text: 'Please log in to continue.',
+      confirmButtonColor: '#127d3a'
+    });
+    return;
+  }
 
   product.vendorId = user.uid;
 
   try {
+    // show spinner
+    showLoading(id ? "Updating product..." : "Uploading product...");
+
     if (id) {
+      // update existing product
       await productsCollection.doc(id).update(product);
+
+      hideLoading();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Product Updated',
+        text: 'Your product has been updated successfully.',
+        confirmButtonColor: '#127d3a'
+      });
+
       showToast("Product updated successfully", "success");
     } else {
+      // add new product
       await productsCollection.add(product);
+
+      hideLoading();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Product Uploaded',
+        text: 'Your product has been added successfully.',
+        confirmButtonColor: '#127d3a'
+      });
+
       showToast("Product uploaded successfully", "success");
     }
+
     loadProducts();
+
   } catch (error) {
     console.error("Error saving product: ", error);
-    alert("Error saving product: " + error.message);
+    hideLoading(); // always hide spinner on error
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+      confirmButtonColor: '#127d3a'
+    });
+
     showToast("Failed to save product", "danger");
   }
 }
+
 
 
       async function editProduct(id) {
@@ -1101,19 +1150,46 @@ function showToast(message, type = "success") {
 }
 
 
-     async function deleteProduct(id) {
-  if (!confirm("Are you sure you want to delete this product?")) return;
+ async function deleteProduct(id) {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "This action cannot be undone.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!result.isConfirmed) return; // ❌ stop if user cancels
 
   try {
     await productsCollection.doc(id).delete();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Product Deleted!',
+      text: 'Your product has been deleted successfully.',
+      confirmButtonColor: '#127d3a'
+    });
+
     showToast("Product deleted successfully", "success");
     loadProducts();
   } catch (error) {
     console.error("❌ Delete failed:", error);
-    alert("Failed to delete: " + error.message);
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+      confirmButtonColor: '#127d3a'
+    });
+
     showToast("Failed to delete product", "danger");
   }
 }
+
 
       document.getElementById("productForm").addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -1157,15 +1233,43 @@ function showToast(message, type = "success") {
 
     <script>
       // Logout function
-      function logout() {
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            window.location.href = "login.html";
-          })
-          .catch((err) => alert("Error logging out: " + err.message));
-      }
+    async function logout() {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "Do you really want to log out?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#127d3a',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Yes, log me out',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!result.isConfirmed) return; // user cancelled
+
+  try {
+    await firebase.auth().signOut();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Logged Out',
+      text: 'You have been logged out successfully.',
+      confirmButtonColor: '#127d3a'
+    }).then(() => {
+      // redirect only after user clicks OK
+      window.location.href = "login.html";
+    });
+
+  } catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Logout Failed',
+      text: err.message,
+      confirmButtonColor: '#127d3a'
+    });
+  }
+}
+
     </script>
 
     <script>
@@ -1188,6 +1292,25 @@ function showToast(message, type = "success") {
         });
     </script>
 
+    <script>
+// Show a loading popup with custom message
+function showLoading(message = "Please wait...") {
+  Swal.fire({
+    title: message,
+    allowOutsideClick: false,
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+}
+
+// Close the loading popup
+function hideLoading() {
+  Swal.close();
+}
+</script>
+
 
     <!-- Toast Container -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
@@ -1200,6 +1323,16 @@ function showToast(message, type = "success") {
     </div>
   </div>
 </div>
+
+ <script>
+    async function initPage() {
+      showLoading("Preparing your products...");
+
+      await loadProducts();
+
+      hideLoading();
+    }
+  </script>
 
   </body>
 </html>
