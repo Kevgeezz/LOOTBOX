@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchase Product - Premium Store</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+      }
+
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .main-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 2rem 0;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--shadow-soft);
+        border: none;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .product-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .product-image:hover {
+        transform: scale(1.05);
+      }
+
+      .image-container {
+        overflow: hidden;
+        border-radius: 15px;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 350px;
+      }
+
+      .product-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+
+      .badge-custom {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      .price {
+        font-size: 2.2rem;
+        font-weight: 700;
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0;
+      }
+
+      .vendor-tag {
+        background: linear-gradient(135deg, #ff6b6b, #402256);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+
+      .stock-info {
+        color: #28a745;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .stock-low {
+        color: #ffc107;
+      }
+
+      .stock-out {
+        color: #dc3545;
+      }
+
+      .btn-checkout {
+        background: var(--success-gradient);
+        border: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(56, 239, 125, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-checkout:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(56, 239, 125, 0.4);
+        color: white;
+      }
+
+      .btn-back {
+        border-radius: 50px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .description {
+        color: #6c757d;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      .upload-date {
+        color: #adb5bd;
+        font-size: 0.85rem;
+        font-style: italic;
+      }
+
+      .divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+        border: none;
+        margin: 1.5rem 0;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .info-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .product-title {
+          font-size: 1.5rem;
+        }
+        .price {
+          font-size: 1.8rem;
+        }
+        .btn-checkout {
+          font-size: 1rem;
+          padding: 0.8rem 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid main-container">
+      <div class="container">
+        <!-- Back Button -->
+        <div class="row mb-4 fade-in">
+          <div class="col-12">
+            <button
+              class="btn btn-outline-secondary btn-back"
+              onclick="goBack()"
+            >
+              <i class="bi bi-arrow-left me-2"></i>Back to Store
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Card -->
+        <div class="card product-card fade-in">
+          <div class="card-body p-4 p-md-5">
+            <div class="row g-4">
+              <!-- Product Image -->
+              <div class="col-md-6">
+                <div class="image-container">
+                  <img
+                    id="productImage"
+                    src="https://via.placeholder.com/400x350/667eea/ffffff?text=Premium+Product"
+                    alt="Product Image"
+                    class="product-image"
+                  />
+                </div>
+              </div>
+
+              <!-- Product Details -->
+              <div class="col-md-6 d-flex flex-column">
+                <div class="flex-grow-1">
+                  <!-- Product Name -->
+                  <h3 id="productName" class="product-title">
+                    Premium Wireless Headphones
+                  </h3>
+
+                  <!-- Badges -->
+                  <div class="mb-3">
+                    <span id="categoryBadge" class="badge-custom"
+                      >Electronics</span
+                    >
+                    <span id="brandBadge" class="badge-custom">SoundMax</span>
+                  </div>
+
+                  <!-- Description -->
+                  <p id="productDescription" class="description mb-4">
+                    Experience crystal-clear audio with our premium wireless
+                    headphones. Featuring noise cancellation, 30-hour battery
+                    life, and superior comfort for all-day listening. Perfect
+                    for music lovers and professionals alike.
+                  </p>
+
+                  <hr class="divider" />
+
+                  <!-- Price and Stock Info -->
+                  <div class="info-section">
+                    <div class="row align-items-center mb-3">
+                      <div class="col-6">
+                        <div class="price" id="productPrice">$299.99</div>
+                      </div>
+                      <div class="col-6 text-end">
+                        <div class="stock-info" id="stockInfo">
+                          ✓ In Stock (15 available)
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Vendor Info -->
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div>
+                        <span class="vendor-tag" id="vendorName"
+                          >Uploaded by TechStore Pro</span
+                        >
+                      </div>
+                      <div class="upload-date" id="uploadDate">
+                        Uploaded on March 15, 2024
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Checkout Button -->
+                <div class="mt-4 text-center">
+                  <button
+                    class="btn btn-checkout w-100"
+                    onclick="proceedToCheckout()"
+                  >
+                    <i class="bi bi-cart-check me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <script>
+      // Function to get URL parameters
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      // Function to populate product data from URL parameters
+      function populateProductData() {
+        const productName =
+          getUrlParameter("name") || "Premium Wireless Headphones";
+        const productPrice = getUrlParameter("price") || "$299.99";
+        const productDescription =
+          getUrlParameter("description") ||
+          "Experience crystal-clear audio with our premium wireless headphones. Featuring noise cancellation, 30-hour battery life, and superior comfort for all-day listening.";
+        const productCategory = getUrlParameter("category") || "Electronics";
+        const productBrand = getUrlParameter("brand") || "SoundMax";
+        const productStock = getUrlParameter("stock") || "15";
+        const productVendor = getUrlParameter("vendor") || "TechStore Pro";
+        const productImage =
+          getUrlParameter("image") ||
+          "https://via.placeholder.com/400x350/667eea/ffffff?text=Premium+Product";
+        const uploadDate = getUrlParameter("uploadDate") || "March 15, 2024";
+
+        // Update DOM elements
+        document.getElementById("productName").textContent = productName;
+        document.getElementById("productPrice").textContent = productPrice;
+        document.getElementById("productDescription").textContent =
+          productDescription;
+        document.getElementById("categoryBadge").textContent = productCategory;
+        document.getElementById("brandBadge").textContent = productBrand;
+        document.getElementById("vendorName").textContent = productVendor;
+        document.getElementById("productImage").src = productImage;
+        document.getElementById("productImage").alt = productName;
+        document.getElementById(
+          "uploadDate"
+        ).textContent = `Uploaded on ${uploadDate}`;
+
+        // Update stock display
+        const stockElement = document.getElementById("stockInfo");
+        const stockNum = parseInt(productStock);
+
+        if (stockNum > 10) {
+          stockElement.innerHTML = `✓ In Stock (${stockNum} available)`;
+          stockElement.className = "stock-info";
+        } else if (stockNum > 0) {
+          stockElement.innerHTML = `⚠ Low Stock (${stockNum} left)`;
+          stockElement.className = "stock-info stock-low";
+        } else {
+          stockElement.innerHTML = "✗ Out of Stock";
+          stockElement.className = "stock-info stock-out";
+          document.querySelector(".btn-checkout").disabled = true;
+          document.querySelector(".btn-checkout").innerHTML =
+            '<i class="bi bi-x-circle me-2"></i>Out of Stock';
+        }
+      }
+
+      // Functions for button actions
+      function goBack() {
+        if (document.referrer) {
+          window.history.back();
+        } else {
+          window.location.href = "/";
+        }
+      }
+
+      function proceedToCheckout() {
+        // Get current product data
+        const productData = {
+          name: document.getElementById("productName").textContent,
+          price: document.getElementById("productPrice").textContent,
+          vendor: document.getElementById("vendorName").textContent,
+          image: document.getElementById("productImage").src,
+        };
+
+        // Here you would typically integrate with your payment system
+        alert(
+          `Proceeding to checkout for: ${productData.name}\nPrice: ${productData.price}\nVendor: ${productData.vendor}`
+        );
+
+        // Example: Redirect to checkout page with product data
+        // window.location.href = `checkout.html?name=${encodeURIComponent(productData.name)}&price=${encodeURIComponent(productData.price)}`;
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", function () {
+        populateProductData();
+
+        // Add smooth scrolling and animations
+        const card = document.querySelector(".product-card");
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        });
+
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "all 0.6s ease";
+        observer.observe(card);
+      });
+
+      // Example of how to call this page with parameters:
+      // purchase.html?name=Premium Headphones&price=$299.99&description=Amazing sound quality&category=Electronics&brand=SoundMax&stock=15&vendor=TechStore&image=https://example.com/image.jpg&uploadDate=March 15, 2024
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+    <script>
+      // 🔑 Your Firebase config (use same as Vproduct.html)
+      const firebaseConfig = {
+        apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+        authDomain: "lootbox-vproduct.firebaseapp.com",
+        projectId: "lootbox-vproduct",
+        storageBucket: "lootbox-vproduct.firebasestorage.app",
+        messagingSenderId: "753114136209",
+        appId: "1:753114136209:web:xxxxxx",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Get URL param
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      async function loadProduct() {
+        const productId = getUrlParameter("id");
+        if (!productId) {
+          alert("❌ No product ID provided.");
+          return;
+        }
+
+        try {
+          const doc = await db.collection("products").doc(productId).get();
+          if (!doc.exists) {
+            alert("⚠️ Product not found.");
+            return;
+          }
+
+          const data = doc.data();
+
+          // ✅ Populate DOM
+          document.getElementById("productName").textContent = data.name;
+          document.getElementById("productPrice").textContent =
+            "GH₵ " + data.price;
+          document.getElementById("productDescription").textContent =
+            data.description;
+          document.getElementById("categoryBadge").textContent = data.category;
+          document.getElementById("brandBadge").textContent = data.brand;
+          document.getElementById("vendorName").textContent = data.vendorName
+            ? data.vendorName.split("@")[0]
+            : "Unknown";
+          document.getElementById("productImage").src = data.image;
+          document.getElementById("uploadDate").textContent = data.createdAt
+            ?.toDate
+            ? "Uploaded on " + data.createdAt.toDate().toLocaleDateString()
+            : "";
+
+          // ✅ Save vendor + product details globally
+          window.currentVendorId = data.vendorId;
+          window.currentProduct = {
+            id: productId,
+            vendorId: data.vendorId,
+            vendorName: data.vendorName,
+          };
+        } catch (err) {
+          console.error("🔥 Error loading product:", err);
+          alert("Failed to load product.");
+        }
+      }
+
+      function goBack() {
+        if (document.referrer) {
+          window.history.back();
+        } else {
+          window.location.href = "index.html";
+        }
+      }
+
+      function proceedToCheckout() {
+        const productData = {
+          id: getUrlParameter("id"), //
+          name: document.getElementById("productName").textContent,
+          price: parseFloat(
+            document
+              .getElementById("productPrice")
+              .textContent.replace("GH₵ ", "")
+          ),
+          vendor: document.getElementById("vendorName").textContent,
+          vendorId: window.currentVendorId || null,
+          image: document.getElementById("productImage").src,
+          quantity: 1,
+        };
+
+        // Save to localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find((item) => item.id === productData.id);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push(productData);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Redirect
+        window.location.href = "Cart/Cart.html";
+      }
+
+      document.addEventListener("DOMContentLoaded", loadProduct);
+    </script>
+  </body>
+</html>

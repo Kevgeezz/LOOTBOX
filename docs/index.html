@@ -3210,73 +3210,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-
-
-<!--<script>
-  window.addEventListener("DOMContentLoaded", function () {
-    const productContainer = document.getElementById("productList");
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-
-    products.forEach(product => {
-      const div = document.createElement("div");
-      div.className = "swiper-slide"; // So it looks like others
-      div.innerHTML = `
-        <div class="vendor product-item position-relative">
-          <div class="z-1 position-absolute rounded-3 m-3 px-3 bg-light text-dark">new</div>
-          <img src="${product.image}" alt="${product.name}" class="product-image img-fluid">
-          <div class="cart-concern">
-            <div class="cart-button d-flex justify-content-between align-items-center px-4">
-              <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE
-                <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
-              </a>
-              <a href="${product.image}" class="view-btn">
-                <svg class="expand" width="16" height="16"><use xlink:href="#expand"></use></svg>
-              </a>
-              <a href="Cart/Cart.html"
-                class="add-to-cart"
-                data-name="${product.name}"
-                data-price="${product.price}"
-                data-image="${product.image}">
-                <svg class="cart" width="16" height="16"><use xlink:href="#cart"></use></svg>
-              </a>
-              <a href="#" class="wishlist-btn">
-                <svg class="wishlist" width="20" height="20"><use xlink:href="#wishlist"></use></svg>
-              </a>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <h5><a href="#" class="item-name">${product.name}</a></h5>
-            <h5 class="money fw-bold">GH₵${parseFloat(product.price).toFixed(2)}</h5>
-          </div>
-        </div>
-      `;
-      productContainer.appendChild(div);
-    });
-
-    // Optional: If you're using swiper here
-    if (document.querySelector('.swiper') && typeof Swiper !== "undefined") {
-      new Swiper(".vendor-swiper", {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        navigation: {
-          nextEl: ".vendor-next",
-          prevEl: ".vendor-prev",
-        },
-        pagination: {
-          el: ".vendor-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          992: { slidesPerView: 3 },
-          1200: { slidesPerView: 4 },
-        },
-      });
-    }
-  });
-</script>-->
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("searchInput");
@@ -3864,6 +3797,12 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
           if (data.status === "Active") {
             console.log("✅ Adding product:", data.name);
 
+            // ✅ define vendorName + uploadedTime first
+    const vendorName = data.vendorName ? data.vendorName.split("@")[0] : "Unknown";
+    const uploadedTime = data.createdAt?.toDate 
+      ? data.createdAt.toDate().toLocaleDateString() 
+      : "";
+
              productListContainer.innerHTML += `
           <div class="swiper-slide">
             <div class="product-item position-relative">
@@ -3871,9 +3810,11 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
               <img src="${data.image}" alt="${data.name}" class="product-image img-fluid">
               <div class="cart-concern">
                 <div class="cart-button d-flex justify-content-between align-items-center px-4">
-                  <a href="#" class="btn-wrap d-flex align-items-center text-capitalize fs-6">PURCHASE
-                    <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
-                  </a>
+                  <a href="purchase.html?id=${doc.id}" class="btn-wrap d-flex align-items-center text-capitalize fs-6">
+  View Product
+  <svg class="arrow" width="20" height="20"><use xlink:href="#arrow-right"></use></svg>
+</a>
+
                   <a href="${data.image}" class="view-btn">
                     <svg class="expand" width="16" height="16"><use xlink:href="#expand"></use></svg>
                   </a>
@@ -3892,6 +3833,11 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
                 <h5><a href="#" class="item-name">${data.name}</a></h5>
                 <h5 class="money fw-bold">GH₵ ${data.price}</h5>
               </div>
+             <div class="d-flex justify-content-between align-items-center mt-2">
+  <small class="text-muted">Uploaded By ${vendorName}</small>
+  <small class="text-muted">${uploadedTime}</small>
+</div>
+
             </div>
           </div>
         `;

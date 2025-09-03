@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lootbox Vendor - Orders</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <style>
+      :root {
+        --lootbox-purple: #7c3aed;
+        --lootbox-purple-light: #ede9fe;
+        --lootbox-gradient: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+      }
+
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: #e9e5ff;
+        border-right: 1px solid #e5e7eb;
+        box-shadow: 0px 0px 20px rgb(188 188 188);
+        padding: 1rem;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+      }
+
+      .main-content {
+        margin-left: 250px;
+      }
+
+      .nav-link {
+        color: #64748b;
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        margin: 0.25rem 0;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background-color: var(--lootbox-purple-light);
+        color: var(--lootbox-purple);
+      }
+
+      .nav-link.active {
+        background-color: var(--lootbox-purple);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+          z-index: 1000;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.show {
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+      }
+
+      .status-badge {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .status-pending {
+        background-color: #fffbeb;
+        color: #f59e0b;
+        border: 1px solid #fcd34d;
+      }
+
+      .status-processing {
+        background-color: #dbeafe;
+        color: #3b82f6;
+        border: 1px solid #93c5fd;
+      }
+
+      .status-completed {
+        background-color: #dcfce7;
+        color: #16a34a;
+        border: 1px solid #86efac;
+      }
+
+      .status-cancelled {
+        background-color: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+      }
+
+      .table th {
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-top: none;
+        background-color: #f9fafb;
+        padding: 1rem 0.75rem;
+      }
+
+      .table td {
+        padding: 1rem 0.75rem;
+        vertical-align: middle;
+      }
+
+      .table-hover tbody tr {
+        transition: all 0.2s ease;
+      }
+
+      .table-hover tbody tr:hover {
+        background-color: #f8f9ff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-id {
+        font-weight: 600;
+        color: var(--lootbox-purple);
+      }
+
+      .customer-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--lootbox-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .customer-name {
+        font-weight: 500;
+        color: #1f2937;
+      }
+
+      .product-name {
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.25rem;
+      }
+
+      .product-meta {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+
+      .order-date {
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+
+      .order-amount {
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      .btn-action {
+        border-radius: 6px;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .btn-view {
+        background-color: #eff6ff;
+        color: #3b82f6;
+        border: 1px solid #bfdbfe;
+      }
+
+      .btn-view:hover {
+        background-color: #dbeafe;
+        color: #2563eb;
+      }
+
+      .btn-update {
+        background-color: #f0fdf4;
+        color: #16a34a;
+        border: 1px solid #bbf7d0;
+      }
+
+      .btn-update:hover {
+        background-color: #dcfce7;
+        color: #15803d;
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .pagination .page-link {
+        border-radius: 6px;
+        margin: 0 0.25rem;
+        border: 1px solid #e5e7eb;
+        color: #4b5563;
+      }
+
+      .pagination .page-link:hover {
+        background-color: #f3f4f6;
+      }
+
+      .pagination .page-item.active .page-link {
+        background: var(--lootbox-gradient);
+        border-color: var(--lootbox-purple);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div
+        class="p-3 border-bottom d-flex justify-content-between align-items-center"
+      >
+        <span class="fw-semibold">Vendor Panel</span>
+        <button class="btn btn-link d-md-none" onclick="toggleSidebar()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-3">
+        <div class="mb-4">
+          <p class="text-muted small mb-2">DASHBOARD</p>
+          <a
+            href="../Vendor/Vdashboard.html"
+            class="nav-link d-flex align-items-center"
+          >
+            <i class="bi bi-shop me-2"></i>
+            Overview
+          </a>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-muted small mb-2">CATALOG</p>
+          <a
+            href="../Vendor/Vproduct.html"
+            class="nav-link d-flex align-items-center"
+          >
+            <i class="bi bi-box me-2"></i>
+            Products
+          </a>
+          <a
+            href="../Vendor/Vorders.html"
+            class="nav-link active d-flex align-items-center"
+          >
+            <i class="bi bi-cart me-2"></i>
+            Orders
+          </a>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-muted small mb-2">ACCOUNT</p>
+          <a href="./profile.html" class="nav-link d-flex align-items-center">
+            <i class="bi bi-person me-2"></i>
+            Profile
+          </a>
+          <a href="/vendor/settings" class="nav-link d-flex align-items-center">
+            <i class="bi bi-gear me-2"></i>
+            Settings
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-auto p-3 border-top">
+        <a
+          href="#"
+          onclick="logout()"
+          class="nav-link text-danger d-flex align-items-center"
+        >
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Logout
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4"
+      >
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler border-0 d-md-none"
+            type="button"
+            onclick="toggleSidebar()"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <a class="navbar-brand d-flex align-items-center" href="/vendor">
+            <span class="fw-bold text-purple me-2">Lootbox</span>
+            <span class="badge bg-purple">Vendor</span>
+          </a>
+
+          <div class="d-flex align-items-center gap-3">
+            <div class="position-relative d-none d-md-block">
+              <i
+                class="bi bi-search position-absolute top-50 translate-middle-y ms-3"
+              ></i>
+              <input
+                type="search"
+                class="form-control ps-5"
+                placeholder="Search orders..."
+              />
+            </div>
+
+            <button class="btn btn-link position-relative">
+              <i class="bi bi-bell"></i>
+              <span
+                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+              >
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
+
+            <button class="btn btn-link">
+              <i class="bi bi-person-circle"></i>
+            </button>
+            <span class="d-none d-md-inline" id="vendorEmail"></span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h1 class="h3 mb-1">Orders</h1>
+            <p class="text-muted">View and manage customer orders</p>
+          </div>
+          <button
+            class="btn btn-outline-secondary d-flex align-items-center gap-2"
+          >
+            <i class="bi bi-file-earmark-text"></i>
+            Generate Report
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="position-relative">
+              <i
+                class="bi bi-search position-absolute top-50 translate-middle-y ms-3"
+              ></i>
+              <input
+                type="search"
+                class="form-control ps-5"
+                placeholder="Search orders..."
+              />
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-auto ms-md-auto">
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-secondary d-flex align-items-center gap-2"
+              >
+                <i class="bi bi-funnel"></i>
+                Filter
+              </button>
+              <select class="form-select">
+                <option>All orders</option>
+                <option>Completed</option>
+                <option>Processing</option>
+                <option>Cancelled</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body">
+                <!-- Dynamic content will be inserted here -->
+                <tr>
+                  <td colspan="7" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Loading orders...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <p class="text-muted small mb-0">Showing 10 of 45 orders</p>
+          <nav>
+            <ul class="pagination mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Required modals -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Order Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="orderDetailsModalBody">
+            <!-- Content will be dynamically inserted -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="statusUpdateModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update Order Status</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="statusUpdateModalBody">
+            <!-- Content will be dynamically inserted -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirmStatusUpdate"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="successToast" class="toast" role="alert">
+        <div class="toast-header bg-success text-white">
+          <strong class="me-auto">Success</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+        <div class="toast-body" id="successToastBody"></div>
+      </div>
+
+      <div id="errorToast" class="toast" role="alert">
+        <div class="toast-header bg-danger text-white">
+          <strong class="me-auto">Error</strong>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+        <div class="toast-body" id="errorToastBody"></div>
+      </div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div
+      id="loading-spinner"
+      class="position-fixed top-50 start-50 translate-middle"
+      style="display: none"
+    >
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("show");
+      }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const db = firebase.firestore();
+        const ordersTableBody = document.getElementById("orders-table-body");
+
+        firebase.auth().onAuthStateChanged(async (user) => {
+          if (!user) {
+            document.getElementById("vendorEmail").textContent = user.email;
+            ordersTableBody.innerHTML =
+              "<tr><td colspan='7' class='text-center text-danger py-4'>⚠️ Please log in as a vendor</td></tr>";
+            return;
+          }
+
+          const vendorId = user.uid;
+          console.log("✅ Logged in vendor:", vendorId);
+
+          try {
+            const snapshot = await db
+              .collection("orders")
+              .where("vendorId", "==", vendorId)
+              .orderBy("createdAt", "desc")
+              .get();
+            console.log("📦 Orders found:", snapshot.size);
+            if (snapshot.empty) {
+              ordersTableBody.innerHTML =
+                "<tr><td colspan='7' class='text-center py-5'><i class='bi bi-cart-x display-4 text-muted'></i><p class='mt-3 text-muted'>No orders yet</p></td></tr>";
+              return;
+            }
+
+            ordersTableBody.innerHTML = ""; // clear placeholder row
+
+            snapshot.forEach((doc) => {
+              console.log("📝 Order:", doc.id, doc.data()); // debug log
+              const order = doc.data();
+              const date = order.createdAt?.toDate
+                ? order.createdAt.toDate().toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })
+                : "";
+
+              // Format customer name from email if available
+              let customerName = "Guest";
+              let customerInitial = "G";
+              if (order.buyerEmail) {
+                customerName = order.buyerEmail.split("@")[0];
+                customerInitial = customerName.charAt(0).toUpperCase();
+              } else if (order.buyerId) {
+                customerName = order.buyerId;
+                customerInitial = customerName.charAt(0).toUpperCase();
+              }
+
+              // Get status class
+              const statusClass = `status-${order.status?.toLowerCase()}`;
+
+              // Format price
+              const formattedPrice = Number(order.price).toLocaleString(
+                "en-GH",
+                {
+                  style: "currency",
+                  currency: "GHS",
+                  minimumFractionDigits: 2,
+                }
+              );
+
+              const row = `
+                            <tr class="align-middle">
+                                <td><span class="order-id">#${doc.id
+                                  .slice(0, 8)
+                                  .toUpperCase()}</span></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="customer-avatar me-2">
+                                            ${customerInitial}
+                                        </div>
+                                        <span class="customer-name">${customerName}</span>
+                                    </div>
+                                </td>
+                                <td><span class="order-date">${date}</span></td>
+                                <td>
+                                    <div>
+                                        <div class="product-name">${
+                                          order.productName
+                                        }</div>
+                                        <div class="product-meta">SKU: ${
+                                          order.sku || "N/A"
+                                        } • Qty: ${order.quantity}</div>
+                                    </div>
+                                </td>
+                                <td class="order-amount">${formattedPrice}</td>
+                                <td>
+                                    <span class="status-badge ${statusClass}">${
+                order.status
+              }</span>
+                                </td>
+                                <td class="text-end">
+                                    <button class="btn btn-action btn-view me-2 view-details" data-id="${
+                                      doc.id
+                                    }">
+                                        <i class="bi bi-eye me-1"></i> View
+                                    </button>
+                                    <button class="btn btn-action btn-update update-status" data-id="${
+                                      doc.id
+                                    }">
+                                        <i class="bi bi-pencil-square me-1"></i> Update
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+
+              ordersTableBody.innerHTML += row;
+            });
+
+            attachOrderActions();
+          } catch (err) {
+            console.error("🔥 Error loading orders:", err);
+            ordersTableBody.innerHTML =
+              "<tr><td colspan='7' class='text-center text-danger py-4'><i class='bi bi-exclamation-triangle me-2'></i>Failed to load orders</td></tr>";
+          }
+        });
+
+        // --- helper to attach modal events
+        function attachOrderActions() {
+          document.querySelectorAll(".view-details").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+              const id = btn.dataset.id;
+              const doc = await db.collection("orders").doc(id).get();
+              if (doc.exists) {
+                const order = doc.data();
+                document.getElementById("orderDetailsModalBody").innerHTML = `
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-muted">Order Information</h6>
+                                        <p><strong>Order ID:</strong> #${id}</p>
+                                        <p><strong>Date:</strong> ${
+                                          order.createdAt?.toDate
+                                            ? order.createdAt
+                                                .toDate()
+                                                .toLocaleString()
+                                            : "N/A"
+                                        }</p>
+                                        <p><strong>Status:</strong> <span class="badge ${getStatusBadgeClass(
+                                          order.status
+                                        )}">${order.status}</span></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-muted">Customer Information</h6>
+                                        <p><strong>Customer:</strong> ${
+                                          order.buyerEmail ||
+                                          order.buyerId ||
+                                          "Guest"
+                                        }</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h6 class="text-muted">Products</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>${order.productName}</td>
+                                                <td>${order.quantity}</td>
+                                                <td>GH₵ ${Number(
+                                                  order.price
+                                                ).toFixed(2)}</td>
+                                                <td>GH₵ ${(
+                                                  Number(order.price) *
+                                                  Number(order.quantity)
+                                                ).toFixed(2)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                new bootstrap.Modal("#orderDetailsModal").show();
+              }
+            });
+          });
+
+          document.querySelectorAll(".update-status").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              document.getElementById("statusUpdateModalBody").innerHTML = `
+                            <p class="mb-3">Choose a new status for order <strong>#${id
+                              .slice(0, 8)
+                              .toUpperCase()}</strong>:</p>
+                            <select id="newStatus" class="form-select">
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        `;
+              document.getElementById("confirmStatusUpdate").onclick =
+                async function () {
+                  const newStatus = document.getElementById("newStatus").value;
+                  await db
+                    .collection("orders")
+                    .doc(id)
+                    .update({ status: newStatus });
+                  location.reload();
+                };
+              new bootstrap.Modal("#statusUpdateModal").show();
+            });
+          });
+        }
+
+        function getStatusBadgeClass(status) {
+          switch (status.toLowerCase()) {
+            case "pending":
+              return "status-pending";
+            case "processing":
+              return "status-processing";
+            case "completed":
+              return "status-completed";
+            case "cancelled":
+              return "status-cancelled";
+            default:
+              return "status-pending";
+          }
+        }
+      });
+
+      function logout() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            console.log("✅ Logged out successfully");
+            // Redirect to login/account page
+            window.location.href = "./login.html";
+          })
+          .catch((error) => {
+            console.error("🔥 Logout failed:", error);
+            alert("Failed to logout. Try again.");
+          });
+      }
+    </script>
+  </body>
+</html>

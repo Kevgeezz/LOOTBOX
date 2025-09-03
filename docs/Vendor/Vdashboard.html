@@ -14,10 +14,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
     />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       :root {
         --lootbox-purple: #7c3aed;
         --lootbox-purple-light: #ede9fe;
+        --lootbox-gradient: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
 
       /* Sidebar Styles */
@@ -27,12 +32,18 @@
         position: fixed;
         left: 0;
         top: 0;
-        background: #fff;
+        background: #e9e5ff;
         border-right: 1px solid #e5e7eb;
+        box-shadow: 0px 0px 20px rgb(188 188 188);
+        padding: 1rem;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
       }
 
       .main-content {
         margin-left: 250px;
+        background-color: #f8fafc;
+        min-height: 100vh;
       }
 
       .nav-link {
@@ -56,34 +67,245 @@
       /* Stats Card */
       .stats-card {
         background: white;
-        border-radius: 0.5rem;
+        border-radius: 16px;
         padding: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--card-shadow);
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        height: 100%;
+      }
+
+      .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .stats-card .icon-container {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .stats-card .sales-icon {
+        background-color: rgba(124, 58, 237, 0.1);
+        color: var(--lootbox-purple);
+      }
+
+      .stats-card .orders-icon {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+      }
+
+      .stats-card .customers-icon {
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+      }
+
+      .stats-card .conversion-icon {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+      }
+
+      .stats-card h3 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #1f2937;
       }
 
       .stats-card .trend-up {
         color: #059669;
+        font-weight: 600;
       }
 
       .stats-card .trend-down {
         color: #dc2626;
+        font-weight: 600;
       }
 
-      /* Product Card */
-      .product-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 0.5rem;
+      /* Card Styles */
+      .card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.2s ease;
       }
 
-      .product-card img {
-        aspect-ratio: 1;
+      .card:hover {
+        transform: translateY(-3px);
+      }
+
+      .card-header {
+        background: white;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 1.25rem 1.5rem;
+        border-top-left-radius: 16px !important;
+        border-top-right-radius: 16px !important;
+      }
+
+      .card-header h5 {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0;
+      }
+
+      /* Table Styles */
+      .table th {
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-top: none;
+        background-color: #f9fafb;
+        padding: 1rem 0.75rem;
+      }
+
+      .table td {
+        padding: 1rem 0.75rem;
+        vertical-align: middle;
+      }
+
+      .table-hover tbody tr {
+        transition: all 0.2s ease;
+      }
+
+      .table-hover tbody tr:hover {
+        background-color: #f8f9ff;
+      }
+
+      /* Status Badges */
+      .status-badge {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .status-completed {
+        background-color: #dcfce7;
+        color: #16a34a;
+        border: 1px solid #86efac;
+      }
+
+      .status-processing {
+        background-color: #dbeafe;
+        color: #3b82f6;
+        border: 1px solid #93c5fd;
+      }
+
+      .status-pending {
+        background-color: #fffbeb;
+        color: #f59e0b;
+        border: 1px solid #fcd34d;
+      }
+
+      .status-cancelled {
+        background-color: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+      }
+
+      /* Product Items */
+      .product-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border-radius: 12px;
+        transition: background-color 0.2s ease;
+      }
+
+      .product-item:hover {
+        background-color: #f9fafb;
+      }
+
+      .product-item img {
+        width: 50px;
+        height: 50px;
         object-fit: cover;
-        transition: transform 0.2s;
+        border-radius: 8px;
       }
 
-      .product-card:hover img {
-        transform: scale(1.05);
+      .product-info {
+        flex: 1;
+        margin-left: 1rem;
+      }
+
+      .product-info h6 {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #1f2937;
+      }
+
+      .product-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .product-meta .stock {
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+
+      .product-meta .price {
+        font-weight: 700;
+        color: var(--lootbox-purple);
+      }
+
+      /* Navbar */
+      .navbar {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Buttons */
+      .btn-primary {
+        background: var(--lootbox-gradient);
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+      }
+
+      /* Graph Container */
+      .graph-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+      }
+
+      .graph-controls {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .graph-controls .btn {
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .graph-controls .btn-outline-primary {
+        border-color: var(--lootbox-purple);
+        color: var(--lootbox-purple);
+      }
+
+      .graph-controls .btn-outline-primary.active {
+        background-color: var(--lootbox-purple);
+        color: white;
       }
 
       /* Mobile Responsive */
@@ -101,6 +323,55 @@
         .main-content {
           margin-left: 0;
         }
+
+        .graph-container {
+          height: 250px;
+        }
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c4b5fd;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--lootbox-purple);
+      }
+
+      /* Page header */
+      .page-header h1 {
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      .page-header p {
+        color: #6b7280;
+      }
+
+      /* Animation for numbers */
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .count-animation {
+        animation: countUp 0.5s ease forwards;
       }
     </style>
   </head>
@@ -148,7 +419,7 @@
 
         <div class="mb-4">
           <p class="text-muted small mb-2">ACCOUNT</p>
-          <a href="/vendor/profile" class="nav-link d-flex align-items-center">
+          <a href="./profile.html" class="nav-link d-flex align-items-center">
             <i class="bi bi-person me-2"></i>
             Profile
           </a>
@@ -161,7 +432,8 @@
 
       <div class="mt-auto p-3 border-top">
         <a
-          href="/logout"
+          href="#"
+          onclick="logout()"
           class="nav-link text-danger d-flex align-items-center"
         >
           <i class="bi bi-box-arrow-right me-2"></i>
@@ -191,17 +463,6 @@
           </a>
 
           <div class="d-flex align-items-center gap-3">
-            <div class="position-relative d-none d-md-block">
-              <i
-                class="bi bi-search position-absolute top-50 translate-middle-y ms-3"
-              ></i>
-              <input
-                type="search"
-                class="form-control ps-5"
-                placeholder="Search products..."
-              />
-            </div>
-
             <button class="btn btn-link position-relative">
               <i class="bi bi-bell"></i>
               <span
@@ -214,6 +475,7 @@
             <button class="btn btn-link">
               <i class="bi bi-person-circle"></i>
             </button>
+            <span class="d-none d-md-inline" id="vendorEmail"></span>
           </div>
         </div>
       </nav>
@@ -222,18 +484,15 @@
       <div class="container-fluid py-4">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <div>
+          <div class="page-header">
             <h1 class="h3 mb-1">Dashboard</h1>
             <p class="text-muted">
-              Welcome back! Here's an overview of your store.
+              Welcome back! Here's an overview of your store performance.
             </p>
           </div>
           <button
+            onclick="window.location.href='../Vendor/Vproduct.html'"
             class="btn btn-primary"
-            style="
-              background-color: var(--lootbox-purple);
-              border-color: var(--lootbox-purple);
-            "
           >
             <i class="bi bi-plus-lg me-2"></i>
             Add New Product
@@ -245,17 +504,21 @@
           <!-- Total Sales -->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="stats-card">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="text-muted">Total Sales</span>
-                <i class="bi bi-cart text-muted"></i>
+              <div class="icon-container sales-icon">
+                <i class="bi bi-currency-dollar fs-4"></i>
               </div>
-              <h3 class="mb-1">GH&#8373;10,256.54</h3>
+              <span class="text-muted">Total Sales</span>
+              <h3 class="mb-1 count-animation" data-stat="total-sales">
+                GH₵0.00
+              </h3>
               <p class="mb-0 small">
-                <span class="trend-up">
-                  <i class="bi bi-arrow-up"></i>
-                  12%
+                <span id="growthTrend">
+                  <i id="growthIcon" class="bi"></i>
+                  <span id="growthValue">0%</span>
                 </span>
-                <span class="text-muted ms-1">from last month</span>
+                <span class="text-muted ms-1" id="growthLabel"
+                  >from last month</span
+                >
               </p>
             </div>
           </div>
@@ -263,11 +526,11 @@
           <!-- Orders -->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="stats-card">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="text-muted">Orders</span>
-                <i class="bi bi-bag text-muted"></i>
+              <div class="icon-container orders-icon">
+                <i class="bi bi-bag fs-4"></i>
               </div>
-              <h3 class="mb-1">145</h3>
+              <span class="text-muted">Orders</span>
+              <h3 class="mb-1 count-animation" data-stat="total-orders">0</h3>
               <p class="mb-0 small">
                 <span class="trend-up">
                   <i class="bi bi-arrow-up"></i>
@@ -281,17 +544,15 @@
           <!-- Customers -->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="stats-card">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="text-muted">Customers</span>
-                <i class="bi bi-people text-muted"></i>
+              <div class="icon-container customers-icon">
+                <i class="bi bi-people fs-4"></i>
               </div>
-              <h3 class="mb-1">2,310</h3>
+              <span class="text-muted">Customers</span>
+              <h3 class="mb-1 count-animation" data-stat="total-customers">
+                0
+              </h3>
               <p class="mb-0 small">
-                <span class="trend-up">
-                  <i class="bi bi-arrow-up"></i>
-                  2%
-                </span>
-                <span class="text-muted ms-1">new customers</span>
+                <span class="text-muted">unique buyers</span>
               </p>
             </div>
           </div>
@@ -299,18 +560,66 @@
           <!-- Conversion Rate -->
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="stats-card">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="text-muted">Conversion Rate</span>
-                <i class="bi bi-graph-up text-muted"></i>
+              <div class="icon-container conversion-icon">
+                <i class="bi bi-graph-up fs-4"></i>
               </div>
-              <h3 class="mb-1">3.2%</h3>
+              <span class="text-muted">Conversion Rate</span>
+              <h3 class="mb-1 count-animation" data-stat="conversion-rate">
+                0%
+              </h3>
               <p class="mb-0 small">
-                <span class="trend-down">
-                  <i class="bi bi-arrow-down"></i>
-                  0.4%
-                </span>
-                <span class="text-muted ms-1">from last month</span>
+                <span class="text-muted">of orders completed</span>
               </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales Graph Section -->
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <div class="card">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h5 class="card-title mb-0">Sales Performance</h5>
+                <div class="graph-controls">
+                  <button
+                    class="btn btn-outline-primary active"
+                    data-period="day"
+                    onclick="changeGraphPeriod('day')"
+                  >
+                    Day
+                  </button>
+
+                  <button
+                    class="btn btn-outline-primary"
+                    data-period="week"
+                    onclick="changeGraphPeriod('week')"
+                  >
+                    Week
+                  </button>
+
+                  <button
+                    class="btn btn-outline-primary"
+                    data-period="month"
+                    onclick="changeGraphPeriod('month')"
+                  >
+                    Month
+                  </button>
+                  <button
+                    class="btn btn-outline-primary"
+                    data-period="year"
+                    onclick="changeGraphPeriod('year')"
+                  >
+                    Year
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="graph-container">
+                  <canvas id="salesChart"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -320,52 +629,36 @@
           <!-- Recent Orders -->
           <div class="col-12 col-lg-8">
             <div class="card">
-              <div class="card-header bg-white py-3">
+              <div class="card-header">
                 <h5 class="card-title mb-0">Recent Orders</h5>
               </div>
-              <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                  <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Customer</th>
-                      <th>Date</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>ORD-001</td>
-                      <td>John Smith</td>
-                      <td>2025-04-26</td>
-                      <td>GH&#8373;125.99</td>
-                      <td>
-                        <span class="badge bg-success">Completed</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>ORD-002</td>
-                      <td>Sarah Johnson</td>
-                      <td>2025-04-25</td>
-                      <td>GH&#8373;89.99</td>
-                      <td>
-                        <span class="badge bg-warning text-dark"
-                          >Processing</span
-                        >
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>ORD-003</td>
-                      <td>Mike Williams</td>
-                      <td>2025-04-24</td>
-                      <td>GH&#8373;45.50</td>
-                      <td>
-                        <span class="badge bg-success">Completed</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recent-orders-table">
+                      <tr>
+                        <td colspan="5" class="text-center py-4">
+                          <div
+                            class="spinner-border text-primary"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                          <p class="mt-2 text-muted">Loading orders...</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -374,126 +667,824 @@
           <div class="col-12 col-lg-4">
             <div class="card">
               <div
-                class="card-header bg-white py-3 d-flex justify-content-between align-items-center"
+                class="card-header d-flex justify-content-between align-items-center"
               >
                 <h5 class="card-title mb-0">Top Products</h5>
                 <a
-                  href="#"
+                  href="../Vendor/Vproduct.html"
                   class="text-decoration-none"
                   style="color: var(--lootbox-purple)"
                   >View All</a
                 >
               </div>
-              <div class="card-body">
-                <!-- Product Item -->
-                <div class="d-flex align-items-center mb-3">
-                  <img
-                    src="https://via.placeholder.com/50"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Gaming Mouse</h6>
-                    <div
-                      class="d-flex justify-content-between align-items-center mt-1"
-                    >
-                      <small class="text-muted">15 in stock</small>
-                      <span class="fw-medium">GH&#8373;59.99</span>
-                    </div>
+              <div class="card-body" id="top-products">
+                <div class="text-center py-4">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
                   </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="d-flex align-items-center mb-3">
-                  <img
-                    src="https://via.placeholder.com/50"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Mechanical Keyboard</h6>
-                    <div
-                      class="d-flex justify-content-between align-items-center mt-1"
-                    >
-                      <small class="text-muted">8 in stock</small>
-                      <span class="fw-medium">GH&#8373;129.99</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="d-flex align-items-center">
-                  <img
-                    src="https://via.placeholder.com/50"
-                    class="rounded me-3"
-                    alt="Product"
-                  />
-                  <div class="flex-grow-1">
-                    <h6 class="mb-0">Gaming Headset</h6>
-                    <div
-                      class="d-flex justify-content-between align-items-center mt-1"
-                    >
-                      <small class="text-muted">Out of stock</small>
-                      <span class="fw-medium">GH&#8373;89.99</span>
-                    </div>
-                  </div>
+                  <p class="mt-2 text-muted">Loading products...</p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Featured Products -->
-        <div class="mt-4">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="mb-0">Featured Products</h5>
-            <a
-              href="#"
-              class="text-decoration-none"
-              style="color: var(--lootbox-purple)"
-              >View All Products</a
-            >
-          </div>
-
-          <div class="row g-4">
-            <!-- Product Card -->
-            <div class="col-12 col-sm-6 col-lg-3">
-              <div class="card product-card">
-                <img
-                  src="https://via.placeholder.com/300"
-                  class="card-img-top"
-                  alt="Product"
-                />
-                <div class="card-body">
-                  <h6 class="card-title mb-1">Gaming Mouse</h6>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <small class="text-muted">15 in stock</small>
-                    <span class="fw-bold">GH&#8373;59.99</span>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top-0 pt-0">
-                  <button class="btn btn-outline-secondary w-100">
-                    <i class="bi bi-pencil me-2"></i>
-                    Edit
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- More Product Cards -->
-            <!-- Copy the above product card structure for more products -->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-storage-compat.js"></script>
+
     <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+        authDomain: "lootbox-vproduct.firebaseapp.com",
+        projectId: "lootbox-vproduct",
+        storageBucket: "lootbox-vproduct.firebasestorage.app",
+        messagingSenderId: "753114136209",
+        appId: "1:753114136209:web:75f2b96440b32c04c70930",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Chart.js variables
+      let salesChart;
+      let currentPeriod = "day";
+
+      // Auth state observer
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          document.getElementById("vendorEmail").textContent = user.email;
+          loadDashboardData(user.uid);
+          listenToOrderUpdates(user.uid);
+        } else {
+          // For demo purposes, we'll use mock data instead of redirecting
+          console.log("No user logged in, using mock data for demo");
+          loadMockData();
+        }
+      });
+
+      function listenToOrderUpdates(vendorId) {
+        db.collection("orders")
+          .where("vendorId", "==", vendorId)
+          .orderBy("createdAt", "desc")
+          .onSnapshot((snapshot) => {
+            let totalSales = 0;
+            let totalOrders = 0;
+            let completed = 0,
+              processing = 0,
+              cancelled = 0;
+            const orders = [];
+
+            snapshot.forEach((doc) => {
+              const order = { id: doc.id, ...doc.data() };
+              orders.push(order);
+
+              const revenue = (order.price || 0) * (order.quantity || 1);
+              totalOrders++;
+
+              // ✅ Only count revenue if order is completed
+              const status = order.status?.toLowerCase() || "pending";
+              if (status === "completed") {
+                completed++;
+                totalSales += revenue;
+              } else if (status === "processing" || status === "pending") {
+                processing++;
+              } else if (status === "cancelled") {
+                cancelled++;
+              }
+            });
+
+            // --- Update dashboard stats ---
+            document.querySelector(
+              '[data-stat="total-sales"]'
+            ).textContent = `GH₵${totalSales.toFixed(2)}`;
+            document.querySelector('[data-stat="total-orders"]').textContent =
+              totalOrders;
+
+            // --- Update recent orders table ---
+            const recentOrders = orders.slice(0, 5);
+            const ordersTableBody = document.querySelector(
+              "#recent-orders-table"
+            );
+            ordersTableBody.innerHTML = recentOrders
+              .map((order) => {
+                const revenue = (order.price || 0) * (order.quantity || 1);
+                const date = order.createdAt?.toDate
+                  ? order.createdAt.toDate().toLocaleDateString()
+                  : "";
+                return `
+                <tr>
+                  <td class="fw-semibold">#${order.id
+                    .slice(0, 8)
+                    .toUpperCase()}</td>
+                  <td>${order.buyerId || "Guest"}</td>
+                  <td><span class="text-muted small">${date}</span></td>
+                  <td class="fw-bold">GH₵ ${revenue.toFixed(2)}</td>
+                  <td><span class="status-badge status-${(
+                    order.status || "pending"
+                  ).toLowerCase()}">${order.status || "Pending"}</span></td>
+                </tr>
+              `;
+              })
+              .join("");
+
+            // --- Update top products (based on completed orders only) ---
+            const productSales = {};
+            orders.forEach((order) => {
+              const status = order.status?.toLowerCase() || "pending";
+              if (status !== "completed") return; // ✅ only completed orders count
+
+              const revenue = (order.price || 0) * (order.quantity || 1);
+              if (!productSales[order.productId]) {
+                productSales[order.productId] = {
+                  name: order.productName,
+                  image: order.image || "https://placehold.co/50x50",
+                  quantity: 0,
+                  revenue: 0,
+                };
+              }
+              productSales[order.productId].quantity += order.quantity || 1;
+              productSales[order.productId].revenue += revenue;
+            });
+
+            const topProducts = Object.values(productSales)
+              .sort((a, b) => b.revenue - a.revenue)
+              .slice(0, 3);
+
+            const topProductsContainer =
+              document.querySelector("#top-products");
+            if (topProducts.length > 0) {
+              topProductsContainer.innerHTML = topProducts
+                .map(
+                  (p) => `
+                <div class="product-item">
+                  <img src="${p.image}" alt="${p.name}">
+                  <div class="product-info">
+                    <h6>${p.name}</h6>
+                    <div class="product-meta">
+                      <span class="stock">${p.quantity} sold</span>
+                      <span class="price">GH₵ ${p.revenue.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+              `
+                )
+                .join("");
+            } else {
+              topProductsContainer.innerHTML = `
+                <div class="text-center py-3">
+                  <i class="bi bi-box text-muted display-6"></i>
+                  <p class="text-muted mt-2">No products sold yet</p>
+                </div>
+              `;
+            }
+
+            // Update the sales chart with new data
+            updateSalesChart(orders, currentPeriod);
+          });
+      }
+
+      async function loadDashboardData(vendorId) {
+        console.log("Loading dashboard data for vendor:", vendorId);
+        try {
+          // Get products
+          const productsSnapshot = await db
+            .collection("products")
+            .where("vendorId", "==", vendorId)
+            .get();
+
+          console.log("Products found:", productsSnapshot.size);
+
+          // Get orders
+          const ordersSnapshot = await db
+            .collection("orders")
+            .where("vendorId", "==", vendorId)
+            .get();
+
+          console.log("Orders found:", ordersSnapshot.size);
+
+          // --- Metrics ---
+          const totalProducts = productsSnapshot.size;
+          let totalSales = 0;
+          let totalOrders = ordersSnapshot.size;
+          const uniqueCustomers = new Set();
+          let completedOrders = 0;
+
+          ordersSnapshot.forEach((doc) => {
+            const order = doc.data();
+
+            // Track unique buyers
+            if (order.buyerId) {
+              uniqueCustomers.add(order.buyerId);
+            }
+
+            // ✅ Only completed orders count toward sales
+            if (order.status?.toLowerCase() === "completed") {
+              completedOrders++;
+              totalSales += (order.price || 0) * (order.quantity || 1);
+            }
+          });
+
+          // --- Update stats on dashboard ---
+          document.querySelector(
+            '[data-stat="total-sales"]'
+          ).textContent = `GH₵${totalSales.toFixed(2)}`;
+          document.querySelector('[data-stat="total-orders"]').textContent =
+            totalOrders;
+          document.querySelector('[data-stat="total-customers"]').textContent =
+            uniqueCustomers.size;
+
+          // Update Conversion Rate card
+          const conversionRate =
+            totalOrders > 0 ? (completedOrders / totalOrders) * 100 : 0;
+          document.querySelector('[data-stat="conversion-rate"]').textContent =
+            conversionRate.toFixed(1) + "%";
+
+          // --- Growth Trend (Month over Month) ---
+          const ordersWithRevenue = ordersSnapshot.docs.map((doc) => {
+            const data = doc.data();
+            const revenue = (data.price || 0) * (data.quantity || 1);
+            const date = data.createdAt?.toDate
+              ? data.createdAt.toDate()
+              : new Date();
+            return { ...data, revenue, date };
+          });
+          calculateGrowth(ordersWithRevenue);
+
+          // --- Top Products (by sales field) ---
+          const topProducts = productsSnapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => (b.sales || 0) - (a.sales || 0))
+            .slice(0, 3);
+
+          const topProductsContainer = document.querySelector("#top-products");
+          if (topProducts.length > 0) {
+            topProductsContainer.innerHTML = topProducts
+              .map(
+                (product) => `
+                <div class="product-item">
+                  <img src="${
+                    product.image || "https://via.placeholder.com/50"
+                  }"
+                      alt="${product.name}">
+                  <div class="product-info">
+                    <h6>${product.name}</h6>
+                    <div class="product-meta">
+                      <span class="stock">${product.stock} in stock</span>
+                      <span class="price">GH₵${product.price}</span>
+                    </div>
+                  </div>
+                </div>
+              `
+              )
+              .join("");
+          } else {
+            topProductsContainer.innerHTML = `
+              <div class="text-center py-3">
+                <i class="bi bi-box text-muted display-6"></i>
+                <p class="text-muted mt-2">No products added yet</p>
+              </div>
+            `;
+          }
+
+          // --- Recent Orders ---
+          const recentOrders = ordersSnapshot.docs
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => {
+              const dateA = a.createdAt?.toDate
+                ? a.createdAt.toDate().getTime()
+                : 0;
+              const dateB = b.createdAt?.toDate
+                ? b.createdAt.toDate().getTime()
+                : 0;
+              return dateB - dateA;
+            })
+            .slice(0, 5);
+
+          const ordersTableBody = document.querySelector(
+            "#recent-orders-table"
+          );
+          if (recentOrders.length > 0) {
+            ordersTableBody.innerHTML = recentOrders
+              .map((order) => {
+                const revenue = (order.price || 0) * (order.quantity || 1);
+                const date = order.createdAt?.toDate
+                  ? order.createdAt.toDate().toLocaleDateString()
+                  : "";
+                return `
+                  <tr>
+                    <td class="fw-semibold">#${order.id
+                      .slice(0, 8)
+                      .toUpperCase()}</td>
+                    <td>${order.buyerId || "Guest"}</td>
+                    <td><span class="text-muted small">${date}</span></td>
+                    <td class="fw-bold">GH₵${revenue.toFixed(2)}</td>
+                    <td>
+                      <span class="status-badge status-${(
+                        order.status || "pending"
+                      ).toLowerCase()}">
+                        ${order.status || "Pending"}
+                      </span>
+                    </td>
+                  </tr>
+                `;
+              })
+              .join("");
+          } else {
+            ordersTableBody.innerHTML = `
+              <tr>
+                <td colspan="5" class="text-center py-4">
+                  <i class="bi bi-cart-x text-muted display-6"></i>
+                  <p class="text-muted mt-2">No orders yet</p>
+                </td>
+              </tr>
+            `;
+          }
+
+          // Initialize the sales chart
+          const ordersData = ordersSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          initSalesChart(ordersData);
+        } catch (error) {
+          console.error("Error loading dashboard data:", error);
+          // If there's an error, load mock data for demo purposes
+          loadMockData();
+        }
+      }
+
+      // Initialize the sales chart
+      function initSalesChart(ordersData) {
+        const ctx = document.getElementById("salesChart").getContext("2d");
+
+        // Process data for the chart
+        const chartData = processChartData(ordersData, currentPeriod);
+
+        // ✅ Destroy the old chart before making a new one
+        if (salesChart) {
+          salesChart.destroy();
+        }
+
+        salesChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: chartData.labels,
+            datasets: [
+              {
+                label: "Sales (GH₵)",
+                data: chartData.values,
+                borderColor: "#7c3aed",
+                backgroundColor: "rgba(124, 58, 237, 0.1)",
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: "#7c3aed",
+                pointBorderColor: "#fff",
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                mode: "index",
+                intersect: false,
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                callbacks: {
+                  label: function (context) {
+                    return `GH₵ ${context.raw.toFixed(2)}`;
+                  },
+                },
+              },
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: "#6b7280" },
+              },
+              y: {
+                beginAtZero: true,
+                grid: { color: "rgba(0, 0, 0, 0.05)" },
+                ticks: {
+                  color: "#6b7280",
+                  callback: (value) => "GH₵ " + value,
+                },
+              },
+            },
+            interaction: { intersect: false, mode: "index" },
+          },
+        });
+      }
+
+      // Process order data for the chart based on selected period
+      function processChartData(orders, period) {
+        // Filter only completed orders
+        const completedOrders = orders.filter(
+          (order) => order.status?.toLowerCase() === "completed"
+        );
+
+        // Calculate revenue for each order
+        const ordersWithRevenue = completedOrders.map((order) => {
+          const revenue = (order.price || 0) * (order.quantity || 1);
+          const date = order.createdAt?.toDate
+            ? order.createdAt.toDate()
+            : new Date();
+          return {
+            ...order,
+            revenue,
+            date,
+          };
+        });
+
+        let labels = [];
+        let values = [];
+
+        if (period === "week") {
+          // Last 7 days
+          labels = [];
+          values = Array(7).fill(0);
+
+          const today = new Date();
+          for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            labels.push(date.toLocaleDateString("en-US", { weekday: "short" }));
+
+            // Find orders for this day
+            const dayOrders = ordersWithRevenue.filter((order) => {
+              const orderDate = order.date;
+              return (
+                orderDate.getDate() === date.getDate() &&
+                orderDate.getMonth() === date.getMonth() &&
+                orderDate.getFullYear() === date.getFullYear()
+              );
+            });
+
+            // Sum revenue for this day
+            values[6 - i] = dayOrders.reduce(
+              (sum, order) => sum + order.revenue,
+              0
+            );
+          }
+        } else if (period === "month") {
+          // Last 30 days
+          labels = [];
+          values = Array(30).fill(0);
+
+          const today = new Date();
+          for (let i = 29; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            labels.push(date.getDate().toString());
+
+            // Find orders for this day
+            const dayOrders = ordersWithRevenue.filter((order) => {
+              const orderDate = order.date;
+              return (
+                orderDate.getDate() === date.getDate() &&
+                orderDate.getMonth() === date.getMonth() &&
+                orderDate.getFullYear() === date.getFullYear()
+              );
+            });
+
+            // Sum revenue for this day
+            values[29 - i] = dayOrders.reduce(
+              (sum, order) => sum + order.revenue,
+              0
+            );
+          }
+        } else if (period === "year") {
+          // Last 12 months
+          labels = [];
+          values = Array(12).fill(0);
+
+          const today = new Date();
+          for (let i = 11; i >= 0; i--) {
+            const date = new Date(today);
+            date.setMonth(date.getMonth() - i);
+            labels.push(date.toLocaleDateString("en-US", { month: "short" }));
+
+            // Find orders for this month
+            const monthOrders = ordersWithRevenue.filter((order) => {
+              const orderDate = order.date;
+              return (
+                orderDate.getMonth() === date.getMonth() &&
+                orderDate.getFullYear() === date.getFullYear()
+              );
+            });
+
+            // Sum revenue for this month
+            values[11 - i] = monthOrders.reduce(
+              (sum, order) => sum + order.revenue,
+              0
+            );
+          }
+        } else if (period === "day") {
+          // Today’s 24 hours
+          labels = [];
+          values = Array(24).fill(0);
+
+          const today = new Date();
+
+          for (let h = 0; h < 24; h++) {
+            labels.push(h + ":00"); // "0:00", "1:00", etc.
+
+            // Find orders for this hour
+            const hourOrders = ordersWithRevenue.filter((order) => {
+              const orderDate = order.date;
+              return (
+                orderDate.getDate() === today.getDate() &&
+                orderDate.getMonth() === today.getMonth() &&
+                orderDate.getFullYear() === today.getFullYear() &&
+                orderDate.getHours() === h
+              );
+            });
+
+            // Sum revenue for this hour
+            values[h] = hourOrders.reduce(
+              (sum, order) => sum + order.revenue,
+              0
+            );
+          }
+        }
+
+        return { labels, values };
+      }
+
+      // Update the chart with new data
+      function updateSalesChart(orders, period) {
+        const chartData = processChartData(orders, period);
+
+        if (!salesChart) {
+          // Create the chart once
+          initSalesChart(orders);
+        } else {
+          // Just update it
+          salesChart.data.labels = chartData.labels;
+          salesChart.data.datasets[0].data = chartData.values;
+          salesChart.update();
+        }
+      }
+
+      // Change the graph period
+      function changeGraphPeriod(period) {
+        currentPeriod = period;
+
+        // Update active button
+        document.querySelectorAll(".graph-controls .btn").forEach((btn) => {
+          btn.classList.remove("active");
+          if (btn.getAttribute("data-period") === period) {
+            btn.classList.add("active");
+          }
+        });
+
+        // Update chart with new period
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // Re-fetch data for the selected period
+            db.collection("orders")
+              .where("vendorId", "==", user.uid)
+              .get()
+              .then((snapshot) => {
+                const orders = snapshot.docs.map((doc) => ({
+                  id: doc.id,
+                  ...doc.data(),
+                }));
+                updateSalesChart(orders, period);
+              });
+          } else {
+            // For demo purposes, use mock data
+            updateSalesChart([], period);
+          }
+        });
+      }
+
+      // Mock data for demo purposes
+      function loadMockData() {
+        console.log("Loading mock data for demo");
+
+        // Mock stats
+        document.querySelector('[data-stat="total-sales"]').textContent =
+          "GH₵1,245.80";
+        document.querySelector('[data-stat="total-orders"]').textContent = "24";
+        document.querySelector('[data-stat="total-customers"]').textContent =
+          "18";
+        document.querySelector('[data-stat="conversion-rate"]').textContent =
+          "75%";
+
+        // Mock recent orders
+        const mockOrders = [
+          {
+            id: "ord12345",
+            buyerId: "user456",
+            createdAt: { toDate: () => new Date() },
+            price: 29.99,
+            quantity: 1,
+            status: "completed",
+          },
+          {
+            id: "ord12346",
+            buyerId: "user789",
+            createdAt: { toDate: () => new Date(Date.now() - 86400000) },
+            price: 49.99,
+            quantity: 2,
+            status: "processing",
+          },
+          {
+            id: "ord12347",
+            buyerId: "user101",
+            createdAt: { toDate: () => new Date(Date.now() - 172800000) },
+            price: 19.99,
+            quantity: 1,
+            status: "pending",
+          },
+          {
+            id: "ord12348",
+            buyerId: "user112",
+            createdAt: { toDate: () => new Date(Date.now() - 259200000) },
+            price: 79.99,
+            quantity: 1,
+            status: "completed",
+          },
+          {
+            id: "ord12349",
+            buyerId: "user131",
+            createdAt: { toDate: () => new Date(Date.now() - 345600000) },
+            price: 14.99,
+            quantity: 3,
+            status: "cancelled",
+          },
+        ];
+
+        const ordersTableBody = document.querySelector("#recent-orders-table");
+        ordersTableBody.innerHTML = mockOrders
+          .map((order) => {
+            const revenue = (order.price || 0) * (order.quantity || 1);
+            const date = order.createdAt.toDate().toLocaleDateString();
+            return `
+              <tr>
+                <td class="fw-semibold">#${order.id
+                  .slice(0, 8)
+                  .toUpperCase()}</td>
+                <td>${order.buyerId}</td>
+                <td><span class="text-muted small">${date}</span></td>
+                <td class="fw-bold">GH₵${revenue.toFixed(2)}</td>
+                <td><span class="status-badge status-${order.status.toLowerCase()}">${
+              order.status
+            }</span></td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        // Mock top products
+        const mockProducts = [
+          {
+            id: "prod1",
+            name: "Gaming Headset",
+            image: "https://placehold.co/50x50",
+            stock: 15,
+            price: "49.99",
+          },
+          {
+            id: "prod2",
+            name: "Wireless Mouse",
+            image: "https://placehold.co/50x50",
+            stock: 22,
+            price: "29.99",
+          },
+          {
+            id: "prod3",
+            name: "Mechanical Keyboard",
+            image: "https://placehold.co/50x50",
+            stock: 8,
+            price: "79.99",
+          },
+        ];
+
+        const topProductsContainer = document.querySelector("#top-products");
+        topProductsContainer.innerHTML = mockProducts
+          .map(
+            (product) => `
+            <div class="product-item">
+              <img src="${product.image}" alt="${product.name}">
+              <div class="product-info">
+                <h6>${product.name}</h6>
+                <div class="product-meta">
+                  <span class="stock">${product.stock} in stock</span>
+                  <span class="price">GH₵${product.price}</span>
+                </div>
+              </div>
+            </div>
+          `
+          )
+          .join("");
+
+        // Initialize chart with mock data
+        initSalesChart(mockOrders);
+      }
+
+      // Toggle sidebar on mobile
       function toggleSidebar() {
-        document.getElementById("sidebar").classList.toggle("show");
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("show");
+      }
+
+      // Logout function
+      function logout() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            window.location.href = "../index.html";
+          })
+          .catch((error) => {
+            console.error("Logout error:", error);
+          });
+      }
+
+      // Initialize dashboard when page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if user is logged in
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            console.log("User is logged in:", user.email);
+            document.getElementById("vendorEmail").textContent = user.email;
+            loadDashboardData(user.uid);
+          } else {
+            console.log("No user is logged in, using mock data");
+            loadMockData();
+          }
+        });
+      });
+
+      function calculateGrowth(orders) {
+        const now = new Date();
+        const today = now.getDate();
+        const yesterday = new Date(now);
+        yesterday.setDate(today - 1);
+
+        // Revenue for today
+        const todayRevenue = orders.reduce((sum, order) => {
+          const d = order.date;
+          if (
+            d.getDate() === now.getDate() &&
+            d.getMonth() === now.getMonth() &&
+            d.getFullYear() === now.getFullYear()
+          ) {
+            return sum + order.revenue;
+          }
+          return sum;
+        }, 0);
+
+        // Revenue for yesterday
+        const yesterdayRevenue = orders.reduce((sum, order) => {
+          const d = order.date;
+          if (
+            d.getDate() === yesterday.getDate() &&
+            d.getMonth() === yesterday.getMonth() &&
+            d.getFullYear() === yesterday.getFullYear()
+          ) {
+            return sum + order.revenue;
+          }
+          return sum;
+        }, 0);
+
+        // Percentage change
+        let growth = 0;
+        if (yesterdayRevenue > 0) {
+          growth = ((todayRevenue - yesterdayRevenue) / yesterdayRevenue) * 100;
+        }
+
+        // Update DOM
+        const growthValueEl = document.getElementById("growthValue");
+        const growthTrendEl = document.getElementById("growthTrend");
+        const growthIconEl = document.getElementById("growthIcon");
+        const growthLabelEl = document.getElementById("growthLabel");
+
+        growthValueEl.textContent = `${growth.toFixed(1)}%`;
+
+        if (growth >= 0) {
+          growthTrendEl.className = "trend-up";
+          growthIconEl.className = "bi bi-arrow-up";
+        } else {
+          growthTrendEl.className = "trend-down";
+          growthIconEl.className = "bi bi-arrow-down";
+        }
+
+        // 👇 Change label
+        growthLabelEl.textContent = "from yesterday";
       }
     </script>
   </body>

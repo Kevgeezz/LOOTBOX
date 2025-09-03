@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lootbox Vendor - Products</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+
+      <!-- Google Fonts ================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+          <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet">
+
+
+      <!--  Google Fonts (Mine) -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+ <!--  Font Awesome -->
+ <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+ <script src="https://kit.fontawesome.com/a8b3cd8f70.js" crossorigin="anonymous"></script>
+
+    <!--Link Swiper's CSS ================================================== -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+
+
+    <style>
+
+ 
+.delete-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(206 23 23);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.delete-svgIcon {
+  width: 15px;
+  transition-duration: 0.3s;
+}
+
+.delete-svgIcon path {
+  fill: white;
+}
+
+.delete-button:hover {
+  width: 90px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.delete-button:hover .delete-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.delete-button::before {
+  display: none;
+  content: "Delete";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.delete-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+
+.edit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(115 59 161);;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.edit-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.edit-svgIcon path {
+  fill: white;
+}
+
+.edit-button:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(115 59 161);;
+  align-items: center;
+}
+
+.edit-button:hover .edit-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.edit-button::before {
+  display: none;
+  content: "Edit";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.edit-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+
+
+      .buttons {
+        display: flex;
+        justify-content: space-around;
+        top: 20px;
+        left: 10px;
+      }
+
+      .buttons button {
+        width: 150px;
+        height: 50px;
+        margin-bottom: 20px;
+        color: black;
+        position: relative;
+        /*left: 80%;*/
+        overflow: hidden;
+        font-size: 18px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 3px solid #44d8a4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+
+      .buttons button:before,
+      .buttons button:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: #44d8a4;
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .buttons button:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .buttons button:after {
+        left: 0;
+        bottom: 0;
+      }
+
+      .buttons button span {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+      }
+
+      .buttons button span:before,
+      .buttons button span:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 0;
+        background-color: #44d8a4;
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .buttons button span:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .buttons button span:after {
+        left: 0;
+        bottom: 0;
+      }
+
+      .buttons button p {
+        padding: 0;
+        margin: 0;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .buttons button p:before,
+      .buttons button p:after {
+        position: absolute;
+        width: 100%;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        z-index: 1;
+        left: 0;
+      }
+
+      .buttons button p:before {
+        content: attr(data-title);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .buttons button p:after {
+        content: attr(data-text);
+        top: 150%;
+        color: #44d8a4;
+      }
+
+      .buttons button:hover:before,
+      .buttons button:hover:after {
+        width: 100%;
+      }
+
+      .buttons button:hover span {
+        z-index: 1;
+      }
+
+      .buttons button:hover span:before,
+      .buttons button:hover span:after {
+        height: 100%;
+      }
+
+      .buttons button:hover p:before {
+        top: -50%;
+        transform: rotate(5deg);
+      }
+
+      .buttons button:hover p:after {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .buttons button.start {
+        background-color: #44d8a4;
+        box-shadow: 0px 5px 10px -10px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .buttons button.start p:before {
+        top: -50%;
+        transform: rotate(5deg);
+      }
+
+      .buttons button.start p:after {
+        color: white;
+        transition: all 0s ease;
+        content: attr(data-start);
+        top: 50%;
+        transform: translateY(-50%);
+        animation: start 0.3s ease;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes start {
+        from {
+          top: -50%;
+        }
+      }
+
+      .buttons button.start:hover:before,
+      .buttons button.start:hover:after {
+        display: none;
+      }
+
+      .buttons button.start:hover span {
+        display: none;
+      }
+
+      .buttons button:active {
+        outline: none;
+        border: none;
+      }
+
+      .buttons button:focus {
+        outline: 0;
+      }
+
+      :root {
+        --lootbox-purple: #7c3aed;
+      }
+      .navbar-brand {
+        font-family: "Monoton", cursive;
+        font-size: 1.5rem;
+        font-weight: 400;
+        /* background: rgba(0, 0, 0, 0.6);  Black background with 0.5 opacity */
+        color: black;
+        text-align: center;
+      }
+
+      .navtext {
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 5px;
+      }
+
+      .logo {
+        width: 50px;
+        margin-top: 1px;
+        margin-bottom: 10px;
+      }
+      /* Sidebar Styles */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background:#e9e5ff;
+        border-right: 1px solid #e5e7eb;
+        box-shadow: 0px 0px 20px rgb(188 188 188);
+        padding: 1rem;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+      }
+
+      .main-content {
+        margin-left: 250px;
+      }
+
+      .nav-link {
+        color: #64748b;
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        margin: 0.25rem 0;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background-color: var(--lootbox-purple-light);
+        color: var(--lootbox-purple);
+      }
+
+      .nav-link.active {
+        background-color: var(--lootbox-purple);
+        color: white;
+      }
+
+      /* Product Card */
+      .product-card {
+        height: 100%;
+      }
+
+      .product-card .img-container {
+        position: relative;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        overflow: hidden;
+      }
+
+      .product-card .img-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover .img-container img {
+        transform: scale(1.05);
+      }
+
+      .product-card .status-badge {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        z-index: 1;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+          z-index: 1000;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.show {
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+      }
+
+        .money {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: green;
+        }
+
+
+        h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--black-color);
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.product-item {
+  transition: transform 0.2s;
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 8px;
+   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+    
+.sidebar-link {
+ 
+  color: black;
+  
+}
+
+.sidebar-link:hover {
+  background: rgba(173, 58, 58, 0.1);
+}
+
+    </style>
+
+
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  </head>
+  <body onload="initPage() ">
+    <!-- Sidebar (Same as previous pages) -->
+    <nav class="sidebar" id="sidebar">
+      <div
+        class="p-3 border-bottom d-flex justify-content-between align-items-center"
+      >
+        <span class="fw-semibold">Vendor Panel</span>
+        <button class="btn btn-link d-md-none" onclick="toggleSidebar()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-3">
+        <div class="mb-4">
+          <p class="text-muted small mb-2">DASHBOARD</p>
+          <a
+            href="../Vendor/Vdashboard.html"
+            class="nav-link d-flex align-items-center sidebar-link"
+          >
+            <i class="bi bi-shop me-2"></i>
+            Overview
+          </a>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-muted small mb-2">CATALOG</p>
+          <a
+            href="../Vendor/Vproduct.html"
+            class="nav-link active d-flex align-items-center sidebar-link"
+          >
+            <i class="bi bi-box me-2"></i>
+            Products
+          </a>
+          <a
+            href="../Vendor/Vorders.html"
+            class="nav-link d-flex align-items-center sidebar-link"
+          >
+            <i class="bi bi-cart me-2"></i>
+            Orders
+          </a>
+        </div>
+
+        <div class="mb-4">
+          <p class="text-muted small mb-2">ACCOUNT</p>
+          <a href="./profile.html" class="nav-link d-flex align-items-center sidebar-link">
+            <i class="bi bi-person me-2"></i>
+            Profile
+          </a>
+          <a href="/vendor/settings" class="nav-link d-flex align-items-center sidebar-link">
+            <i class="bi bi-gear me-2"></i>
+            Settings
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-auto p-3 border-top">
+        <a
+          href="#"
+          onclick="logout()"
+          class="nav-link text-danger d-flex align-items-center sidebar-link"
+        >
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Logout
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4"
+      >
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler border-0 d-md-none"
+            type="button"
+            onclick="toggleSidebar()"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <a class="navbar-brand d-flex align-items-center" href="/vendor">
+            <img
+              src="../images/cart.png"
+              alt="Logo"
+              width="30"
+              height="50"
+              class="logo d-inline-block align-text-center"
+            />
+            <p class="navtext">LOOTBOX</p>
+          </a>
+
+          <li class="nav-item me-5 dropdown">
+            <div class="buttons">
+              <a
+                class="nav-link nav-link-ltr text-white pb-1 pe-"
+                href="../index.html"
+                role="button"
+                aria-expanded="false"
+              >
+                <button class="btn">
+                  <span></span>
+                  <p
+                    data-start="good luck!"
+                    data-text="BUY"
+                    data-title="RETURN TO SHOP"
+                  ></p>
+                </button>
+              </a>
+            </div>
+          </li>
+
+          <div class="d-flex align-items-center gap-3">
+            <div class="position-relative d-none d-md-block">
+              <i
+                class="bi bi-search position-absolute top-50 translate-middle-y ms-3"
+              ></i>
+              <input
+                type="search"
+                class="form-control ps-5"
+                placeholder="Search products..."
+              />
+            </div>
+
+            <button class="btn btn-link position-relative">
+              <i class="bi bi-bell"></i>
+              <span
+                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+              >
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
+
+            <button class="btn btn-link">
+              <i class="bi bi-person-circle"></i>
+            </button>
+
+            <span id="vendorEmail" class="text-muted small"></span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container-fluid py-4">
+        <!-- Header -->
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-4 mb-4"
+        >
+          <div>
+            <h1 class="h3 mb-1">Products</h1>
+            <p class="text-muted mb-0">Manage your product catalog</p>
+          </div>
+          <button
+            class="btn btn-primary"
+            style="background-color: var(--lootbox-purple)"
+            data-bs-toggle="modal"
+            data-bs-target="#productModal"
+          >
+            <i class="bi bi-plus-lg me-2"></i>Add New Product
+          </button>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="position-relative">
+              <i
+                class="bi bi-search position-absolute top-50 translate-middle-y ms-3"
+              ></i>
+              <input
+                type="search"
+                class="form-control ps-5"
+                placeholder="Search products..."
+              />
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-auto ms-md-auto">
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-secondary d-flex align-items-center"
+              >
+                <i class="bi bi-funnel me-2"></i>
+                Filter
+              </button>
+              <select class="form-select">
+                <option>All products</option>
+                <option>Active</option>
+                <option>Draft</option>
+                <option>Out of stock</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="row g-4">
+          <!-- Product Card 
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+                  alt="Gaming Mouse"
+                />
+                <span class="badge bg-success status-badge">Active</span>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title mb-1">Gaming Mouse</h6>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-1"
+                >
+                  <span class="fw-bold">$59.99</span>
+                  <small class="text-muted">15 in stock</small>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0 pt-0">
+                <button class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-pencil me-2"></i>
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+
+           Product Card 
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+                  alt="Mechanical Keyboard"
+                />
+                <span class="badge bg-success status-badge">Active</span>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title mb-1">Mechanical Keyboard</h6>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-1"
+                >
+                  <span class="fw-bold">$129.99</span>
+                  <small class="text-muted">8 in stock</small>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0 pt-0">
+                <button class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-pencil me-2"></i>
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+
+           Product Card 
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card product-card">
+              <div class="img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+                  alt="Gaming Headset"
+                />
+                <span class="badge bg-danger status-badge">Out of Stock</span>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title mb-1">Gaming Headset</h6>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-1"
+                >
+                  <span class="fw-bold">$89.99</span>
+                  <small class="text-muted">0 in stock</small>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0 pt-0">
+                <button class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-pencil me-2"></i>
+                  Edit
+                </button>
+              </div>
+            </div>-->
+          </div>
+
+          <!-- More Product Cards -->
+          <!-- Copy the above product card structure for more products -->
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-4">
+          <button class="btn btn-outline-secondary">Load More</button>
+        </div>
+
+        <!-- Add Product Modal -->
+        <div
+          class="modal fade"
+          id="productModal"
+          tabindex="-1"
+          aria-labelledby="productModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <form id="productForm">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="productModalLabel">
+                    Add Product
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Product Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="productName"
+                      placeholder="Enter product name"
+                      required
+                    />
+                  </div>
+
+<div class="col-12">
+  <label class="form-label">Description</label>
+  <textarea class="form-control" id="productDescription" placeholder="Enter product description"></textarea>
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Category</label>
+  <input type="text" class="form-control" id="productCategory" placeholder="e.g. Electronics" />
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Brand</label>
+  <input type="text" class="form-control" id="productBrand" placeholder="e.g. Samsung, Apple..." />
+</div>
+
+
+
+                  <div class="col-md-6">
+                    <label class="form-label">Price</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="productPrice"
+                      placeholder="Enter price"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Stock</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="productStock"
+                      placeholder="Enter stock quantity"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                    <label class="form-label">Upload Product Image: </label>
+                  
+                    <img
+                      id="productImagePreview"
+                      src=""
+                      alt="Preview"
+                      class="img-fluid mb-2"
+                      style="max-height: 100px;
+    object-fit: cover;
+    border: 4px solid #a25ad9;
+    border-radius: 30px;
+    margin-left: 40px;"
+                    />
+                  </div>
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="productImageFile"
+                      accept="image/*"
+                      
+                    />
+                  </div>
+                  
+                  <input type="hidden" id="existingImage" />
+
+                  <div class="col-12">
+                    <label class="form-label">Status</label>
+
+                    <select class="form-select" id="productStatus" required placeholder="Select status">
+                      <option value="Active">Active</option>
+                      <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="hidden" id="productIndex" />
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Product
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("show");
+      }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-storage-compat.js"></script>
+
+
+    <script>
+      //  Firebase config )
+      const firebaseConfig = {
+        apiKey: "AIzaSyB9jxnU1G6WgE6rRKI_IufJ-abQNE-v7dk",
+        authDomain: "lootbox-vproduct.firebaseapp.com",
+        projectId: "lootbox-vproduct",
+        storageBucket: "lootbox-vproduct.firebasestorage.app",
+        messagingSenderId: "753114136209",
+        appId: "1:753114136209:web:75f2b96440b32c04c70930",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      const productsCollection = db.collection("products");
+
+      // Check if user is logged in
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          console.log("Vendor:", user.email);
+          // Optionally inject into HTML
+          document.getElementById("vendorEmail").textContent = user.email;
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+       
+function showToast(message, type = "success") {
+  const toastEl = document.getElementById("toastBox");
+  const toastBody = document.getElementById("toastMessage");
+
+  toastBody.textContent = message;
+
+  // Change color based on type
+  toastEl.classList.remove("bg-success", "bg-danger", "bg-warning");
+  toastEl.classList.add(`bg-${type}`);
+
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
+
+
+    </script>
+
+    <script>
+      async function loadProducts() {
+        const snapshot = await productsCollection.get();
+        products = snapshot.docs.map((doc) => ({
+           id: doc.id,//Ensures the Firestore doc ID is included
+            ...doc.data()
+            }));
+        renderProducts();
+      }
+
+      function renderProducts() {
+        const grid = document.querySelector(".row.g-4");
+        grid.innerHTML = "";
+        products.forEach((p, i) => {
+          grid.innerHTML += `
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card product-card product-item">
+              <div class="img-container">
+                <img src="${p.image}" alt="${p.name}" class="product-imageimg-fluid">
+                <span class="badge bg-${
+                  p.status === "Active" ? "success" : "danger"
+                } status-badge">${p.status}</span>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title mb-1">${p.name}</h5>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                  <span class="fw-bold money">GH&#8373;${p.price}</span>
+                  <small class="text-muted">${p.stock} in stock</small>
+                </div>
+              </div>
+               <p class="text-muted small">Vendor: ${p.vendorName || "Unknown"}</p>
+  <p class="text-muted small">
+    Added: ${p.createdAt?.toDate ? p.createdAt.toDate().toLocaleString() : ""}
+  </p>
+              <div class="card-footer bg-white border-top-0 pt-0 d-flex gap-2 justify-content-between align-items-center ">
+
+                <button class="edit-button" onclick="editProduct('${
+                  p.id
+                }')">
+                   <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                  </svg>
+                </button>
+
+                 <button class="delete-button" onclick="deleteProduct('${
+                   p.id
+                 }')">
+                   <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                  </svg>
+        </button>
+              </div>
+            </div>
+          </div>`;
+
+        });
+      }
+             
+
+  
+
+   async function saveProduct(product, id = null) {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Not Authenticated',
+      text: 'Please log in to continue.',
+      confirmButtonColor: '#127d3a'
+    });
+    return;
+  }
+
+ 
+  // ✅ Add vendor info + timestamps
+  product.vendorId = user.uid;
+  product.vendorName = user.displayName || user.email;  // fallback if no displayName
+  if (!id) {
+    product.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+  } else {
+    product.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+  }
+
+
+  try {
+    // show spinner
+    showLoading(id ? "Updating product..." : "Uploading product...");
+
+    if (id) {
+      // update existing product
+      await productsCollection.doc(id).update(product);
+
+      hideLoading();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Product Updated',
+        text: 'Your product has been updated successfully.',
+        confirmButtonColor: '#127d3a'
+      });
+
+      showToast("Product updated successfully", "success");
+    } else {
+      // add new product
+      await productsCollection.add(product);
+
+      hideLoading();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Product Uploaded',
+        text: 'Your product has been added successfully.',
+        confirmButtonColor: '#127d3a'
+      });
+
+      showToast("Product uploaded successfully", "success");
+    }
+
+    loadProducts();
+
+  } catch (error) {
+    console.error("Error saving product: ", error);
+    hideLoading(); // always hide spinner on error
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+      confirmButtonColor: '#127d3a'
+    });
+
+    showToast("Failed to save product", "danger");
+  }
+}
+
+
+
+      async function editProduct(id) {
+  const doc = await productsCollection.doc(id).get();
+  const p = doc.data();
+
+  document.getElementById("productName").value = p.name;
+  document.getElementById("productPrice").value = p.price;
+  document.getElementById("productStock").value = p.stock;
+  document.getElementById("productStatus").value = p.status;
+  document.getElementById("productIndex").value = id;
+
+document.getElementById("productDescription").value = p.description || "";
+document.getElementById("productCategory").value = p.category || "";
+document.getElementById("productBrand").value = p.brand || "";
+
+  // Show the existing image and store its value
+  document.getElementById("productImagePreview").src = p.image || "";
+  document.getElementById("existingImage").value = p.image || "";
+
+  // Clear the file input
+  document.getElementById("productImageFile").value = "";
+
+  new bootstrap.Modal(document.getElementById("productModal")).show();
+}
+
+
+ async function deleteProduct(id) {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "This action cannot be undone.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!result.isConfirmed) return; // ❌ stop if user cancels
+
+  try {
+    await productsCollection.doc(id).delete();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Product Deleted!',
+      text: 'Your product has been deleted successfully.',
+      confirmButtonColor: '#127d3a'
+    });
+
+    showToast("Product deleted successfully", "success");
+    loadProducts();
+  } catch (error) {
+    console.error("❌ Delete failed:", error);
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+      confirmButtonColor: '#127d3a'
+    });
+
+    showToast("Failed to delete product", "danger");
+  }
+}
+
+
+      document.getElementById("productForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("productName").value;
+  const price = parseFloat(document.getElementById("productPrice").value);
+  const stock = parseInt(document.getElementById("productStock").value);
+  const status = document.getElementById("productStatus").value;
+  const id = document.getElementById("productIndex").value;
+
+    // ✅ New fields
+  const description = document.getElementById("productDescription").value;
+  const category = document.getElementById("productCategory").value;
+  const brand = document.getElementById("productBrand").value;
+
+  const fileInput = document.getElementById("productImageFile");
+  const file = fileInput.files[0];
+
+  let imageUrl = document.getElementById("existingImage").value;
+
+  try {
+    // ✅ Only upload if a new file is selected
+    if (file) {
+      const storageRef = firebase.storage().ref();
+      const imageRef = storageRef.child(`productImages/${Date.now()}_${file.name}`);
+      const snapshot = await imageRef.put(file);
+      imageUrl = await snapshot.ref.getDownloadURL();
+    }
+
+    const product = { name, price, stock, image: imageUrl, status, description, category, brand };
+    await saveProduct(product, id);
+
+    bootstrap.Modal.getInstance(document.getElementById("productModal")).hide();
+    fileInput.value = "";
+  } catch (err) {
+    console.error("Upload error:", err);
+    alert("Failed to upload image: " + err.message);
+  }
+});
+
+
+      // On load
+      let products = [];
+      loadProducts();
+    </script>
+
+    <script>
+      // Logout function
+    async function logout() {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "Do you really want to log out?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#127d3a',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Yes, log me out',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!result.isConfirmed) return; // user cancelled
+
+  try {
+    await firebase.auth().signOut();
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Logged Out',
+      text: 'You have been logged out successfully.',
+      confirmButtonColor: '#127d3a'
+    }).then(() => {
+      // redirect only after user clicks OK
+      window.location.href = "login.html";
+    });
+
+  } catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Logout Failed',
+      text: err.message,
+      confirmButtonColor: '#127d3a'
+    });
+  }
+}
+
+    </script>
+
+    <script>
+      document
+        .getElementById("productForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("productName").value;
+          const price = document.getElementById("productPrice").value;
+          const image = document.getElementById("productImage").value;
+
+          let products = JSON.parse(localStorage.getItem("products")) || [];
+
+          products.push({ name, price, image });
+          localStorage.setItem("products", JSON.stringify(products));
+
+          alert("Product added!");
+          this.reset();
+        });
+    </script>
+
+    <script>
+// Show a loading popup with custom message
+function showLoading(message = "Please wait...") {
+  Swal.fire({
+    title: message,
+    allowOutsideClick: false,
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+}
+
+// Close the loading popup
+function hideLoading() {
+  Swal.close();
+}
+</script>
+
+
+    <!-- Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+  <div id="toastBox" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMessage">
+        Success!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+ <script>
+    async function initPage() {
+      showLoading("Preparing your products...");
+
+      await loadProducts();
+
+      hideLoading();
+    }
+  </script>
+
+  </body>
+</html>
