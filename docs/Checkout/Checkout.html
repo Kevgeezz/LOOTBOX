@@ -754,7 +754,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  emailjs.init(""); // ✅ replace with your EmailJS public key
+  emailjs.init("LzKLUK4QTvKMqgbli"); // ✅ replace with your EmailJS public key
 
   function getCartTotal() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -808,7 +808,7 @@
 
     if (paymentMethod === "cash") {
       // ✅ Cash on Delivery → No Paystack
-      emailjs.send("", "", formData)
+      emailjs.send("service_aqi1rdc", "template_f5ynuup", formData)
         .then(() => {
           Swal.fire({
             icon: 'success',
@@ -833,7 +833,7 @@
     } else {
       // ✅ Online Payment via Paystack
       var handler = PaystackPop.setup({
-        
+        key: 'pk_test_b97a7004bcd5554f4a68a55b200a7c4766524cdd',
         email: formData.email,
         amount: totalAmount,
         currency: "GHS",
