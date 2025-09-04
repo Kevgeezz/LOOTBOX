@@ -26,20 +26,21 @@
       rel="stylesheet"
     />
     
-<!--Link Swiper's CSS ================================================== -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!--Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-  <!-- Style Sheet ================================================== -->
-  <link rel="stylesheet" href="styles.css">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="styles.css">
 
-  <!--  Google Fonts (Mine) -->
-  
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-  
-  
-
-  
+    <!--  Google Fonts (Mine) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Monoton&family=Montserrat:wght@100;300;400;700;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <!-- AOS (Animate on Scroll) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <style>
       :root {
         --primary-color: #7c3aed;
@@ -58,26 +59,25 @@
         flex-direction: column;
       }
        
-.navbar-brand {
-  font-family: "Monoton", cursive;
-  font-size: 1.5rem;
-  font-weight: 400;
-  /* background: rgba(0, 0, 0, 0.6);  Black background with 0.5 opacity */
-  color: white;
-  text-align: center;
-}
+      .navbar-brand {
+        font-family: "Monoton", cursive;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: white;
+        text-align: center;
+      }
 
-.navtext {
-  text-align: center;
-  margin-top: 15px;
-  margin-left: 5px;
-}
+      .navtext {
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 5px;
+      }
 
-.logo {
-  width: 50px;
-  margin-top: 1px;
-  margin-bottom: 10px;
-}
+      .logo {
+        width: 50px;
+        margin-top: 1px;
+        margin-bottom: 10px;
+      }
 
       .login-container {
         max-width: 450px;
@@ -178,14 +178,294 @@
         color: #6c757d;
         z-index: 10;
       }
+
+      /* Modern Social Login Buttons */
+      .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 20px 0;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 1px solid #ddd;
+        background: #ffe1e1;
+        color: #444;
+        text-decoration: none;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-btn.google {
+        border-color: #ddd;
+      }
+
+      .social-btn.google:hover {
+        background: #ffe1e1;
+        border-color: #ccc;
+
+      }
+
+      .social-btn.facebook {
+        border-color: #3b5998;
+        background:#0b5affd4;
+        color: white;
+      }
+
+      .social-btn.facebook:hover {
+        background: #344e86;
+        border-color: #344e86;
+      }
+
+      .social-icon {
+        margin-right: 12px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: 25px 0;
+        color: #6c757d;
+            padding-top: 40px;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background-color: #ddd;
+      }
+
+      .divider-text {
+        padding: 0 15px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #7c3aed !important;
+        background: white;
+        border-radius: 8px;
+        text-align: center;
+        white-space: nowrap;
+        margin: 0 auto;
+
+      }
+
+      @media (max-width: 576px) {
+        .login-container {
+          padding: 1.5rem;
+        }
+      }
+
+      .buttons {
+  display: flex;
+  justify-content: space-around;
+  top: 20px;
+  left: 10px;
+}
+
+.buttons button {
+  width: 150px;
+  height: 50px;
+  margin-bottom: 20px;
+  color: white;
+  position: relative;
+  /*left: 80%;*/
+  overflow: hidden;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.buttons button:before,
+.buttons button:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button:after {
+  left: 0;
+  bottom: 0;
+}
+
+.buttons button span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.buttons button span:before,
+.buttons button span:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button span:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.buttons button span:after {
+  left: 0;
+  bottom: 0;
+}
+
+.buttons button p {
+  padding: 0;
+  margin: 0;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.buttons button p:before,
+.buttons button p:after {
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  z-index: 1;
+  left: 0;
+}
+
+.buttons button p:before {
+  content: attr(data-title);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buttons button p:after {
+  content: attr(data-text);
+  top: 150%;
+  color: #44d8a4;
+}
+
+.buttons button:hover:before,
+.buttons button:hover:after {
+  width: 100%;
+}
+
+.buttons button:hover span {
+  z-index: 1;
+}
+
+.buttons button:hover span:before,
+.buttons button:hover span:after {
+  height: 100%;
+}
+
+.buttons button:hover p:before {
+  top: -50%;
+  transform: rotate(5deg);
+}
+
+.buttons button:hover p:after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buttons button.start {
+  background-color: #44d8a4;
+  box-shadow: 0px 5px 10px -10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.buttons button.start p:before {
+  top: -50%;
+  transform: rotate(5deg);
+}
+
+.buttons button.start p:after {
+  color: white;
+  transition: all 0s ease;
+  content: attr(data-start);
+  top: 50%;
+  transform: translateY(-50%);
+  animation: start 0.3s ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes start {
+  from {
+    top: -50%;
+  }
+}
+
+.buttons button.start:hover:before,
+.buttons button.start:hover:after {
+  display: none;
+}
+
+.buttons button.start:hover span {
+  display: none;
+}
+
+.buttons button:active {
+  outline: none;
+  border: none;
+}
+
+.buttons button:focus {
+  outline: 0;
+}
+
+    .btn-back {
+        border-radius: 50px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        background-color: var(--primary-hover);
+      }
+
     </style>
-
-    <!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
   </head>
   <body>
-    <!-- Header (same as original) -->
+    <!-- Header -->
     <header
       id="header"
       class="site-header py-3 px-3 px-lg-5 bg-black w-100 z-1"
@@ -268,67 +548,14 @@
               <div class="col-md-5 offset-lg-2">
                 <div class="navbar-collapse order-1 order-lg-1 ms-3 ms-lg-0" id="navbarMenu">
                   <ul class="navbar-nav d-flex justify-content-center">
-                    <li class="nav-item me-5">
-                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item me-5">
-                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0" href="about-us.html">About</a>
-                    </li>
+                    
+                    
 
-                    <!-- Dropdown for Shop -->
-                    <li class="nav-item me-5 dropdown">
-                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle" href="#"
-                        id="navbarDropdownShop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Shop
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownShop">
-                        <li><a class="dropdown-item" href="../clothes/clothes.html">Clothes <span
-                                    class="badge bg-primary">New Arrivals</span></a>
-                        </li>
-                        <li><a class="dropdown-item" href="../Shop/shop.html">Electronics
-                                <span class="badge bg-primary">New</span></a></li>
-                         <li><a class="dropdown-item" href="single-product.html">Food Stuff
-                                    <span class="badge bg-primary">New</span></a></li>
-                    </ul>
-                    </li>
+                  
 
-
-                    <!-- Dropdown for Pages -->
-                    <li class="nav-item me-5 dropdown">
-                      <a class="nav-link nav-link-ltr text-white pb-1 pe-0 dropdown-toggle" href="#"
-                        id="navbarDropdownPages" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pages
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownPages">
-                        <li>
-                          <a href="about-us.html" class="dropdown-item">About</a>    
-                        </li>
-                        <li>
-                          <a href="../cart/cart.html" class="dropdown-item">Cart</a>
-                        </li>
-                        <li>
-                          <a href="../wishlist/index.html" class="dropdown-item">Wishlist</a>       
-                        </li>
-                        <li>
-                          <a href="../checkout/checkout.html" class="dropdown-item">Checkout</a>
-                             
-                        </li>
-                        <li>
-                          <a href="contact.html" class="dropdown-item">Contact</a>
-                              
-                        </li>
-                        <li>
-                          <a href="faqs.html" class="dropdown-item">FAQs</a>
-                        </li>
-                        <li>
-                          <a href="../Account/Account.html" class="dropdown-item">Account</a>
-                        </li>      
-                      </ul>
-                    </li>
 
                     
                   </ul>
-
                 </div>
               </div>
               <div class="col-md-3">
@@ -377,13 +604,72 @@
 
     <main class="flex-grow-1 d-flex align-items-center">
       <div class="container py-5">
+
+  <div class="row mb-4 fade-in">
+  <div class="col-12 nav-item me-5">
+    <button
+      class="btn btn-outline-secondary btn-back"
+      onclick="window.location.href='../index.html'"
+    >
+      <i class="fas fa-arrow-left me-2"></i>Back to Store
+    </button>
+  </div>
+</div>
+
         <div class="login-container">
+
           <div class="login-header">
             <img src="../images/cart.png" alt="LOOTBOX Logo" />
             <h2>Vendor Portal</h2>
             <p class="text-muted">Sign in to manage your products</p>
           </div>
-
+          
+          <!-- Social Login Buttons -->
+          <div class="social-login">
+            <a href="javascript:void(0)" onclick="signInWithGoogle()" class="social-btn google">
+              <span class="social-icon">
+                 <i class="google-icon">
+                     <svg  width="24" height="24" margin-right="20px"
+    viewBox="0 0 256 262"
+    preserveAspectRatio="xMidYMid"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+      fill="#4285F4"
+    ></path>
+    <path
+      d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+      fill="#34A853"
+    ></path>
+    <path
+      d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+      fill="#FBBC05"
+    ></path>
+    <path
+      d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+      fill="#EB4335"
+    ></path>
+  </svg>
+</i>
+              </span>
+              Continue with Google
+            </a>
+            
+            <a href="javascript:void(0)" onclick="signInWithFacebook()" class="social-btn facebook">
+              <span class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </span>
+              Continue with Facebook
+            </a>
+          </div>
+          
+          <!-- Divider -->
+          <div class="divider">
+            <span class="divider-text" style="color: #6c757d;">Or continue with email</span>
+          </div>
+          
+          <!-- Login Form -->
           <form id="loginForm">
             <div class="mb-4 input-icon">
               <i class="fas fa-envelope"></i>
@@ -421,9 +707,8 @@
                 >
               </div>
               <a href="javascript:void(0)" onclick="resetPassword()" class="text-decoration-none">
-  Forgot password?
-</a>
-
+                Forgot password?
+              </a>
             </div>
 
             <button
@@ -458,12 +743,11 @@
       function login() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
+        const remember = document.getElementById("rememberMe").checked;
         const errorElement = document.getElementById("errorMsg");
 
-        // Clear previous errors
         errorElement.innerText = "";
 
-        // Basic validation
         if (!email || !password) {
           Swal.fire({
             icon: 'error',
@@ -471,98 +755,173 @@
             text: "Please fill in all fields",
             confirmButtonColor: '#127d3a'
           });
-
           return;
         }
 
-    firebase
-  .auth()
-  .signInWithEmailAndPassword(email, password)
-  .then(() => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Vendor Login Successful 🎉',
-      text: 'Start Selling!',
-      confirmButtonColor: '#127d3a'
-    }).then(() => {
-      // Redirect only after user clicks "OK"
-      window.location.href = "Vproduct.html";
-    });
-  })
-  .catch((err) => {
-    let errorMessage;
+        // Pick persistence mode
+        const persistence = remember
+          ? firebase.auth.Auth.Persistence.LOCAL   // stays after browser close
+          : firebase.auth.Auth.Persistence.SESSION; // clears on browser close
 
-      switch (err.code) {
-        case "auth/user-not-found":
-          errorMessage = "No account found with this email";
-          break;
-        case "auth/wrong-password":
-          errorMessage = "Incorrect password. Please try again.";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "Please enter a valid email address.";
-          break;
-        case "auth/invalid-credential": // Firebase’s generic invalid login
-        case "auth/invalid-login-credentials":
-          errorMessage = "Incorrect email or password. Please try again.";
-          break;
-        default:
-          errorMessage = "Login failed: " + err.message;
+        firebase.auth().setPersistence(persistence)
+          .then(() => firebase.auth().signInWithEmailAndPassword(email, password))
+          .then(() => {
+            // Optionally save email so it's pre-filled next time
+            if (remember) {
+              localStorage.setItem("vendorEmail", email);
+            } else {
+              localStorage.removeItem("vendorEmail");
+            }
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Vendor Login Successful 🎉',
+              text: 'Start Selling!',
+              confirmButtonColor: '#127d3a'
+            }).then(() => {
+              window.location.href = "Vproduct.html";
+            });
+          })
+          .catch((err) => {
+            let errorMessage;
+            switch (err.code) {
+              case "auth/user-not-found":
+                errorMessage = "No account found with this email";
+                break;
+              case "auth/wrong-password":
+                errorMessage = "Incorrect password. Please try again.";
+                break;
+              case "auth/invalid-email":
+                errorMessage = "Please enter a valid email address.";
+                break;
+              case "auth/invalid-credential":
+              case "auth/invalid-login-credentials":
+                errorMessage = "Incorrect email or password. Please try again.";
+                break;
+              default:
+                errorMessage = "Login failed: " + err.message;
+            }
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Login Failed',
+              text: errorMessage,
+              confirmButtonColor: '#d33'
+            });
+          });
       }
 
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: errorMessage,
-        confirmButtonColor: '#d33'
+      // Allow Enter key login
+      document.getElementById("password").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          login();
+        }
       });
-    });
+
+      function resetPassword() {
+        const email = document.getElementById("email").value;
+
+        if (!email) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Missing Email',
+            text: "Please enter your email address first.",
+            confirmButtonColor: '#d33'
+          });
+          return;
+        }
+
+        firebase.auth().sendPasswordResetEmail(email)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Email Sent',
+              text: 'A password reset link has been sent to your email.',
+              confirmButtonColor: '#127d3a'
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.message,
+              confirmButtonColor: '#d33'
+            });
+          });
       }
 
-      // Allow login on Enter key press
-      document
-        .getElementById("password")
-        .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            login();
-          }
-        });
+      function signInWithGoogle() {
+        const remember = document.getElementById('rememberMe')?.checked === true;
+        const persistence = remember
+          ? firebase.auth.Auth.Persistence.LOCAL
+          : firebase.auth.Auth.Persistence.SESSION;
+
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth().setPersistence(persistence)
+          .then(() => firebase.auth().signInWithPopup(provider))
+          .then((result) => {
+            const user = result.user;
+            const displayName = user.displayName || user.email || "there";
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome to LootBox, ${displayName}!`,
+              confirmButtonColor: '#127d3a'
+            }).then(() => {
+              window.location.href = "./Vproduct.html";
+            });
+          })
+          .catch((error) => {
+            console.error("Google sign-in error:", error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Google Sign-in Failed',
+              text: error.message,
+              confirmButtonColor: '#d33'
+            });
+          });
+      }
+
+      function signInWithFacebook() {
+        const remember = document.getElementById('rememberMe')?.checked === true;
+        const persistence = remember
+          ? firebase.auth.Auth.Persistence.LOCAL
+          : firebase.auth.Auth.Persistence.SESSION;
+          
+        const provider = new firebase.auth.FacebookAuthProvider();
+
+        firebase.auth().setPersistence(persistence)
+          .then(() => firebase.auth().signInWithPopup(provider))
+          .then((result) => {
+            const user = result.user;
+            const name = user.displayName || "there";
+            Swal.fire({
+              icon: 'success',
+              title: `Welcome to LootBox, ${name}!`,
+              confirmButtonColor: '#127d3a'
+            }).then(() => {
+              window.location.href = "./Vproduct.html";
+            });
+          })
+          .catch((error) => {
+            console.error("Facebook sign-in error:", error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Facebook Sign-in Failed',
+              text: error.message,
+              confirmButtonColor: '#d33'
+            });
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedEmail = localStorage.getItem("vendorEmail");
+        if (savedEmail) {
+          document.getElementById("email").value = savedEmail;
+          document.getElementById("rememberMe").checked = true;
+        }
+      });
     </script>
-
-    <script>
-  function resetPassword() {
-    const email = document.getElementById("email").value;
-
-    if (!email) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Missing Email',
-        text: "Please enter your email address first.",
-        confirmButtonColor: '#d33'
-      });
-      return;
-    }
-
-    firebase.auth().sendPasswordResetEmail(email)
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Email Sent',
-          text: 'A password reset link has been sent to your email.',
-          confirmButtonColor: '#127d3a'
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.message,
-          confirmButtonColor: '#d33'
-        });
-      });
-  }
-</script>
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
